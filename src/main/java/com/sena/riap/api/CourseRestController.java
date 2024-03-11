@@ -15,7 +15,6 @@ public class CourseRestController {
     @Autowired
     private CourseService courseService;
 
-
     @GetMapping("/course")
     public List<Course> listCourse() {
         return courseService.getCourse();
