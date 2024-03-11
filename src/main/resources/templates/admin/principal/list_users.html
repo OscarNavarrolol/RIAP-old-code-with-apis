@@ -1,0 +1,204 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Usuarios</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container mt-4">
+
+    <div id="tableContainer">
+        <h1>List of tables</h1>
+    <h2 th:if="${users != null}">Lista de Users</h2>
+
+    <table class="table table-dark" th:if="${users != null}">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Documento</th>
+            <th>Edad</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Telefono</th>
+            <th>Imagen de Perfil</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <td th:text="${user.idUser}"></td>
+            <td th:text="${user.document}"></td>
+            <td th:text="${user.age}"></td>
+            <td th:text="${user.nameUser}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.phone}"></td>
+            <td>
+                <img th:if="${user.profilePicture != null}" th:src="${user.profilePicture}" alt="Imagen de Perfil" style="max-width: 100px;">
+            </td>
+            <td>
+                <a th:href="@{/editUser/{idUser}(idUser=${user.idUser})}">Edit</a>
+                <a th:href="@{/delete/{idUser}(idUser=${user.idUser})}" class="delete">delete</a>
+            </td>
+        </tr>
+        </tbody>
+
+        <a th:href="@{/newUserData}">NEW USER</a>
+
+    </table>
+
+    <h2 th:if="${userCourse != null}">Secomd</h2>
+
+    <table class="table table-dark" th:if="${userCourse != null}">
+        <thead class="thead-dark">
+        <tr>
+            <th>idUserCourse</th>
+            <th>idCourse</th>
+            <th>IdUser</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="userCourse : ${userCourse}">
+            <td th:text="${userCourse.idUserCourse}"></td>
+            <td th:text="${userCourse.idCourse}"></td>
+            <td th:text="${userCourse.IdUser}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <h2 th:if="${program != null}">Third</h2>
+
+    <table class="table table-dark" th:if="${program != null}">
+        <thead class="thead-dark">
+        <tr>
+            <th>idProgram</th>
+            <th>name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="program : ${program}">
+            <td th:text="${program.idProgram}"></td>
+            <td th:text="${program.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2 th:if="${event != null}">Fourth</h2>
+    <table class="table table-dark" th:if="${event != null}">
+        <thead class="thead-dark">
+        <tr>
+            <th>idEvent</th>
+            <th>date</th>
+            <th>objective</th>
+            <th>startTime</th>
+            <th>endTime</th>
+            <th>location</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${event}">
+            <td th:text="${event.idEvent}"></td>
+            <td th:text="${event.date}"></td>
+            <td th:text="${event.objective}"></td>
+            <td th:text="${event.startTime}"></td>
+            <td th:text="${event.endTime}"></td>
+            <td th:text="${event.location}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2 th:if="${course != null}">Fifth</h2>
+    <table class="table table-dark" th:if="${course != null}">
+        <thead class="thead-dark">
+        <tr>
+            <th>idCourse   </th>
+            <th>number</th>
+            <th>idProgram</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${course}">
+            <td th:text="${course.idCourse}"></td>
+            <td th:text="${course.number}"></td>
+            <td th:text="${course.idProgram}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h2 th:if="${attendance != null}">sixth</h2>
+    <table class="table table-dark" th:if="${attendance != null}">
+        <thead class="thead-dark">
+        <tr>
+            <th>idAttendance  </th>
+            <th>idEvent</th>
+            <th>idUser</th>
+            <th>attendanceTime</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="attendance : ${attendance}">
+            <td th:text="${attendance.idAttendance}"></td>
+            <td th:text="${attendance.idEvent}"></td>
+            <td th:text="${attendance.idUser}"></td>
+            <td th:text="${attendance.attendanceTime}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button id="showUserCourse" class="showDataButton">Mostrar Cursos de Usuario</button>
+    <button id="showProgram" class="showDataButton">Mostrar Programas</button>
+    <button id="showAttendance" class="showDataButton">Mostrar showAttendance</button>
+    <button id="showUserData" class="showDataButton">Mostrar showUserData</button>
+    <button id="showEventData" class="showDataButton">Mostrar showEventData</button>
+    <button id="showCourse" class="showDataButton">Mostrar showCourse</button>
+    </div>
+</div>
+<script>
+    function fetchData(url) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to fetch data');
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('tableContainer').innerHTML = data;
+                assignClickEvents();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    function assignClickEvents() {
+        document.getElementById("showUserCourse").addEventListener("click", function() {
+            fetchData('/userCourse/listUserCourse');
+        });
+
+        document.getElementById("showProgram").addEventListener("click", function() {
+            fetchData('/program/listProgram');
+        });
+
+        document.getElementById("showAttendance").addEventListener("click", function() {
+            fetchData('/attendance/listAttendance');
+        });
+
+        document.getElementById("showUserData").addEventListener("click", function() {
+            fetchData('/users');
+        });
+
+        document.getElementById("showEventData").addEventListener("click", function() {
+            fetchData('/eventData/listEvent');
+        });
+
+        document.getElementById("showCourse").addEventListener("click", function() {
+            fetchData('/course/listCourse');
+        });
+    }
+
+    assignClickEvents();
+</script>
+
+</body>
+</html>
