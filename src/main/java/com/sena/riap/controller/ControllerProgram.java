@@ -16,14 +16,4 @@ import java.util.List;
 @RequestMapping("/program")
 public class ControllerProgram {
 
-    @Autowired
-    private ProgramService programService;
-
-    @GetMapping("/listProgram")
-    public String listPrograms (Model model) {
-        List<Program> programData = programService.getProgram();
-        model.addAttribute("program", programData);
-        return "admin/principal/list_users";
-    }
-
 }

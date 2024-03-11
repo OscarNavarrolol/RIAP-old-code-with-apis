@@ -16,14 +16,4 @@ import java.util.List;
 @RequestMapping("/userCourse")
 public class ControllerUserCourse {
 
-    @Autowired
-    private UserCourseService userCourseService;
-
-    @GetMapping("/listUserCourse")
-    public String listUsersCourses (Model model) {
-        List<UserCourse> userCourseData = userCourseService.getUserCourse();
-        model.addAttribute("userCourse", userCourseData);
-        return "admin/principal/list_users";
-    }
-
 }

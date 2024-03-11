@@ -15,14 +15,4 @@ import java.util.List;
 @RequestMapping("/course")
 public class ControllerCourse {
 
-    @Autowired
-    private CourseService courseService;
-
-    @GetMapping("/listCourse")
-    public String listCourses (Model model) {
-        List<Course> courseData = courseService.getCourse();
-        model.addAttribute("course", courseData);
-        return "admin/principal/list_users";
-    }
-
 }

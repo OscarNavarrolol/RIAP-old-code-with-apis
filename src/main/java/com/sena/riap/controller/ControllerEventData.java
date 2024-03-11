@@ -15,15 +15,4 @@ import java.util.List;
 @RequestMapping("/eventData")
 public class ControllerEventData {
 
-    @Autowired
-    private EventDataService eventDataService;
-
-    @GetMapping("/listEvent")
-    public String listEvents (Model model) {
-        List<EventData> eventData = eventDataService.getEventData();
-        model.addAttribute("event", eventData);
-        return "admin/principal/list_users";
-    }
-
-
 }

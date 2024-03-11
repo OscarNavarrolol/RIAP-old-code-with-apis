@@ -26,17 +26,25 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Override
     public Attendance getAttendanceById(Long id) {
-        return null;
+        return attendanceRepository.findById(id).orElse(null);
     }
 
     @Override
     public Attendance updateAttendance(Long id, Attendance attendance) {
+
+        Attendance oldAttendance = attendanceRepository.findById(id).orElse(null);
+        if (oldAttendance != null){
+            oldAttendance.setIdEvent(attendance.getIdEvent());
+            oldAttendance.setIdUser(attendance.getIdUser());
+            oldAttendance.setAttendanceTime(attendance.getAttendanceTime());
+            return attendanceRepository.save(oldAttendance);
+        }
         return null;
     }
 
     @Override
     public void deleteAttendance(Long id) {
-
+        attendanceRepository.deleteById(id);
     }
 
     @Override

@@ -25,16 +25,22 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course getCourseById(Long id) {
-        return null;
+        return courseRepository.findById(id).orElse(null);
     }
 
     @Override
     public Course updateCourse(Long id, Course course) {
+        Course oldCourse = courseRepository.findById(id).orElse(null);
+        if (oldCourse != null){
+            oldCourse.setIdProgram(course.getIdProgram());
+            oldCourse.setNumber(course.getNumber());
+            return courseRepository.save(oldCourse);
+        }
         return null;
     }
 
     @Override
     public void deleteCourse(Long id) {
-
+        courseRepository.deleteById(id);
     }
 }

@@ -25,16 +25,25 @@ public class EventDataServiceImpl implements EventDataService {
 
     @Override
     public EventData getEventDataById(Long id) {
-        return null;
+        return eventDataRepository.findById(id).orElse(null);
     }
 
     @Override
     public EventData updateEventData(Long id, EventData eventData) {
+        EventData oldEventData = eventDataRepository.findById(id).orElse(null);
+        if (oldEventData != null){
+            oldEventData.setDate(eventData.getDate());
+            oldEventData.setObjective(oldEventData.getObjective());
+            oldEventData.setStartTime(oldEventData.getStartTime());
+            oldEventData.setEndTime(oldEventData.getEndTime());
+            oldEventData.setLocation(oldEventData.getLocation());
+            return eventDataRepository.save(oldEventData);
+        }
         return null;
     }
 
     @Override
     public void deleteEventData(Long id) {
-
+        eventDataRepository.deleteById(id);
     }
 }

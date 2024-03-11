@@ -25,16 +25,21 @@ public class ProgramServiceImpl implements ProgramService {
 
     @Override
     public Program getProgramById(Long id) {
-        return null;
+        return programRepository.findById(id).orElse(null);
     }
 
     @Override
     public Program updateProgram(Long id, Program program) {
+        Program oldProgram = programRepository.findById(id).orElse(null);
+        if (oldProgram != null){
+            oldProgram.setName(program.getName());
+            return programRepository.save(oldProgram);
+        }
         return null;
     }
 
     @Override
     public void deleteProgram(Long id) {
-
+        programRepository.deleteById(id);
     }
 }

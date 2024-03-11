@@ -16,14 +16,4 @@ import java.util.List;
 @RequestMapping("/attendance")
 public class ControllerAttendance {
 
-    @Autowired
-    private AttendanceService attendanceService;
-
-    @GetMapping("/listAttendance")
-    public String listAttendances (Model model) {
-        List<Attendance> attendanceData = attendanceService.getAttendance();
-        model.addAttribute("attendance", attendanceData);
-        return "admin/principal/list_users";
-    }
-
 }

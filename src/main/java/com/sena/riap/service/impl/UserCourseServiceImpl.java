@@ -26,17 +26,24 @@ public class UserCourseServiceImpl implements UserCourseService {
 
     @Override
     public UserCourse getUserCourseById(Long id) {
-        return null;
+        return userCourseRepository.findById(id).orElse(null);
     }
 
     @Override
     public UserCourse updateUserCourse(Long id, UserCourse userCourse) {
+
+        UserCourse oldUserCourse = userCourseRepository.findById(id).orElse(null);
+        if (oldUserCourse != null){
+            oldUserCourse.setIdCourse(userCourse.getIdCourse());
+            oldUserCourse.setIdUser(userCourse.getIdUser());
+            return userCourseRepository.save(oldUserCourse);
+        }
         return null;
     }
 
     @Override
     public void deleteUserCourse(Long id) {
-
+        userCourseRepository.deleteById(id);
     }
 
     @Override
