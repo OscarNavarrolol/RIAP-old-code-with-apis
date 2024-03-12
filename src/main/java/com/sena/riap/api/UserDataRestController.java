@@ -24,6 +24,11 @@ public class UserDataRestController {
         return userDataService.getUserDataById(idUser);
     }
 
+    @GetMapping("/user/auth")
+    public UserData verifyCredentials(@RequestParam("document") String document, @RequestParam("password") String password){
+        return userDataService.loginUser(document,password);
+    }
+
     @PostMapping("/user")
     public UserData saveUserData(@RequestBody UserData userData) {
         return userDataService.saveUserData(userData);

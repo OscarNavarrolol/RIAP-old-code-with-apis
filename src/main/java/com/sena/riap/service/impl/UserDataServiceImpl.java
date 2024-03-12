@@ -52,4 +52,14 @@ public class UserDataServiceImpl implements UserDataService {
     public void deleteUserData(Long id) {
         userDataRepository.deleteById(id);
     }
+
+    @Override
+    public UserData loginUser(String document, String password) {
+        UserData user = userDataRepository.findByDocumentAndPassword(document, password);
+
+        if (user != null && user.getRoleUser().equals("admin")){
+            return user;
+        }
+        return null;
+    }
 }

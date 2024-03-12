@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDataRepository extends JpaRepository<UserData,Long> {
-
+    UserData findByDocumentAndPassword(String document, String password);
 
 }
