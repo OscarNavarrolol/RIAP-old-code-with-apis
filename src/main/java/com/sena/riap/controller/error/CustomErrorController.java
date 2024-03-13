@@ -1,4 +1,4 @@
-package com.sena.riap.error;
+package com.sena.riap.controller.error;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,7 +17,7 @@ public class CustomErrorController implements ErrorController {
 
         if(status != null) {
             int statusCode = Integer.valueOf(status.toString());
-
+            //handling general errors
             if (statusCode == HttpStatus.FORBIDDEN.value()) {
                 return "error/Error403";
             } else if (statusCode == HttpStatus.NOT_FOUND.value()) {
