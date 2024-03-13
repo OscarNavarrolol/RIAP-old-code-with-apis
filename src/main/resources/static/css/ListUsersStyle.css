@@ -1,0 +1,64 @@
+/* style.css */
+
+/* Estilos para la tabla */
+.table-container {
+    overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es demasiado ancha */
+    margin-top: 20px; /* Espacio superior para separar la tabla de otros elementos */
+}
+
+table {
+    width: 100%; /* Asegurar que la tabla ocupe todo el ancho del contenedor */
+    border-collapse: collapse; /* Fusionar bordes de celdas */
+}
+
+th, td {
+    padding: 8px; /* Añadir espacio interno en celdas */
+    border: 1px solid #ddd; /* Añadir bordes a celdas */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+th {
+    background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
+}
+
+/* Estilos para las imágenes de perfil */
+img {
+    max-width: 100px; /* Tamaño máximo para las imágenes de perfil */
+    height: auto; /* Mantener la proporción de aspecto */
+}
+
+/* style.css */
+
+/* Estilos para la tabla */
+.table-container {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f8f9fa;
+    color: #212529;
+    font-weight: bold;
+}
+
+/* Estilos para las imágenes de perfil */
+.profile-image {
+    max-width: 80px;
+    height: auto;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
