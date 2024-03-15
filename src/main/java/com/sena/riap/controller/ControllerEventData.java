@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/eventData")
+@RequestMapping("/event_data")
 public class ControllerEventData {
 
 }

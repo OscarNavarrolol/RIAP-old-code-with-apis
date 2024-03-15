@@ -8,38 +8,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api_user")
 public class UserDataRestController {
 
     @Autowired
     private UserDataService userDataService;
 
-    @GetMapping("/user")
+    @GetMapping("/list_user")
     public List<UserData> listUserData() {
         return userDataService.getUserData();
     }
 
-    @GetMapping("/user/{id_user}")
+    @GetMapping("/find/{id_user}")
     public UserData getUserData(@PathVariable("id_user") Long idUser) {
         return userDataService.getUserDataById(idUser);
     }
 
-    @GetMapping("/user/auth")
+    @GetMapping("/auth")
     public UserData verifyCredentials(@RequestParam("document") String document, @RequestParam("password") String password){
         return userDataService.loginUser(document,password);
     }
 
-    @PostMapping("/user")
+    @PostMapping("/save")
     public UserData saveUserData(@RequestBody UserData userData) {
         return userDataService.saveUserData(userData);
     }
 
-    @PutMapping("/user/{id_user}")
+    @PutMapping("/update/{id_user}")
     public UserData updateUserData(@PathVariable("id_user") Long idUser, @RequestBody UserData userData) {
         return userDataService.updateUserData(idUser, userData);
     }
 
-    @DeleteMapping("/user/{id_user}")
+    @DeleteMapping("/delete/{id_user}")
     public void deleteUserData(@PathVariable("id_user") Long idUser) {
         userDataService.deleteUserData(idUser);
     }

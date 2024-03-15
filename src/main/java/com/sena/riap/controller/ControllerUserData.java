@@ -1,17 +1,13 @@
 package com.sena.riap.controller;
 
 
-import com.sena.riap.entities.UserData;
 import com.sena.riap.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
-@RequestMapping({"/","/userData"})
+@RequestMapping({"/","/user_data"})
 public class ControllerUserData {
 
     @Autowired
@@ -19,22 +15,22 @@ public class ControllerUserData {
 
     @GetMapping("/tables")
     public String tablesGeneral() {
-        return "admin/principal/list_users";
+        return "admin/principal/ListUsers";
     }
 
-    @GetMapping("/aboutUs")
+    @GetMapping("/about_us")
     public String getAboutUsPage(){
-        return "general/aboutUs";
+        return "general/AboutUs";
     }
 
     @GetMapping("/login")
     public String getLoginPage(){
-        return "general/login";
+        return "general/Login";
     }
 
     @GetMapping
     public String getHomePage(){
-        return "general/homePage";
+        return "general/HomePage";
     }
 
 }

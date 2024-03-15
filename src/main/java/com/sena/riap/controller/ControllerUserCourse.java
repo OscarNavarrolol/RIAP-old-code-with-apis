@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/userCourse")
+@RequestMapping("/user_course")
 public class ControllerUserCourse {
 
 }
