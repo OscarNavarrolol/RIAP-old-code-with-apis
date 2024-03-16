@@ -1,26 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuarios</title>
-    <link rel="stylesheet" href="/css/ListUsersStyle.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
+  <link rel="stylesheet" href="/css/ListUsersStyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-<div class="container mt-4">
-    <div id="buttonContainer">
-        <h1>List of tables</h1>
-        <!-- Ejemplo de botones con algunos endpoints reales. modificalos o eliminalos si lo necesitas -->
-        <button class="showDataButton" data-url="/api/user">Show Users</button>
-        <button class="showDataButton" data-url="/api/program">Show Program</button>
+  <script src="/js/ChargeData.js"></script>
+    <header>
+      <div class="panel">
+        <div class="information">
+          <img src="/images/logoriap.png" alt="logo RIAP">
+          <h1>RIAP</h1>
+        </div>
+        <hr>
+        <div class="menu">
+          <nav>
+            <ul>
+              <li><a id="buttonAttendances">Attendances</a></li>
+              <li><a id="buttonCourses">Courses</a></li>
+              <li><a >Events Data</a></li>
+              <li><a >Programs</a></li>
+              <li><a >Users Courses</a></li>
+              <li><a >Users Datas</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <hr class="hr2">
+    <div class="boards">
+      <div class="container">
+        <table class="table">
+          <thead id="headerTable">
+          </thead>
+          <tbody id="data">
+            
+          </tbody>
+        </table>
+      </div>
     </div>
-    <div id="tableContainer">
-
-    </div>
-</div>
-<script>
-
-</script>
-</body>
+  </body>
 </html>

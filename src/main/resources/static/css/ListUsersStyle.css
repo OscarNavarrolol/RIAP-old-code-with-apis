@@ -1,64 +1,94 @@
-/* style.css */
-
-/* Estilos para la tabla */
-.table-container {
-    overflow-x: auto; /* Permitir desplazamiento horizontal si la tabla es demasiado ancha */
-    margin-top: 20px; /* Espacio superior para separar la tabla de otros elementos */
-}
-
-table {
-    width: 100%; /* Asegurar que la tabla ocupe todo el ancho del contenedor */
-    border-collapse: collapse; /* Fusionar bordes de celdas */
-}
-
-th, td {
-    padding: 8px; /* Añadir espacio interno en celdas */
-    border: 1px solid #ddd; /* Añadir bordes a celdas */
-    text-align: left; /* Alinear texto a la izquierda */
-}
-
-th {
-    background-color: #f2f2f2; /* Color de fondo para las celdas de encabezado */
-}
-
-/* Estilos para las imágenes de perfil */
-img {
-    max-width: 100px; /* Tamaño máximo para las imágenes de perfil */
-    height: auto; /* Mantener la proporción de aspecto */
-}
-
-/* style.css */
-
-/* Estilos para la tabla */
-.table-container {
-    overflow-x: auto;
-    margin-top: 20px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    border-radius: 5px;
-    overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    padding: 12px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #f8f9fa;
-    color: #212529;
-    font-weight: bold;
-}
-
-/* Estilos para las imágenes de perfil */
-.profile-image {
-    max-width: 80px;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+:root{
+    --bottun_web:#00AF00;
+    --color_black:#202124;
+    --color_white:#F1F0EF;
+    --effect:rgba(255, 255, 255, 0.3);
+    --border:solid 1px;
+    --border_rount:5px;
+  }
+  
+  body{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: var(--color_black);
+    margin: 15px;
+  }
+  
+  .panel{
+    padding: 20px;
+    background-color: rgba(0, 0, 0,0.5);
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    display: flex;
+  }
+  
+  .information{
+    width: 20%;
+    display: flex;
+  }
+  
+  img{
+    width: 50px;
+    border-radius: 10px;
+  }
+  
+  h1{
+    margin: auto 20px;
+    color: white;
+  }
+  
+  .menu{
+    width: 80%;
+  }
+  
+  .panel ul{
+    padding: 0;
+    display: flex;
+    margin: auto;
+    list-style: none;
+  }
+  
+  .panel ul li a{
+    text-decoration:none;
+    color: white;
+  }
+  
+  .panel ul li{
+    border-radius: 10px;
+    cursor: pointer;
+    margin: auto;
+    padding:15px 14px;
+    color: var(--color_white);
+    text-align: center;
+    border-color: var(--bottun_web);
+    box-shadow: 0 0 40px 40px var(--bottun_web) inset;
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  
+  .panel ul li:hover {
+    box-shadow: 0 0 10px 0 var(--bottun_web) inset, 0 0 10px 4px var(--bottun_web);
+  }
+  
+  .hr2{
+    border-color: #00AF00;
+  }
+  
+  .boards{
+    background-color: rgba(0, 0, 0,0.5);
+    color: white; 
+    border-radius: 0 0 5px 5px;
+    margin: auto;
+  }
+  
+  .boards h2{
+    text-align: center;
+  }
+  
+  .table{
+    padding: 25px;
+    margin: auto;
+  }
+  
+  .table tr td {
+    border: solid 1px white;
+    background-color: var(--bottun_web);
+  }
