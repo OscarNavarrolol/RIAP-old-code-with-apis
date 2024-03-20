@@ -48,6 +48,7 @@
   }
   
   .panel ul li a{
+    padding: 15px 14px;
     text-decoration:none;
     color: white;
   }
@@ -69,26 +70,50 @@
   }
   
   .hr2{
-    border-color: #00AF00;
+    border-color: #ffffff;
+    box-shadow: 0 0 1px 1px;
   }
   
-  .boards{
+  .container{
     background-color: rgba(0, 0, 0,0.5);
     color: white; 
     border-radius: 0 0 5px 5px;
     margin: auto;
   }
   
-  .boards h2{
+  table{
+    width: 100%;
+    padding: 0;
+    margin: auto;
+
+  }
+
+  thead tr{
+    text-align: center;
+    background-color: rgba(30, 255, 0, 0.4);
+  }
+
+  thead th{
+    padding: 8px 0;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  tbody tr{
     text-align: center;
   }
-  
-  .table{
-    padding: 25px;
-    margin: auto;
+
+  tbody td{
+    padding: 4px 0;
+    font-family: 'Courier New', Courier, monospace;
+  }
+
+  tbody td img{
+    width: 50px;
+    height: 50px;
   }
   
-  .table tr td {
-    border: solid 1px white;
-    background-color: var(--bottun_web);
+  .picture{
+    width:20px;
   }
+
+
