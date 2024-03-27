@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 
 @Entity
@@ -26,11 +27,11 @@ public class EventData {
 
     @Column(name = "start_time")
     @NotNull(message = "Start time cannot be null")
-    private LocalDate startTime;
+    private LocalTime startTime;
 
     @Column(name = "end_time")
     @NotNull(message = "End time cannot be null")
-    private LocalDate endTime;
+    private LocalTime endTime;
 
     @NotBlank(message = "location cannot be blank")
     @Size(max = 100,message = "The length of the location must be a maximum of 255 characters")
@@ -60,19 +61,19 @@ public class EventData {
         this.objective = objective;
     }
 
-    public LocalDate getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDate startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDate getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDate endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 
