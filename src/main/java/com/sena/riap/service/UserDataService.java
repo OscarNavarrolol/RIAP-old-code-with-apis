@@ -19,4 +19,6 @@ public interface UserDataService {
 
     public UserData loginUser(String document, String password);
 
+    public UserData getLoggedInUser();
+
 }

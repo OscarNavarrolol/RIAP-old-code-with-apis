@@ -25,7 +25,8 @@ public class UserDataRestController {
         return userDataService.getUserDataById(idUser);
     }
 
-    @GetMapping("/auth")
+    // le retorna el objeto usuario correspondiente a las credenciales correctas
+    @PostMapping("/auth")
     public UserData verifyCredentials(@RequestParam("document") String document, @RequestParam("password") String password){
         return userDataService.loginUser(document,password);
     }

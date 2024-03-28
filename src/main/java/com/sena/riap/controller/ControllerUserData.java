@@ -33,4 +33,14 @@ public class ControllerUserData {
         return "general/HomePage";
     }
 
+    @GetMapping("/logout")
+    public String logout() {
+        return "redirect:/login";
+    }
+
+    @GetMapping("/principal")
+    public String showPrincipalPage(){
+        return "admin/principal/PrincipalAdmin";
+    }
+
 }

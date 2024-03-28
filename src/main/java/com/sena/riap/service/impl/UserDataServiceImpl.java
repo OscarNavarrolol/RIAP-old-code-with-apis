@@ -12,6 +12,8 @@ import java.util.List;
 @Service
 public class UserDataServiceImpl implements UserDataService {
 
+    private UserData loggedInUser;
+
     @Autowired
     private UserDataRepository userDataRepository;
 
@@ -58,8 +60,14 @@ public class UserDataServiceImpl implements UserDataService {
         UserData user = userDataRepository.findByDocumentAndPassword(document, password);
 
         if (user != null && user.getRoleUser().equals("admin")){
+            loggedInUser = user;
             return user;
         }
         return null;
+    }
+
+    @Override
+    public UserData getLoggedInUser() {
+        return loggedInUser;
     }
 }
