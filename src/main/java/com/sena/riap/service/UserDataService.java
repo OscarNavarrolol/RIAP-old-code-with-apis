@@ -12,7 +12,6 @@ public interface UserDataService {
 
     public UserData getUserDataById(Long id);
 
-
     public UserData updateUserData(Long id, UserData userData);
 
     public void deleteUserData(Long id);
@@ -20,5 +19,7 @@ public interface UserDataService {
     public UserData loginUser(String document, String password);
 
     public UserData getLoggedInUser();
+
+    List<UserData> getLearnersByCourseNumber(int courseNumber);
 
 }

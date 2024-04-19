@@ -41,4 +41,6 @@ public class EventDataRestController {
         eventDataService.deleteEventData(idEvent);
     }
 
+    // METHODS REQUIRED FOR THE PROJECT
+
 }

@@ -40,4 +40,5 @@ public class UserCourseRestController {
         userCourseService.deleteUserCourse(idUserCourse);
     }
 
+    // METHODS REQUIRED FOR THE PROJECT
 }

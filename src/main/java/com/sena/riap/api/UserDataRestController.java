@@ -25,12 +25,6 @@ public class UserDataRestController {
         return userDataService.getUserDataById(idUser);
     }
 
-    // le retorna el objeto usuario correspondiente a las credenciales correctas
-    @PostMapping("/auth")
-    public UserData verifyCredentials(@RequestParam("document") String document, @RequestParam("password") String password){
-        return userDataService.loginUser(document,password);
-    }
-
     @PostMapping("/save")
     public UserData saveUserData(@RequestBody UserData userData) {
         return userDataService.saveUserData(userData);
@@ -44,6 +38,14 @@ public class UserDataRestController {
     @DeleteMapping("/delete/{id_user}")
     public void deleteUserData(@PathVariable("id_user") Long idUser) {
         userDataService.deleteUserData(idUser);
+    }
+
+    // METHODS REQUIRED FOR THE PROJECT
+
+    // Returns the user object corresponding to the correct credentials
+    @PostMapping("/auth")
+    public UserData verifyCredentials(@RequestParam("document") String document, @RequestParam("password") String password){
+        return userDataService.loginUser(document,password);
     }
 
 }

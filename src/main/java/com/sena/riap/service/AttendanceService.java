@@ -21,4 +21,6 @@ public interface AttendanceService {
     List<Attendance> getAttendancesByEventId(Long eventId);
 
     List<Attendance> getAttendancesByUserId(Long userId);
+
+    void deleteAllByEventId(Long eventId);
 }

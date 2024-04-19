@@ -46,4 +46,10 @@ public class EventDataServiceImpl implements EventDataService {
     public void deleteEventData(Long id) {
         eventDataRepository.deleteById(id);
     }
+
+    // complete methods
+    @Override
+    public List<EventData> findEventsByCourseNumber(int courseNumber) {
+        return eventDataRepository.findEventsByCourseNumber(courseNumber);
+    }
 }

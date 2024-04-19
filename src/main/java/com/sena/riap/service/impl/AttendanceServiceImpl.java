@@ -56,4 +56,10 @@ public class AttendanceServiceImpl implements AttendanceService {
     public List<Attendance> getAttendancesByUserId(Long userId) {
         return null;
     }
+
+    // complete methods
+    @Override
+    public void deleteAllByEventId(Long eventId) {
+        attendanceRepository.deleteAllByIdEvent(eventId);
+    }
 }

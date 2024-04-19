@@ -40,4 +40,6 @@ public class CourseRestController {
         courseService.deleteCourse(idCourse);
     }
 
+    // METHODS REQUIRED FOR THE PROJECT
+
 }

@@ -40,4 +40,7 @@ public class AttendanceRestController {
         attendanceService.deleteAttendance(idAttendance);
     }
 
+
+    // METHODS REQUIRED FOR THE PROJECT
+
 }

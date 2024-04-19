@@ -70,4 +70,10 @@ public class UserDataServiceImpl implements UserDataService {
     public UserData getLoggedInUser() {
         return loggedInUser;
     }
+
+    // complete methods
+    @Override
+    public List<UserData> getLearnersByCourseNumber(int courseNumber) {
+        return null;
+    }
 }
