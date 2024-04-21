@@ -18,7 +18,6 @@ public class Course {
     @Column(name = "number_course")
     private Integer number;
 
-    //  @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "id_program")
     private Long idProgram;
 

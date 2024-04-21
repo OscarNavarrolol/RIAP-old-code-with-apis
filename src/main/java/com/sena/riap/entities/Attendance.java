@@ -16,13 +16,9 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idAttendance;
 
-    // @NotNull(message = "Event cannot be null")
-    // @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "id_event")
     private Long idEvent;
 
-    // @NotNull(message = "User cannot be null")
-    //  @ManyToOne(fetch = FetchType.LAZY)
     @Column(name = "id_user")
     private Long idUser;
 

@@ -32,6 +32,4 @@ public interface AttendanceService {
 
     public Attendance saveEventArrivalTime(Long idUser);
 
-    public Attendance getUserAttendance(Long idUser);
-
 }

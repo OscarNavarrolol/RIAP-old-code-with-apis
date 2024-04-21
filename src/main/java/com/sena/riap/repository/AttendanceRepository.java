@@ -15,6 +15,6 @@ public interface AttendanceRepository extends JpaRepository<Attendance,Long> {
     @Transactional
     void deleteAllByIdEvent(Long eventId);
 
-    public Attendance findByIdUser(Long idUser);
+    public Attendance findByUserIdAndEventId(Long idUser,Long idEvent);
 
 }

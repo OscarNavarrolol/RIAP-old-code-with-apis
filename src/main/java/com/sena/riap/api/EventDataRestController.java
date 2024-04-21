@@ -62,25 +62,30 @@ public class EventDataRestController {
         if (courseNumber != null) {
             return eventDataService.findEventsByCourseNumber(courseNumber);
         } else {
-            // Devuelve una lista vacia en caso de error.
+            // Returns an empty collection on error.
             return Collections.emptyList();
         }
     }
 
     @PostMapping("/create_event")
     public EventData createNewEvent(@RequestBody EventData eventData, @RequestParam Integer courseNumber) {
-        // Guarda evento en la BD
-        EventData savedEventData = eventDataService.saveEventData(eventData);
 
-        // La lista de aprendices asociados al curso
+        if (eventData == null) {
+            throw new IllegalArgumentException("EventData cannot be null");
+        }
+        if (courseNumber == null) {
+            throw new IllegalArgumentException("course number must not be null");
+        }
+
+        EventData savedEventData = eventDataService.saveEventData(eventData);
         List<UserData> learners = userDataService.getLearnersByCourseNumber(courseNumber);
 
-        // Crea registros de asistencia vacios para cada aprendiz asociado al curso
+        // Create empty attendance records for each learner associated with the course
         for (UserData learner : learners) {
             Attendance attendance = new Attendance();
             attendance.setIdEvent(savedEventData.getIdEvent());
             attendance.setIdUser(learner.getIdUser());
-            // No establecer la hora de asistencia por ahora
+            // Not setting attendance time
             attendanceService.saveAttendance(attendance);
         }
 
@@ -89,16 +94,16 @@ public class EventDataRestController {
 
     @DeleteMapping("/delete_event/{eventId}")
     public void deleteEvent(@PathVariable Long eventId) {
-        // borra todas las asistencias relacionadas a el evento y luego el evento
+        // delete all attendances related to the event and then the event
         if (eventId != null) {
             try {
                 attendanceService.deleteAllByEventId(eventId);
                 eventDataService.deleteEventData(eventId);
             } catch (Exception e) {
-                System.out.println("Error en el método deleteEvent: " + e);
+                System.out.println("Error in deleteEvent method: " + e);
             }
         } else {
-            System.out.println("ID de evento no encontrado");
+            System.out.println("Event ID not found");
         }
     }
 

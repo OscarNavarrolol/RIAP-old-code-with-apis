@@ -97,7 +97,6 @@ public class AttendanceServiceImpl implements AttendanceService {
                 return event;
             }
         }
-
         return null;
     }
 
@@ -107,27 +106,17 @@ public class AttendanceServiceImpl implements AttendanceService {
         EventData todayEvent = findTodayEvent(getAllEvents());
 
         if (todayEvent != null) {
-            Attendance attendanceRecord = attendanceRepository.findByIdUser(idUser);
+            Attendance attendanceRecord = attendanceRepository.findByUserIdAndEventId(idUser, todayEvent.getIdEvent());
 
-            if (attendanceRecord.getIdEvent() == todayEvent.getIdEvent()){
-                if (attendanceRecord != null) {
-                    LocalDateTime arrivalTime = LocalDateTime.now();
-                    attendanceRecord.setAttendanceTime(arrivalTime);
-                    return attendanceRepository.save(attendanceRecord);
-                } else {
-                    return null;
-                }
+            if (attendanceRecord != null && attendanceRecord.getIdEvent() == todayEvent.getIdEvent()) {
+                LocalDateTime arrivalTime = LocalDateTime.now();
+                attendanceRecord.setAttendanceTime(arrivalTime);
+                return attendanceRepository.save(attendanceRecord);
+            } else {
+                return null;
             }
         } else {
             return null;
         }
-        return null;
     }
-
-    @Override
-    public Attendance getUserAttendance(Long idUser) {
-        return null;
-    }
-
-
 }
