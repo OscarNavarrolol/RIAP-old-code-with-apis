@@ -3,7 +3,9 @@ package com.sena.riap.service;
 
 
 import com.sena.riap.entities.Attendance;
+import com.sena.riap.entities.EventData;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AttendanceService {
@@ -18,9 +20,18 @@ public interface AttendanceService {
 
     public void deleteAttendance (Long id);
 
-    List<Attendance> getAttendancesByEventId(Long eventId);
+    public List<Attendance> getAttendancesByEventId(Long eventId);
 
-    List<Attendance> getAttendancesByUserId(Long userId);
+    public List<Attendance> getAttendancesByUserId(Long userId);
 
-    void deleteAllByEventId(Long eventId);
+    public void deleteAllByEventId(Long eventId);
+
+    public List<EventData> getAllEvents();
+
+    public EventData findTodayEvent(List<EventData> eventList);
+
+    public Attendance saveEventArrivalTime(Long idUser);
+
+    public Attendance getUserAttendance(Long idUser);
+
 }
