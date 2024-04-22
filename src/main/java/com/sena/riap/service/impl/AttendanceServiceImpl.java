@@ -119,7 +119,7 @@ public class AttendanceServiceImpl implements AttendanceService {
             return null;
         }
     }
-        // ñistar de fecha de eventos por numero de curso
+        // listar de fecha de eventos por numero de curso
     public List<LocalDate> listEventsByCourse(int courseNumber){
         return eventDataRepository.findEventDatesByCourseNumber(courseNumber);
     }

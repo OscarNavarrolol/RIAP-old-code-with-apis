@@ -69,7 +69,7 @@
     box-shadow: 0 0 10px 0 var(--bottun_web) inset, 0 0 10px 4px var(--bottun_web);
   }
   
-  .hr2{
+  hr{
     border-color: #ffffff;
     box-shadow: 0 0 1px 1px;
   }
@@ -114,6 +114,40 @@
   
   .picture{
     width:20px;
+  }
+
+  .action{
+    width: 25px;
+    height: 25px;
+  }
+
+  .edit-btn,.delete-btn,.view-btn{
+    background-color: #101012;
+    cursor: pointer;
+    border: none;
+    padding: 4px;
+  }
+
+  .edit-btn:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  .delete-btn:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  .view-btn:hover{
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+  }
+
+  .add-btn{
+    background-color: #101012;
+    border: none;
+    cursor: pointer;
+    text-align: left;
   }
 
 
