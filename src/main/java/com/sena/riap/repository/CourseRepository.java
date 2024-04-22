@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Course,Long> {
-
+    // with jpql
     @Query("SELECT c.number FROM UserData u, UserCourse uc, Course c WHERE u.idUser = uc.idUser AND uc.idCourse = c.idCourse AND u.idUser = :userId")
     List<Integer> findCourseNumbersByUserId(Long userId);
 
