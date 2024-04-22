@@ -14,6 +14,7 @@ import jakarta.persistence.*;
 public class Program {
     @Id
     @Column(name = "id_program")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idProgram;
 
     @NotBlank(message = "Name cannot be blank")

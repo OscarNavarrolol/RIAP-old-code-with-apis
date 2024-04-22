@@ -106,7 +106,7 @@ public class AttendanceServiceImpl implements AttendanceService {
         EventData todayEvent = findTodayEvent(getAllEvents());
 
         if (todayEvent != null) {
-            Attendance attendanceRecord = attendanceRepository.findByUserIdAndEventId(idUser, todayEvent.getIdEvent());
+            Attendance attendanceRecord = attendanceRepository.findByIdUserAndIdEvent(idUser, todayEvent.getIdEvent());
 
             if (attendanceRecord != null && attendanceRecord.getIdEvent() == todayEvent.getIdEvent()) {
                 LocalDateTime arrivalTime = LocalDateTime.now();
@@ -119,4 +119,5 @@ public class AttendanceServiceImpl implements AttendanceService {
             return null;
         }
     }
+
 }

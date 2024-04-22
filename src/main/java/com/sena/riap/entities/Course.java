@@ -11,6 +11,7 @@ public class Course {
 
     @Id
     @Column(name = "id_course")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCourse;
 
     @NotNull(message = "Number cannot be null")

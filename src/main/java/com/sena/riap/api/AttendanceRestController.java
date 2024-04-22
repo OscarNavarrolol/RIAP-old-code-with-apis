@@ -42,5 +42,9 @@ public class AttendanceRestController {
 
     // METHODS REQUIRED FOR THE PROJECT
 
+    @PutMapping("/take_attendance/{id_user}")
+    public void takeAttendance(@PathVariable("id_user") Long idUser){
+        attendanceService.saveEventArrivalTime(idUser);
+    }
 
 }

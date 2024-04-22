@@ -1,10 +1,7 @@
 package com.sena.riap.entities;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -16,6 +13,7 @@ import jakarta.validation.constraints.Size;
 public class UserData {
     @Id
     @Column(name = "id_user")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idUser;
 
     @Size(max = 10)
