@@ -10,8 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.sql.Date; // revisar
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -121,13 +122,19 @@ public class AttendanceServiceImpl implements AttendanceService {
     }
     // listar de fecha de eventos por numero de curso
     @Override
-    public List<LocalDate> listEventsByCourse(int courseNumber) {
-        return eventDataRepository.findEventDatesByCourseNumber(courseNumber);
+    public List<LocalDate> listEventsByCourse(Integer courseNumber) {
+        List<Date> dates = eventDataRepository.findEventDatesByCourseNumber(courseNumber);
+        List<LocalDate> localDates = dates.stream()
+                .map(Date::toLocalDate)
+                .collect(Collectors.toList());
+
+                // eventDataRepository.findEventDatesByCourseNumber(courseNumber);
+                return localDates;
     }
 
     // tomar las asistencias por curso y fecha
     @Override
-    public List<Attendance> listAttendanceByCourse(int courseNumber, LocalDate eventDate) {
+    public List<Attendance> listAttendanceByCourse(Integer courseNumber, LocalDate eventDate) {
         return attendanceRepository.findByCourseAndDate(courseNumber, eventDate);
     }
 

@@ -33,8 +33,8 @@ public interface AttendanceService {
 
     public Attendance saveEventArrivalTime(Long idUser);
 
-    public List<LocalDate> listEventsByCourse(int courseNumber);
+    public List<LocalDate> listEventsByCourse(Integer courseNumber);
 
-    public List<Attendance> listAttendanceByCourse (int courseNumber, LocalDate eventDate);
+    public List<Attendance> listAttendanceByCourse (Integer courseNumber, LocalDate eventDate);
 
 }
