@@ -16,7 +16,7 @@ public interface AttendanceRepository extends JpaRepository<Attendance,Long> {
     void deleteAllByIdEvent(Long eventId);
 
     public Attendance findByIdUserAndIdEvent(Long idUser,Long idEvent);
-
+    // buscar las asistencias
     @Query(value = "SELECT * FROM attendance a " +
             "JOIN event_data e ON a.id_event = e.id_event " +
             "JOIN course c ON e.id_event = c.id_course " +

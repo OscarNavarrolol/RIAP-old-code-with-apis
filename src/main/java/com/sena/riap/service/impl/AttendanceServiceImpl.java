@@ -119,12 +119,28 @@ public class AttendanceServiceImpl implements AttendanceService {
             return null;
         }
     }
-        // listar de fecha de eventos por numero de curso
+    // listar de fecha de eventos por numero de curso
+    @Override
+    public List<LocalDate> listEventsByCourse(int courseNumber) {
+        return eventDataRepository.findEventDatesByCourseNumber(courseNumber);
+    }
+
+    // tomar las asistencias por curso y fecha
+    @Override
+    public List<Attendance> listAttendanceByCourse(int courseNumber, LocalDate eventDate) {
+        return attendanceRepository.findByCourseAndDate(courseNumber, eventDate);
+    }
+
+    /*
+    @Override
     public List<LocalDate> listEventsByCourse(int courseNumber){
         return eventDataRepository.findEventDatesByCourseNumber(courseNumber);
     }
-        // tomar las asistencias por curso y fecha
+
+    @Override
     public List<Attendance> listAttendanceByCourse (int courseNumber, LocalDate eventDate){
         return attendanceRepository.findByCourseAndDate(courseNumber, eventDate);
     }
+
+     */
 }

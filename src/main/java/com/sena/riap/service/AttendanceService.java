@@ -5,6 +5,7 @@ package com.sena.riap.service;
 import com.sena.riap.entities.Attendance;
 import com.sena.riap.entities.EventData;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -31,5 +32,9 @@ public interface AttendanceService {
     public EventData findTodayEvent(List<EventData> eventList);
 
     public Attendance saveEventArrivalTime(Long idUser);
+
+    public List<LocalDate> listEventsByCourse(int courseNumber);
+
+    public List<Attendance> listAttendanceByCourse (int courseNumber, LocalDate eventDate);
 
 }
