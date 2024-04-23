@@ -68,6 +68,7 @@ $("#buttonUsers").click(function () {
 });
 
 
+/* 
 $(document).on("click", ".edit-btn", function() {
   var eventId = $(this).data("id");
 
@@ -84,4 +85,9 @@ $(document).on("click", ".view-btn", function() {
   var eventId = $(this).data("id");
 
 });
+
+$(document).on("click", ".add-btn", function() {
+  var eventId = $(this).data("id");
+
+}); */
 
