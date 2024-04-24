@@ -17,10 +17,10 @@ public interface AttendanceRepository extends JpaRepository<Attendance,Long> {
 
     public Attendance findByIdUserAndIdEvent(Long idUser,Long idEvent);
     // buscar las asistencias
-    @Query(value = "SELECT * FROM attendance a " +
+    @Query(value = "SELECT a.id_attendance , a.id_event, a.id_user, a.attendance_time FROM attendance a " +
             "JOIN event_data e ON a.id_event = e.id_event " +
             "JOIN course c ON e.id_event = c.id_course " +
             "WHERE c.number_course =:courseNumber  AND e.date_event =:eventDate", nativeQuery = true)
-    List<Attendance> findByCourseAndDate (int courseNumber, LocalDate eventDate);
+    List<Attendance> findByCourseAndDate (Integer courseNumber, LocalDate eventDate);
 
 }

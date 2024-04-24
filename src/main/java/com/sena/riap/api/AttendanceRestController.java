@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
 @RequestMapping("/api_attendance")
 public class AttendanceRestController {
 
@@ -56,7 +56,7 @@ public class AttendanceRestController {
     }
 
     @GetMapping("/attendance_course")
-    public List<Attendance> getAttendanceCD(@RequestParam int courseNumber,@RequestParam LocalDate eventDate){
+    public List<Attendance> getAttendanceCD(@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate){
         return attendanceService.listAttendanceByCourse(courseNumber,eventDate);
     }
 
