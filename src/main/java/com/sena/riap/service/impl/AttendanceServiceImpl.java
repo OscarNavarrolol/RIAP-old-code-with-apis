@@ -2,8 +2,10 @@ package com.sena.riap.service.impl;
 
 import com.sena.riap.entities.Attendance;
 import com.sena.riap.entities.EventData;
+import com.sena.riap.entities.UserData;
 import com.sena.riap.repository.AttendanceRepository;
 import com.sena.riap.repository.EventDataRepository;
+import com.sena.riap.repository.UserDataRepository;
 import com.sena.riap.service.AttendanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,9 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     @Autowired
     private EventDataRepository eventDataRepository;
+
+    @Autowired
+    private UserDataRepository userDataRepository;
 
     @Override
     public List<Attendance> getAttendance() {
@@ -135,7 +140,25 @@ public class AttendanceServiceImpl implements AttendanceService {
     // tomar las asistencias por curso y fecha
     @Override
     public List<Attendance> listAttendanceByCourse(Integer courseNumber, LocalDate eventDate) {
-        return attendanceRepository.findByCourseAndDate(courseNumber, eventDate);
+        // return attendanceRepository.findByCourseAndDate(courseNumber, eventDate);
+
+        List<Attendance> attendances = attendanceRepository.findByCourseAndDate(courseNumber, eventDate);
+
+    for (Attendance attendance : attendances) {
+        EventData event = eventDataRepository.findById(attendance.getIdEvent()).orElse(null);
+        UserData user = userDataRepository.findById(attendance.getIdUser()).orElse(null);
+
+        if (event != null) {
+            attendance.setEventName(event.getObjective());
+        }
+
+        if (user != null) {
+            attendance.setUserName(user.getNameUser());
+        }
+    }
+
+    return attendances;
+
     }
 
     /*

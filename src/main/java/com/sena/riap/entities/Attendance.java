@@ -2,7 +2,6 @@ package com.sena.riap.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -24,6 +23,28 @@ public class Attendance {
 
     @Column(name = "attendance_time")
     private LocalDateTime attendanceTime;
+
+    // metodos pa probar pe
+    @Transient
+    private String eventName;
+    @Transient
+    private String userName;
+
+    public String getEventName() {
+        return eventName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Long getIdAttendance() {
         return idAttendance;
