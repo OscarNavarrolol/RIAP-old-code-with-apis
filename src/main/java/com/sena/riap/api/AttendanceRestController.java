@@ -3,10 +3,19 @@ package com.sena.riap.api;
 import com.sena.riap.entities.Attendance;
 import com.sena.riap.service.AttendanceService;
 import com.sena.riap.service.EventDataService;
+import com.sena.riap.service.report.AttendanceExporterExcel;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -58,6 +67,24 @@ public class AttendanceRestController {
     @GetMapping("/attendance_course")
     public List<Attendance> getAttendanceCD(@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate){
         return attendanceService.listAttendanceByCourse(courseNumber,eventDate);
+    }
+
+    @GetMapping("/export")
+    public void exportarListadoDeEmpleadosEnExcel(HttpServletResponse response) throws IOException {
+        response.setContentType("application/octet-stream");
+
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDate = dateFormatter.format(new Date());
+
+        String cabecera = "Content-Disposition";
+        String valor = "attachment; filename=Empleados_" + currentDate + ".xlsx";
+
+        response.setHeader(cabecera, valor);
+
+        List<Attendance> attendanceList = attendanceService.getAttendance();
+
+        AttendanceExporterExcel exporter = new AttendanceExporterExcel(attendanceList);
+        exporter.export(response);
     }
 
 }

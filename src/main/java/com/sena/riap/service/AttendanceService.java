@@ -37,4 +37,6 @@ public interface AttendanceService {
 
     public List<Attendance> listAttendanceByCourse (Integer courseNumber, LocalDate eventDate);
 
+    public void generateExcel(List<Attendance> attendanceList); //
+
 }

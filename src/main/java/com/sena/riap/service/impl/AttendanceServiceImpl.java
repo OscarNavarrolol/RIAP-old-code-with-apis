@@ -7,14 +7,23 @@ import com.sena.riap.repository.AttendanceRepository;
 import com.sena.riap.repository.EventDataRepository;
 import com.sena.riap.repository.UserDataRepository;
 import com.sena.riap.service.AttendanceService;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.sql.Date; // revisar
 import java.util.List;
 import java.util.stream.Collectors;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Service;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
 
 @Service
 public class AttendanceServiceImpl implements AttendanceService {
@@ -159,6 +168,40 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     return attendances;
 
+    }
+    //
+    @Override
+    public void generateExcel(List<Attendance> attendanceList) {
+        try (Workbook workbook = new XSSFWorkbook()) {
+
+            Sheet sheet = workbook.createSheet("Registros");
+
+            Row headerRow = sheet.createRow(0);
+            String[] columns = {"Objetivo", "Horra de llegada", "Aprendiz"}; // name columns
+            for (int i = 0; i < columns.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(columns[i]);
+            }
+
+            int rowNum = 1;
+            for (Attendance attendance : attendanceList) {
+                Row row = sheet.createRow(rowNum++);
+                row.createCell(0).setCellValue(attendance.getAttendanceTime());
+                row.createCell(1).setCellValue(attendance.getIdEvent());
+                row.createCell(2).setCellValue(attendance.getIdUser());
+                //  si necesito mas datos se agregan aqui
+            }
+
+            try (FileOutputStream fileOut = new FileOutputStream("registros.xlsx")) {
+                workbook.write(fileOut);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /*
