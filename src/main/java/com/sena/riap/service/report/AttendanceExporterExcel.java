@@ -4,6 +4,7 @@ import com.sena.riap.entities.Attendance;
 import jakarta.servlet.ServletOutputStream;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.CreationHelper;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -12,6 +13,9 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.time.ZoneId;
+import java.util.Date;
+
 
 public class AttendanceExporterExcel {
 
@@ -28,9 +32,11 @@ public class AttendanceExporterExcel {
 
 	private void writeTableHeader() {
 		Row row = sheet.createRow(0);
-		
+
 		CellStyle style = book.createCellStyle();
 		XSSFFont font = book.createFont();
+
+
 		font.setBold(true);
 		font.setFontHeight(16);
 		style.setFont(font);
@@ -40,16 +46,27 @@ public class AttendanceExporterExcel {
 		cell.setCellStyle(style);
 		
 		cell = row.createCell(1);
-		cell.setCellValue("IdEvent");
+		cell.setCellValue("Objective Event");
 		cell.setCellStyle(style);
 		
 		cell = row.createCell(2);
-		cell.setCellValue("IdUser");
+		cell.setCellValue("Name User");
 		cell.setCellStyle(style);
 		
 		cell = row.createCell(3);
 		cell.setCellValue("AttendanceTime");
 		cell.setCellStyle(style);
+
+
+        /*
+			CellStyle dateCellStyle = workbook.createCellStyle();
+            CreationHelper createHelper = workbook.getCreationHelper();
+            dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy HH:mm:ss"));
+
+            Cell dateCell = row.createCell(0);
+            dateCell.setCellValue(Date.from(attendance.getAttendanceTime().atZone(ZoneId.systemDefault()).toInstant()));
+            dateCell.setCellStyle(dateCellStyle);
+			 */
 
 		/*
 		cell = row.createCell(4);
@@ -76,6 +93,9 @@ public class AttendanceExporterExcel {
 		
 		CellStyle style = book.createCellStyle();
 		XSSFFont font = book.createFont();
+		CellStyle dateCellStyle = book.createCellStyle();
+		CreationHelper createHelper = book.getCreationHelper();
+		dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy HH:mm:ss"));
 		font.setFontHeight(14);
 		style.setFont(font);
 		
@@ -88,20 +108,19 @@ public class AttendanceExporterExcel {
 			cell.setCellStyle(style);
 			
 			cell = fila.createCell(1);
-			cell.setCellValue(attendance.getIdEvent());
+			cell.setCellValue(attendance.getEventName());
 			sheet.autoSizeColumn(1);
 			cell.setCellStyle(style);
 			
 			cell = fila.createCell(2);
-			cell.setCellValue(attendance.getIdUser());
+			cell.setCellValue(attendance.getUserName());
 			sheet.autoSizeColumn(2);
 			cell.setCellStyle(style);
 			
 			cell = fila.createCell(3);
 			cell.setCellValue(attendance.getAttendanceTime());
 			sheet.autoSizeColumn(3);
-			cell.setCellStyle(style);
-
+			cell.setCellStyle(dateCellStyle);
 			/*
 			cell = fila.createCell(4);
 			cell.setCellValue(attendance.getFecha().toString());

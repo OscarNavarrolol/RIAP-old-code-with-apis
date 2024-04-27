@@ -70,18 +70,19 @@ public class AttendanceRestController {
     }
 
     @GetMapping("/export")
-    public void exportarListadoDeEmpleadosEnExcel(HttpServletResponse response) throws IOException {
-        response.setContentType("application/octet-stream");
+    public void exportAttendanceList(HttpServletResponse response,@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate) throws IOException {
+        // response.setContentType("application/octet-stream");
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
-        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HHmmss");  // "yyyy-MM-dd_HH:mm:ss"
         String currentDate = dateFormatter.format(new Date());
 
-        String cabecera = "Content-Disposition";
-        String valor = "attachment; filename=Empleados_" + currentDate + ".xlsx";
+        String header = "Content-Disposition";
+        String value = "attachment; filename=Attendance_" + currentDate + ".xlsx";
 
-        response.setHeader(cabecera, valor);
+        response.setHeader(header, value);
 
-        List<Attendance> attendanceList = attendanceService.getAttendance();
+        List<Attendance> attendanceList = getAttendanceCD(courseNumber, eventDate);
 
         AttendanceExporterExcel exporter = new AttendanceExporterExcel(attendanceList);
         exporter.export(response);
