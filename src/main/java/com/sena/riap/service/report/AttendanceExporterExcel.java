@@ -57,35 +57,6 @@ public class AttendanceExporterExcel {
 		cell.setCellValue("AttendanceTime");
 		cell.setCellStyle(style);
 
-
-        /*
-			CellStyle dateCellStyle = workbook.createCellStyle();
-            CreationHelper createHelper = workbook.getCreationHelper();
-            dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy HH:mm:ss"));
-
-            Cell dateCell = row.createCell(0);
-            dateCell.setCellValue(Date.from(attendance.getAttendanceTime().atZone(ZoneId.systemDefault()).toInstant()));
-            dateCell.setCellStyle(dateCellStyle);
-			 */
-
-		/*
-		cell = row.createCell(4);
-		cell.setCellValue("Fecha");
-		cell.setCellStyle(style);
-		
-		cell = row.createCell(5);
-		cell.setCellValue("Telefono");
-		cell.setCellStyle(style);
-		
-		cell = row.createCell(6);
-		cell.setCellValue("Sexo");
-		cell.setCellStyle(style);
-		
-		cell = row.createCell(7);
-		cell.setCellValue("Salario");
-		cell.setCellStyle(style);
-
-		 */
 	}
 	
 	private void writeTableData() {
@@ -121,28 +92,6 @@ public class AttendanceExporterExcel {
 			cell.setCellValue(attendance.getAttendanceTime());
 			sheet.autoSizeColumn(3);
 			cell.setCellStyle(dateCellStyle);
-			/*
-			cell = fila.createCell(4);
-			cell.setCellValue(attendance.getFecha().toString());
-			sheet.autoSizeColumn(4);
-			cell.setCellStyle(style);
-			
-			cell = fila.createCell(5);
-			cell.setCellValue(attendance.getTelefono());
-			sheet.autoSizeColumn(5);
-			cell.setCellStyle(style);
-			
-			cell = fila.createCell(6);
-			cell.setCellValue(attendance.getSexo());
-			sheet.autoSizeColumn(6);
-			cell.setCellStyle(style);
-			
-			cell = fila.createCell(7);
-			cell.setCellValue(attendance.getSalario());
-			sheet.autoSizeColumn(7);
-			cell.setCellStyle(style);
-
-			 */
 		}
 	}
 	
