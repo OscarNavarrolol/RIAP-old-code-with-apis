@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVENT</title>
+    <link rel="stylesheet" href="/css/styleFormNewUser.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="logo">Form Event Data</h1>
+    <form class="userForm" method="post">
+        <div class="formGroup">
+            <label for="idEventData">ID Event:</label>
+            <input type="number" id="idEventData" name="idEventData" required>
+        </div>
+        <div class="formGroup">
+            <label for="dateEvent">Date Event:</label>
+            <input type="date" id="dateEvent" name="dateEvent" required>
+        </div>
+        <div class="formGroup">
+            <label for="startTime">Start Time:</label>
+            <input type="time" id="startTime" name="startTime" required>
+        </div>
+        <div class="formGroup">
+            <label for="endTime">End Time:</label>
+            <input type="time" id="endTime" name="endTime" required>
+        </div>
+        <div class="formGroup">
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+</body>
+</html>
