@@ -1,9 +1,11 @@
 package com.sena.riap.api;
 
+import com.lowagie.text.DocumentException;
 import com.sena.riap.entities.Attendance;
 import com.sena.riap.service.AttendanceService;
 import com.sena.riap.service.EventDataService;
 import com.sena.riap.service.report.AttendanceExporterExcel;
+import com.sena.riap.service.report.AttendanceExporterPDF;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -68,8 +70,8 @@ public class AttendanceRestController {
         return attendanceService.listAttendanceByCourse(courseNumber,eventDate);
     }
 
-    @GetMapping("/export")
-    public void exportAttendanceList(HttpServletResponse response,@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate) throws IOException {
+    @GetMapping("/export_excel")
+    public void exportAttendanceInXlsx(HttpServletResponse response,@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate) throws IOException {
         // response.setContentType("application/octet-stream");
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
@@ -84,6 +86,25 @@ public class AttendanceRestController {
         List<Attendance> attendanceList = getAttendanceCD(courseNumber, eventDate);
 
         AttendanceExporterExcel exporter = new AttendanceExporterExcel(attendanceList);
+        exporter.export(response);
+    }
+
+
+    @GetMapping("/export_pdf")
+    public void exportAttendanceInPDF (HttpServletResponse response,@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate) throws DocumentException, IOException {
+        response.setContentType("application/pdf");
+
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HHmmss");
+        String today = dateFormatter.format(new Date());
+
+        String cabecera = "Content-Disposition";
+        String valor = "attachment; filename=Attendance_" + today + ".pdf";
+
+        response.setHeader(cabecera, valor);
+
+        List<Attendance> attendanceList = getAttendanceCD(courseNumber, eventDate);
+
+        AttendanceExporterPDF exporter = new AttendanceExporterPDF(attendanceList);
         exporter.export(response);
     }
 

@@ -2,10 +2,7 @@ package com.sena.riap.service.report;
 
 import com.sena.riap.entities.Attendance;
 import jakarta.servlet.ServletOutputStream;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellStyle;
-import org.apache.poi.ss.usermodel.CreationHelper;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -36,6 +33,8 @@ public class AttendanceExporterExcel {
 		CellStyle style = book.createCellStyle();
 		XSSFFont font = book.createFont();
 
+		font.setFontName("Bahnschrift semibold condensed");
+		style.setAlignment(HorizontalAlignment.CENTER);
 
 		font.setBold(true);
 		font.setFontHeight(16);
@@ -68,7 +67,15 @@ public class AttendanceExporterExcel {
 		CreationHelper createHelper = book.getCreationHelper();
 		dateCellStyle.setDataFormat(createHelper.createDataFormat().getFormat("dd/MM/yyyy HH:mm:ss"));
 		font.setFontHeight(14);
+		font.setFontName("Bahnschrift Light condensed");
 		style.setFont(font);
+		style.setAlignment(HorizontalAlignment.CENTER);
+		dateCellStyle.setAlignment(HorizontalAlignment.CENTER);
+
+		XSSFFont fontDate = book.createFont();
+		fontDate.setFontName("Bahnschrift Light condensed");
+		fontDate.setFontHeight(13);
+		dateCellStyle.setFont(fontDate);
 		
 		for(Attendance attendance : attendanceList) {
 			Row fila = sheet.createRow(numberRows ++);
