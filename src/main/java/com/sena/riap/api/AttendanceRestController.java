@@ -55,7 +55,7 @@ public class AttendanceRestController {
     // METHODS REQUIRED FOR THE PROJECT
 
     @PutMapping("/take_attendance/{id_user}")
-    public void takeAttendance(@PathVariable("id_user") Long idUser){
+    public void takeAttendance(@PathVariable("id_user") Long idUser) {
         attendanceService.saveEventArrivalTime(idUser);
     }
 
@@ -66,12 +66,12 @@ public class AttendanceRestController {
     }
 
     @GetMapping("/attendance_course")
-    public List<Attendance> getAttendanceCD(@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate){
-        return attendanceService.listAttendanceByCourse(courseNumber,eventDate);
+    public List<Attendance> getAttendanceCD(@RequestParam Integer courseNumber, @RequestParam LocalDate eventDate) {
+        return attendanceService.listAttendanceByCourse(courseNumber, eventDate);
     }
 
     @GetMapping("/export_excel")
-    public void exportAttendanceInXlsx(HttpServletResponse response,@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate) throws IOException {
+    public void exportAttendanceInXlsx(HttpServletResponse response, @RequestParam Integer courseNumber, @RequestParam LocalDate eventDate) throws IOException {
         // response.setContentType("application/octet-stream");
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 
@@ -89,18 +89,17 @@ public class AttendanceRestController {
         exporter.export(response);
     }
 
-
     @GetMapping("/export_pdf")
-    public void exportAttendanceInPDF (HttpServletResponse response,@RequestParam Integer courseNumber,@RequestParam LocalDate eventDate) throws DocumentException, IOException {
+    public void exportAttendanceInPDF(HttpServletResponse response, @RequestParam Integer courseNumber, @RequestParam LocalDate eventDate) throws DocumentException, IOException {
         response.setContentType("application/pdf");
 
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HHmmss");
         String today = dateFormatter.format(new Date());
 
-        String cabecera = "Content-Disposition";
-        String valor = "attachment; filename=Attendance_" + today + ".pdf";
+        String header = "Content-Disposition";
+        String value = "attachment; filename=Attendance_" + today + ".pdf";
 
-        response.setHeader(cabecera, valor);
+        response.setHeader(header, value);
 
         List<Attendance> attendanceList = getAttendanceCD(courseNumber, eventDate);
 
