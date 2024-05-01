@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <link rel="stylesheet" href="/css/Style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <script src="/js/main.js"></script>
+    <header>
+      <div id="modalForm"></div>
+      <div class="panel">
+        <div class="information">
+          <img src="/images/logoriap.png" alt="logo RIAP" />
+          <h1>RIAP</h1>
+        </div>
+        <hr />
+        <div class="menu">
+          <nav>
+            <ul>
+              <li><a id="buttonAttendances">Attendances</a></li>
+              <li><a id="buttonCourses">Courses</a></li>
+              <li><a id="buttonEvents">Events Data</a></li>
+              <li><a id="buttonPrograms">Programs</a></li>
+              <li><a id="buttonUsersCourses">Users Courses</a></li>
+              <li><a id="buttonUsers">Users Datas</a></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <hr class="hr2" />
+    <div class="container">
+      <table class="table">
+        <thead id="headerTable"></thead>
+        <tbody id="data"></tbody>
+      </table>
+      <div class="spaceAdd">
+        <button class="add-btn">
+          <img src="/images/iconNew.png" class="btnAdd" />
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

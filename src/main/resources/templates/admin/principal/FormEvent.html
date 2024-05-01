@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EVENT</title>
-    <link rel="stylesheet" href="/css/styleFormNewUser.css">
-</head>
-<body>
-<div class="container">
+<link rel="stylesheet" href="/css/styleForm.css"/>
+<div class="container1">
     <h1 class="logo">Form Event Data</h1>
-    <form class="userForm" method="post">
+    <form class="eventForm">
         <div class="formGroup">
             <label for="idEventData">ID Event:</label>
             <input type="number" id="idEventData" name="idEventData" required>
@@ -17,6 +9,14 @@
         <div class="formGroup">
             <label for="dateEvent">Date Event:</label>
             <input type="date" id="dateEvent" name="dateEvent" required>
+        </div>
+        <div class="formGroup">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+        <div class="formGroup">
+            <label for="objective">Objective:</label>
+            <input type="text" id="objective" name="objective" required>
         </div>
         <div class="formGroup">
             <label for="startTime">Start Time:</label>
@@ -27,9 +27,9 @@
             <input type="time" id="endTime" name="endTime" required>
         </div>
         <div class="formGroup">
-            <input type="submit" value="Submit">
+            <input type="submit" id="btnAction" class="btnHidden" value="Guardar"/>
+            <input type="reset" id="btnAction" class="btnHidden" value="Limpiar" />
+            <button id="btnAction"><a href="/user_data/tables">Return</a></button>
         </div>
     </form>
 </div>
-</body>
-</html>

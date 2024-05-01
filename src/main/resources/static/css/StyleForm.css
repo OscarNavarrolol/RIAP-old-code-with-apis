@@ -1,21 +1,14 @@
-* {
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
 }
-
-body {
-    background-color: #e9e9e9;
-}
-
-.container {
+.container1 {
     max-width: 500px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 20px;
     background-color: #ffffff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -38,14 +31,21 @@ label {
 input[type="text"],
 input[type="number"],
 input[type="email"],
-input[type="password"] {
+input[type="password"],
+input[type="date"],
+input[type="datetime-local"]{
     width: 100%;
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #cccccc;
 }
 
-.btnSubmit {
+button a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+#btnAction {
     background-color: #007bff;
     color: #ffffff;
     border: none;
@@ -54,6 +54,6 @@ input[type="password"] {
     cursor: pointer;
 }
 
-.btnSubmit:hover {
+#btnAction:hover {
     background-color: #0056b3;
 }

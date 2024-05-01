@@ -5,17 +5,26 @@ import com.sena.riap.service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
-@RequestMapping({"/","/user_data"})
+@RequestMapping("/user_data")
 public class ControllerUserData {
 
     @Autowired
     private UserDataService userDataService;
 
+    @GetMapping("/get_user_data")
+    public String getMethodName() {
+        return "admin/principal/FormUserData";
+    }
+    
+
     @GetMapping("/tables")
     public String tablesGeneral() {
-        return "admin/principal/ListUsers";
+        return "admin/principal/index";
     }
 
     @GetMapping("/about_us")
@@ -28,7 +37,7 @@ public class ControllerUserData {
         return "general/Login";
     }
 
-    @GetMapping
+    @GetMapping("/home")
     public String getHomePage(){
         return "general/HomePage";
     }
