@@ -20,12 +20,10 @@ $(document).ready(function () {
 
   function mapAttendanceItem(item) {
     return `<tr><td>${item.idAttendance}</td><td>${item.idEvent}</td><td>${item.idUser}</td>
-    <td>${item.attendanceTime}</td><td><button class="view-attendance view-btn" 
-    data-id="${item.idAttendance}"><img src="/images/iconView.png" class="action">
-    </button><button id="edit-attendance" class="edit-btn" data-id="${item.idAttendance}"><img src="/images/iconEdit.png" 
-    class="action"></button><button id="delete-attendance" class="delete-btn" 
-    data-id="${item.idAttendance}"><img src="/images/iconDelete.png" class="action">
-    </button></td></tr>`;
+    <td>${item.attendanceTime}</td><td><button id="view-attendance" class="view-btn" data-id="${item.idAttendance}">
+    <img src="/images/iconView.png" class="action"></button><button id="edit-attendance" class="edit-btn" data-id="${item.idAttendance}">
+    <img src="/images/iconEdit.png" class="action"></button><button id="delete-attendance" class="delete-btn" data-id="${item.idAttendance}">
+    <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
   }
 
   $("#buttonAttendances").click(function () {
@@ -34,7 +32,7 @@ $(document).ready(function () {
     $("#modalForm").hide();
   });
 
-  $(document).on("click", ".view-attendance", function () {
+  $(document).on("click", "#view-attendance", function () {
     var ID = $(this).data("id");
     $("#modalForm").load("/attendance/get_attendance");
     $("#modalForm").show();

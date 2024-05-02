@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  function loadAttendanceList() {
+  function loadProgramList() {
     const $output = $("#data");
     const $headerTable = $("#headerTable");
     $.ajax({
@@ -10,7 +10,7 @@ $(document).ready(function () {
         const headers =
           "<tr><th>Id Program</th><th>Name Program</th><th>Actions</th></tr>";
         $headerTable.html(headers);
-        $output.html(response.map(mapAttendanceItem));
+        $output.html(response.map(mapProgramItem));
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -18,17 +18,23 @@ $(document).ready(function () {
     });
   }
 
-  function mapAttendanceItem(item) {
-    return `<tr><td>${item.idProgram}</td><td>${item.name}</td><td><button class="view-program view-btn" data-id="${item.idProgram}"><img src="/images/iconView.png" class="action"></button><button class="edit-btn" data-id="${item.idProgram}"><img src="/images/iconEdit.png" class="action"></button><button id="delete-program" class="delete-btn" data-id="${item.idProgram}"><img src="/images/iconDelete.png" class="action"></button></td></tr>`;
+  function mapProgramItem(item) {
+    return `<tr><td>${item.idProgram}</td><td>${item.name}</td><td><button id="view-program" class="view-btn" data-id="${item.idProgram}">
+    <img src="/images/iconView.png" class="action"></button><button id="edit-program" class="edit-btn" data-id="${item.idProgram}">
+    <img src="/images/iconEdit.png" class="action"></button><button id="delete-program" class="delete-btn" data-id="${item.idProgram}">
+    <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
   }
 
   $("#buttonPrograms").click(function () {
-    loadAttendanceList();
+    loadProgramList();
+    $("#bton-close-modal").click();
+    $("#modalForm").hide();
   });
 
-  $(document).on("click", ".view-program", function () {
+  $(document).on("click", "#view-program", function () {
     var ID = $(this).data("id");
     $("#modalForm").load("/program/get_program");
+    $("#modalForm").show();
     $.ajax({
       url: `http://localhost:8083/api_program/find/${ID}`,
       type: "GET",
@@ -44,7 +50,7 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#delete-program", function () {
+  $(document).on("click", "#delete_program", function () {
     var ID = $(this).data("id");
     if (confirm("¿Estás seguro de que deseas eliminar este programa?")) {
       $.ajax({
@@ -52,7 +58,7 @@ $(document).ready(function () {
         type: "DELETE",
         success: function (response) {
           alert("¡El programa ha sido eliminado exitosamente!");
-          loadAttendanceList();
+          loadProgramList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
@@ -62,11 +68,54 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on("click", ".edit-btn", function () {
+  $(document).on("click", "#edit-program", function () {
     var ID = $(this).data("id");
+    $("#modalForm").load("/program/get_program");
+    $("#modalForm").show();
+
+    $.ajax({
+      url: `http://localhost:8083/api_program/find/${ID}`,
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        $("#idProgram").val(data.idProgram).prop("readonly", true);
+        $("#nameProgram").val(data.name);
+        $(".btnHidden").show();
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr.responseText);
+        alert("Hubo un error al intentar cargar los datos para editar.");
+      },
+    });
+  });
+
+  $(document).on("click", "#save-btn", function (event) {
+    event.preventDefault();
+
+    var ID = $("#idProgram").val();
+
+    var formData = {
+      name: $("#nameProgram").val(),
+    };
+
+    $.ajax({
+      url: `http://localhost:8083/api_program/update/${ID}`,
+      type: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(formData),
+      success: function (response) {
+        alert("Los datos del programa han sido actualizados exitosamente.");
+        $("#modalForm").hide();
+        loadEventList();
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr.responseText);
+        alert("Hubo un error al intentar actualizar los datos del programa.");
+      },
+    });
   });
 
   $(document).on("click", ".add-btn", function () {
-    var ID = $(this).data("id");
+
   });
 });

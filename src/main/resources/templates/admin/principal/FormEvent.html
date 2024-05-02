@@ -1,6 +1,9 @@
-<link rel="stylesheet" href="/css/styleForm.css"/>
+<link rel="stylesheet" href="/css/styleForm.css" />
 <div class="container1">
-    <h1 class="logo">Form Event Data</h1>
+    <div class="formGroup-header">
+        <a href="http://localhost:8083/user_data/tables" class="a-logo"><img src="/images/iconReturn.png" class="logo"></a>
+        <h1>Form Event Data</h1>
+    </div>
     <form class="eventForm">
         <div class="formGroup">
             <label for="idEventData">ID Event:</label>
@@ -26,10 +29,9 @@
             <label for="endTime">End Time:</label>
             <input type="time" id="endTime" name="endTime" required>
         </div>
-        <div class="formGroup">
-            <input type="submit" id="btnAction" class="btnHidden" value="Guardar"/>
-            <input type="reset" id="btnAction" class="btnHidden" value="Limpiar" />
-            <button id="btnAction"><a href="/user_data/tables">Return</a></button>
-        </div>
+        <div class="formGroup-btn">
+            <input type="submit" id="save-btn" class="btnHidden" value="Guardar"/>
+            <input type="reset" class="btnHidden" value="Limpiar"/>
+          </div>
     </form>
 </div>

@@ -19,16 +19,23 @@ $(document).ready(function () {
   }
 
   function mapAttendanceItem(item) {
-    return `<tr><td>${item.idUserCourse}</td><td>${item.idCourse}</td><td>${item.idUser}</td><td><button class="view-userCourse view-btn" data-id="${item.idUserCourse}"><img src="/images/iconView.png" class="action"></button><button class="edit-btn" data-id="${item.idUserCourse}"><img src="/images/iconEdit.png" class="action"></button><button id="delete-user-course" class="delete-btn" data-id="${item.idUserCourse}"><img src="/images/iconDelete.png" class="action"></button></td></tr>`;
+    return `<tr><td>${item.idUserCourse}</td><td>${item.idCourse}</td><td>${item.idUser}</td>
+    <td><button class="view-userCourse view-btn" data-id="${item.idUserCourse}">
+    <img src="/images/iconView.png" class="action"></button><button class="edit-btn" data-id="${item.idUserCourse}">
+    <img src="/images/iconEdit.png" class="action"></button><button id="delete-user-course" class="delete-btn" data-id="${item.idUserCourse}">
+    <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
   }
 
   $("#buttonUsersCourses").click(function () {
     loadAttendanceList();
+    $("#bton-close-modal").click();
+    $("#modalForm").hide();
   });
   
   $(document).on("click", ".view-userCourse", function () {
     var ID = $(this).data("id");
     $("#modalForm").load("/user_course/get_user_course");
+    $("#modalForm").show();
     $.ajax({
       url: `http://localhost:8083/api_user_course/find/${ID}`,
       type: "GET",

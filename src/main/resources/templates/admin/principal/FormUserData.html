@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="/css/styleForm.css"/>
 <div class="container1">
-    <h1 class="logo">Form User Data</h1>
+    <div class="formGroup-header">
+        <a href="http://localhost:8083/user_data/tables" class="a-logo"><img src="/images/iconReturn.png" class="logo"></a>
+        <h1>Form User Data</h1>
+    </div>
     <form class="userDataForm" enctype="multipart/form-data">
         <div class="formGroup">
             <label for="idUserData">ID User Data:</label>
@@ -40,12 +43,10 @@
         <div class="formGroup">
             <label for="profilePicture">Profile Picture:</label>
             <input type="image" id="profilePicture" name="profilePicture" required>
-            <h1>Falta la camara</h1>
         </div>
-        <div class="formGroup">
-            <input type="submit" id="btnAction" class="btnHidden" value="Guardar"/>
-            <input type="reset" id="btnAction" class="btnHidden" value="Limpiar" />
-            <button id="btnAction"><a href="/user_data/tables">Return</a></button>
+        <div class="formGroup-btn">
+            <input type="submit" id="save-btn" class="btnHidden" value="Guardar"/>
+            <input type="reset" class="btnHidden" value="Limpiar"/>
         </div>
     </form>
 </div>
