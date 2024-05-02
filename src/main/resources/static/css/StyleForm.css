@@ -4,18 +4,32 @@
     box-sizing: border-box;
 }
 .container1 {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
+    margin: 10% auto;
+    max-width: 450px;
+    padding: 30px;
+    background-color: #101012;
     border-radius: 10px;
+    overflow: auto;
+    box-shadow: 0px 0px 10px white;
 }
 
-.logo {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #333333;
+.formGroup-header{
+    margin: 0px auto 20px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+h1{
+    width: 100%;
+    text-align: center;
+    color: #ffffff;
+}
+
+.logo{
+    width: 35px;
+}
+
 
 .formGroup {
     margin-bottom: 20px;
@@ -25,7 +39,7 @@ label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
-    color: #555555;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 input[type="text"],
@@ -33,11 +47,15 @@ input[type="number"],
 input[type="email"],
 input[type="password"],
 input[type="date"],
-input[type="datetime-local"]{
+input[type="datetime-local"],
+input[type="time"],
+select{
+    color: white;
+    background-color: #1f1f24;
     width: 100%;
     padding: 10px;
     border-radius: 5px;
-    border: 1px solid #cccccc;
+    border: 1px solid #16700B;
 }
 
 button a{
@@ -45,8 +63,8 @@ button a{
     color: #ffffff;
 }
 
-#btnAction {
-    background-color: #007bff;
+.btnHidden {
+    background-color: #00AF00;
     color: #ffffff;
     border: none;
     border-radius: 5px;
@@ -54,6 +72,6 @@ button a{
     cursor: pointer;
 }
 
-#btnAction:hover {
-    background-color: #0056b3;
+.btnhiden:hover {
+    background-color: #16700B;
 }

@@ -75,16 +75,14 @@
   }
 
   #modalForm {
+    display: none;
     position: fixed;
-    z-index: 999;
-    background-color: rgba(255, 255, 255, 0.1);
-    width: 500px;
-    height: auto;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    overflow: auto;
-    max-height: 80vh;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
   
   .container{
@@ -160,7 +158,7 @@
     position: fixed;
     bottom: 15px;
     right: 15px;
-    z-index: 999;
+    z-index: 98;
   }
   
   .add-btn{
