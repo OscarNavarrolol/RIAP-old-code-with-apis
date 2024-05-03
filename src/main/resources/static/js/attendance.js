@@ -28,6 +28,7 @@ $(document).ready(function () {
 
   $("#buttonAttendances").click(function () {
     loadAttendanceList();
+    $("#modalForm").load("/attendance/get_attendance");
     $("#bton-close-modal").click();
     $("#modalForm").hide();
     $("#add-btn-attendance").show();
@@ -40,7 +41,6 @@ $(document).ready(function () {
 
   $(document).on("click", "#view-attendance", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/attendance/get_attendance");
     $("#modalForm").show();
     $.ajax({
       url: `http://localhost:8083/api_attendance/find/${ID}`,
@@ -93,8 +93,7 @@ $(document).ready(function () {
         $("#idEventData").val(data.idEvent);
         $("#idUser").val(data.idUser);
         $("#attendanceTime").val(data.attendanceTime);
-        $("#edit-btn-attendance").show();
-        $("#save-btn").hide();
+        $("#save-btn-attendance").show();
         $("#clean-btn").hide();
       },
       error: function (xhr, status, error) {
@@ -104,40 +103,75 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#edit-btn-attendance", function (event) {
-    event.preventDefault();
+  $(document).on("click", "#add-btn-attendance", function () {
+    $("#modalForm").show();
 
-    var ID = $("#idAttendance").val();
+    $("#idAttendance").hide()
+    $("label[for='idAttendance']").hide();
 
-    var formData = {
-      idEvent: $("#idEventData").val(),
-      idUser: $("#idUser").val(),
-      attendanceTime: $("#attendanceTime").val(),
-    };
+    $("#idEventData").val("");
+    $("#idUser").val("");
+    $("#attendanceTime").val("");
 
-    $.ajax({
-      url: `http://localhost:8083/api_attendance/update/${ID}`,
-      type: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(formData),
-      success: function (response) {
-        alert("Los datos de asistencia han sido actualizados exitosamente.");
-        $("#modalForm").hide();
-        loadAttendanceList();
-      },
-      error: function (xhr, status, error) {
-        console.error(xhr.responseText);
-        alert("Hubo un error al intentar actualizar los datos de asistencia.");
-      },
-    });
+    $("#btnHidden").show();
   });
 
-  $(document).on("click", "#add-btn-attendance", function () {
-  
+
+  $(document).on("click", "#save-btn-attendance", function (event) {
+    event.preventDefault();
+
+    var ID = $(this).data("id");
+
+    if (ID != null) {
+      var formData = {
+        idEvent: $("#idEventData").val(),
+        idUser: $("#idUser").val(),
+        attendanceTime: $("#attendanceTime").val(),
+      };
+
+      $.ajax({
+        url: `http://localhost:8083/api_attendance/update/${ID}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("Los datos de asistencia han sido actualizados exitosamente.");
+          $("#modalForm").hide();
+          loadAttendanceList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert(
+            "Hubo un error al intentar actualizar los datos de asistencia."
+          );
+        },
+      });
+    } else {
+      var formData = {
+        idEvent: $("#idEventData").val(),
+        idUser: $("#idUser").val(),
+        attendanceTime: $("#attendanceTime").val(),
+      };
+
+      $.ajax({
+        url: "http://localhost:8083/api_attendance/save",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("La asistencia ha sido guardada exitosamente.");
+          $("#modalForm").hide();
+          loadAttendanceList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert("Hubo un error al intentar guardar la asistencia.");
+        },
+      });
+    }
   });
 
   $(document).on("click", "#returnTable1", function () {
     $("#modalForm").hide();
   });
-
 });
