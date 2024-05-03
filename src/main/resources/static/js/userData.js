@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-  function loadAttendanceList() {
+  function loadUserList() {
     const $output = $("#data");
     const $headerTable = $("#headerTable");
     $.ajax({
@@ -11,7 +11,7 @@ $(document).ready(function () {
         const headers =
           "<tr><th>Id User</th><th>Full Name</th><th>Age</th><th>Document Number</th><th>Phone</th><th>E-mail</th><th>Password User</th><th>Role User</th><th>Profile Picture</th><th>Actions</th></tr>";
         $headerTable.html(headers);
-        $output.html(response.map(mapAttendanceItem));
+        $output.html(response.map(mapUserItem));
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -19,22 +19,28 @@ $(document).ready(function () {
     });
   }
 
-  function mapAttendanceItem(item) {
+  function mapUserItem(item) {
     return `<tr><td>${item.idUser}</td><td>${item.nameUser}</td><td>${item.age}</td><td>${item.document}</td>
     <td>${item.phone}</td><td>${item.email}</td><td>${item.password}</td><td>${item.roleUser}</td>
-    <td><img src="${item.profilePicture}" alt="profile"></td><td><button class="view-user view-btn" data-id="${item.idUser}">
-    <img src="/images/iconView.png" class="action"></button><button class="edit-btn" data-id="${item.idUser}">
+    <td><img src="${item.profilePicture}" alt="profile"></td><td><button id="view-user" class="view-btn" data-id="${item.idUser}">
+    <img src="/images/iconView.png" class="action"></button><button id="edit-user-data" class="edit-btn" data-id="${item.idUser}">
     <img src="/images/iconEdit.png" class="action"></button><button id="delete-user-data" class="delete-btn" data-id="${item.idUser}">
     <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
   }
 
   $("#buttonUsers").click(function () {
-    loadAttendanceList();
+    loadUserList();
     $("#bton-close-modal").click();
     $("#modalForm").hide();
+    $("#add-btn-attendance").hide();
+    $("#add-btn-course").hide();
+    $("#add-btn-event").hide();
+    $("#add-btn-program").hide();
+    $("#add-btn-user-course").hide();
+    $("#add-btn-user").show();
   });
   
-  $(document).on("click", ".view-user", function () {
+  $(document).on("click", "#view-user", function () {
     var ID = $(this).data("id");
     $("#modalForm").load("/user_data/get_user_data");
     $("#modalForm").show();
@@ -68,7 +74,7 @@ $(document).ready(function () {
         type: "DELETE",
         success: function (response) {
           alert("¡El usuario ha sido eliminado exitosamente!");
-          loadAttendanceList();
+          loadUserList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
@@ -80,11 +86,74 @@ $(document).ready(function () {
     }
   });
 
-  $(document).on("click", ".edit-btn", function () {
+  $(document).on("click", "#edit-user-data", function () {
     var ID = $(this).data("id");
+    $("#modalForm").load("/user_data/get_user_data");
+    $("#modalForm").show();
+
+    $.ajax({
+      url: `http://localhost:8083/api_user/find/${ID}`,
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        $("#idUserData").val(data.idUser).prop("readonly", true);
+        $("#document").val(data.document);
+        $("#nameUser").val(data.nameUser);
+        $("#age").val(data.age);
+        $("#email").val(data.email);
+        $("#phone").val(data.phone);
+        $("#role").val(data.roleUser);
+        $("#password").val(data.password);
+        $("#profilePicture").val(data.profilePicture);
+        $("#save-btn").hide();
+        $("#clean-btn").hide();
+        $("#edit-btn-user").show();
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr.responseText);
+        alert("Hubo un error al intentar cargar los datos para editar.");
+      },
+    });
   });
 
-  $(document).on("click", ".add-btn", function () {
-    var ID = $(this).data("id");
+  $(document).on("click", "#edit-btn-user", function (event) {
+    event.preventDefault();
+
+    var ID = $("#idUserData").val();
+
+    var formData = {
+      document: $("#document").val(),
+      nameUser: $("#nameUser").val(),
+      age: $("#age").val(),
+      email: $("#email").val(),
+      phone: $("#phone").val(),
+      roleUser: $("#role").val(),
+      password: $("#password").val(),
+      profilePicture: $("#profilePicture").val(),
+    };
+
+    $.ajax({
+      url: `http://localhost:8083/api_user_data/update/${ID}`,
+      type: "PUT",
+      contentType: "application/json",
+      data: JSON.stringify(formData),
+      success: function (response) {
+        alert("Los datos del usuario han sido actualizados exitosamente.");
+        $("#modalForm").hide();
+        loadUserList();
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr.responseText);
+        alert("Hubo un error al intentar actualizar los datos del usuario.");
+      },
+    });
+  });
+
+  $(document).on("click", "#add-btn-user", function () {
+    alert("table6");
+  });
+
+  $(document).on("click","#returnTable6", function (){
+    $("#modalForm").hide();
   });
 });

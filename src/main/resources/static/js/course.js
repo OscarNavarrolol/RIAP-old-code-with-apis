@@ -30,8 +30,14 @@ $(document).ready(function () {
     loadCourseList();
     $("#bton-close-modal").click();
     $("#modalForm").hide();
+    $("#add-btn-attendance").hide();
+    $("#add-btn-course").show();
+    $("#add-btn-event").hide();
+    $("#add-btn-program").hide();
+    $("#add-btn-user-course").hide();
+    $("#add-btn-user").hide();
   });
-  
+
   $(document).on("click", "#view-course", function () {
     var ID = $(this).data("id");
     $("#modalForm").load("/course/get_course");
@@ -83,7 +89,9 @@ $(document).ready(function () {
         $("#idCourse").val(data.idCourse).prop("readonly", true);
         $("#idProgram").val(data.idProgram);
         $("#numberCourse").val(data.number);
-        $(".btnHidden").show();
+        $("#save-btn").hide();
+        $("#clean-btn").hide();
+        $("#edit-btn-course").show();
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -92,7 +100,7 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#save-btn", function (event) {
+  $(document).on("click", "#edit-btn-course", function (event) {
     event.preventDefault();
 
     var ID = $("#idCourse").val();
@@ -120,8 +128,13 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", ".add-btn", function () {
-
+  $(document).on("click", "#add-btn-course", function () {
+    alert("table2");
   });
+
+  $(document).on("click","#returnTable2", function (){
+    $("#modalForm").hide();
+  });
+
 });
 

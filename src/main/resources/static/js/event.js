@@ -30,6 +30,12 @@ $(document).ready(function () {
     loadEventList();
     $("#bton-close-modal").click();
     $("#modalForm").hide()
+    $("#add-btn-attendance").hide();
+    $("#add-btn-course").hide();
+    $("#add-btn-event").show();
+    $("#add-btn-program").hide();
+    $("#add-btn-user-course").hide();
+    $("#add-btn-user").hide();
   });
   
   $(document).on("click", "#view-event", function () {
@@ -89,7 +95,9 @@ $(document).ready(function () {
         $("#objective").val(data.objective);
         $("#startTime").val(data.startTime);
         $("#endTime").val(data.endTime);
-        $(".btnHidden").show();
+        $("#save-btn").hide();
+        $("#clean-btn").hide();
+        $("#edit-btn-event").show();
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -98,7 +106,7 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#save-btn", function (event) {
+  $(document).on("click", "#edit-btn-event", function (event) {
     event.preventDefault();
 
     var ID = $("#idEventData").val();
@@ -129,7 +137,11 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", ".add-btn", function () {
-    var ID = $(this).data("id");
+  $(document).on("click", "#add-btn-event", function () {
+    alert("table3");
+  });
+
+  $(document).on("click","#returnTable3", function (){
+    $("#modalForm").hide();
   });
 });

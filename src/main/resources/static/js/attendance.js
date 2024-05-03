@@ -30,6 +30,12 @@ $(document).ready(function () {
     loadAttendanceList();
     $("#bton-close-modal").click();
     $("#modalForm").hide();
+    $("#add-btn-attendance").show();
+    $("#add-btn-course").hide();
+    $("#add-btn-event").hide();
+    $("#add-btn-program").hide();
+    $("#add-btn-user-course").hide();
+    $("#add-btn-user").hide();
   });
 
   $(document).on("click", "#view-attendance", function () {
@@ -87,7 +93,9 @@ $(document).ready(function () {
         $("#idEventData").val(data.idEvent);
         $("#idUser").val(data.idUser);
         $("#attendanceTime").val(data.attendanceTime);
-        $(".btnHidden").show();
+        $("#edit-btn-attendance").show();
+        $("#save-btn").hide();
+        $("#clean-btn").hide();
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -96,7 +104,7 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#save-btn", function (event) {
+  $(document).on("click", "#edit-btn-attendance", function (event) {
     event.preventDefault();
 
     var ID = $("#idAttendance").val();
@@ -124,6 +132,12 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", ".add-btn", function () {
+  $(document).on("click", "#add-btn-attendance", function () {
+  
   });
+
+  $(document).on("click", "#returnTable1", function () {
+    $("#modalForm").hide();
+  });
+
 });

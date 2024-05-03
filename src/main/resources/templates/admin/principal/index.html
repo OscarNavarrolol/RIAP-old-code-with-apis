@@ -8,7 +8,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body>
-    <script src="/js/main.js"></script>
     <header>
       <div id="modalForm"></div>
       <div class="panel">
@@ -37,11 +36,27 @@
         <thead id="headerTable"></thead>
         <tbody id="data"></tbody>
       </table>
-      <div class="spaceAdd">
-        <button class="add-btn">
+        <div class="spaceAdd">
+        <button id="add-btn-attendance" class="add-btn" hidden>
+          <img src="/images/iconNew.png" class="btnAdd" />
+        </button>
+        <button id="add-btn-course" class="add-btn" hidden>
+          <img src="/images/iconNew.png" class="btnAdd" />
+        </button>
+        <button id="add-btn-event" class="add-btn" hidden>
+          <img src="/images/iconNew.png" class="btnAdd" />
+        </button>
+        <button id="add-btn-program" class="add-btn" hidden>
+          <img src="/images/iconNew.png" class="btnAdd" />
+        </button>
+        <button id="add-btn-user-course" class="add-btn" hidden>
+          <img src="/images/iconNew.png" class="btnAdd" />
+        </button>
+        <button id="add-btn-user" class="add-btn" hidden>
           <img src="/images/iconNew.png" class="btnAdd" />
         </button>
       </div>
     </div>
   </body>
+  <script src="/js/main.js"></script>
 </html>

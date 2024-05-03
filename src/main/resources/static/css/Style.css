@@ -6,6 +6,10 @@
     --border:solid 1px;
     --border_rount:5px;
   }
+
+  ::-webkit-scrollbar {
+    display: none;
+}
   
   body{
     font-family: Georgia, 'Times New Roman', Times, serif;
