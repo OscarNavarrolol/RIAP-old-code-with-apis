@@ -64,17 +64,17 @@ $(document).ready(function () {
 
   $(document).on("click", "#delete-attendance", function () {
     var ID = $(this).data("id");
-    if (confirm("¿Estás seguro de que deseas eliminar esta asistencia?")) {
+    if (confirm("Are you sure you want to remove this support?")) {
       $.ajax({
         url: `http://localhost:8083/api_attendance/delete/${ID}`,
         type: "DELETE",
         success: function (response) {
-          alert("¡La asistencia ha sido eliminada exitosamente!");
+          alert("Support has been successfully removed!");
           loadAttendanceList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar eliminar la asistencia.");
+          alert("There was an error trying to remove support.");
         },
       });
     }
@@ -90,7 +90,7 @@ $(document).ready(function () {
       type: "GET",
       dataType: "json",
       success: function (data) {
-        $("#idAttendance").val(data.idAttendance);
+        $("#idAttendance").val(data.idAttendance).prop("readonly", true);;
         $("#idEventData").val(data.idEvent);
         $("#idUser").val(data.idUser);
         $("#attendanceTime").val(data.attendanceTime);
@@ -99,7 +99,7 @@ $(document).ready(function () {
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
-        alert("Hubo un error al intentar cargar los datos para editar.");
+        alert("There was an error trying to load data for editing.");
       },
     });
   });
@@ -137,14 +137,14 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("Los datos de asistencia han sido actualizados exitosamente.");
+          alert("Attendance data has been successfully updated.");
           $("#modalForm").hide();
           loadAttendanceList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
           alert(
-            "Hubo un error al intentar actualizar los datos de asistencia."
+            "There was an error trying to update attendance data."
           );
         },
       });
@@ -161,13 +161,13 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("La asistencia ha sido guardada exitosamente.");
+          alert("The attendance has been saved successfully.");
           $("#modalForm").hide();
           loadAttendanceList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar guardar la asistencia.");
+          alert("There was an error trying to save attendance.");
         },
       });
     }

@@ -68,17 +68,17 @@ $(document).ready(function () {
 
   $(document).on("click", "#delete-user-data", function () {
     var ID = $(this).data("id");
-    if (confirm("¿Estás seguro de que deseas eliminar este usuario?")) {
+    if (confirm("Are you sure you want to delete this user?")) {
       $.ajax({
         url: `http://localhost:8083/api_user/delete/${ID}`,
         type: "DELETE",
         success: function (response) {
-          alert("¡El usuario ha sido eliminado exitosamente!");
+          alert("The user has been successfully deleted!");
           loadUserList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar eliminar el usuario.");
+          alert("There was an error trying to delete the user.");
         },
       });
     }
@@ -108,7 +108,7 @@ $(document).ready(function () {
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
-        alert("Hubo un error al intentar cargar los datos para editar.");
+        alert("There was an error trying to load data for editing.");
       },
     });
   });
@@ -155,14 +155,14 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("Los datos del usuario han sido actualizados exitosamente.");
+          alert("The user's data has been successfully updated.");
           $("#modalForm").hide();
           loadUserList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
           alert(
-            "Hubo un error al intentar actualizar los datos del usuario."
+            "There was an error trying to update user data."
           );
         },
       });
@@ -184,13 +184,13 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("El usuario ha sido guardado exitosamente.");
+          alert("The user has been saved successfully.");
           $("#modalForm").hide();
           loadUserList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar guardar el usuario.");
+          alert("There was an error trying to save the user.");
         },
       });
     }

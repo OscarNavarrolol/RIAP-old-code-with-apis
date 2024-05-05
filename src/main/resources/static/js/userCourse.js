@@ -61,17 +61,17 @@ $(document).ready(function () {
 
   $(document).on("click", "#delete-user-course", function () {
     var ID = $(this).data("id");
-    if (confirm("¿Estás seguro de que deseas eliminar este dato?")) {
+    if (confirm("Are you sure you want to delete this data?")) {
       $.ajax({
         url: `http://localhost:8083/api_user_course/delete/${ID}`,
         type: "DELETE",
         success: function (response) {
-          alert("¡El dato ha sido eliminado exitosamente!");
+          alert("The data has been successfully deleted!");
           loadUserCourseList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar eliminar el dato.");
+          alert("There was an error trying to delete the data.");
         },
       });
     }
@@ -95,7 +95,7 @@ $(document).ready(function () {
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
-        alert("Hubo un error al intentar cargar los datos para editar.");
+        alert("There was an error trying to load data for editing.");
       },
     });
   });
@@ -130,14 +130,14 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("Los datos han sido actualizados exitosamente.");
+          alert("The data has been updated successfully.");
           $("#modalForm").hide();
           loadUserCourseList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
           alert(
-            "Hubo un error al intentar actualizar los datos."
+            "There was an error trying to update the data."
           );
         },
       });
@@ -153,13 +153,13 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("Los datos han sido guardados exitosamente.");
+          alert("The data has been saved successfully.");
           $("#modalForm").hide();
           loadUserCourseList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar guardar los datos.");
+          alert("There was an error trying to save the data.");
         },
       });
     }

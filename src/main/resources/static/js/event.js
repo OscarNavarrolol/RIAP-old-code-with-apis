@@ -64,17 +64,17 @@ $(document).ready(function () {
 
   $(document).on("click", "#delete-event", function () {
     var ID = $(this).data("id");
-    if (confirm("¿Estás seguro de que deseas eliminar este evento?")) {
+    if (confirm("Are you sure you want to delete this event?")) {
       $.ajax({
         url: `http://localhost:8083/api_event_data/delete/${ID}`,
         type: "DELETE",
         success: function (response) {
-          alert("¡El evento ha sido eliminada exitosamente!");
+          alert("The event has been successfully deleted!");
           loadEventList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar eliminar el evento.");
+          alert("There was an error trying to delete the event.");
         },
       });
     }
@@ -101,7 +101,7 @@ $(document).ready(function () {
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
-        alert("Hubo un error al intentar cargar los datos para editar.");
+        alert("There was an error trying to load data for editing.");
       },
     });
   });
@@ -142,14 +142,14 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("Los datos del evento han sido actualizados exitosamente.");
+          alert("The event data has been successfully updated.");
           $("#modalForm").hide();
           loadEventList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
           alert(
-            "Hubo un error al intentar actualizar los datos del evento."
+            "There was an error trying to update the event data."
           );
         },
       });
@@ -168,13 +168,13 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("El evento ha sido guardada exitosamente.");
+          alert("The event has been saved successfully.");
           $("#modalForm").hide();
           loadEventList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar guardar el evento.");
+          alert("There was an error trying to save the event.");
         },
       });
     }

@@ -61,17 +61,17 @@ $(document).ready(function () {
 
   $(document).on("click", "#delete-course", function () {
     var ID = $(this).data("id");
-    if (confirm("¿Estás seguro de que deseas eliminar este curso?")) {
+    if (confirm("Are you sure you want to delete this course?")) {
       $.ajax({
         url: `http://localhost:8083/api_course/delete/${ID}`,
         type: "DELETE",
         success: function (response) {
-          alert("¡El curso ha sido eliminada exitosamente!");
+          alert("The course has been successfully deleted!");
           loadCourseList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar eliminar la asistencia.");
+          alert("There was an error trying to delete the course.");
         },
       });
     }
@@ -96,7 +96,7 @@ $(document).ready(function () {
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
-        alert("Hubo un error al intentar cargar los datos para editar.");
+        alert("There was an error trying to load data for editing.");
       },
     });
   });
@@ -131,14 +131,14 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("Los datos del curso han sido actualizados exitosamente.");
+          alert("The course data has been successfully updated.");
           $("#modalForm").hide();
           loadCourseList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
           alert(
-            "Hubo un error al intentar actualizar los datos del curso."
+            "There was an error trying to update course data."
           );
         },
       });
@@ -154,13 +154,13 @@ $(document).ready(function () {
         contentType: "application/json",
         data: JSON.stringify(formData),
         success: function (response) {
-          alert("El curso ha sido guardada exitosamente.");
+          alert("The course has been saved successfully.");
           $("#modalForm").hide();
           loadCourseList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
-          alert("Hubo un error al intentar guardar el curso.");
+          alert("There was an error trying to save the course.");
         },
       });
     }
