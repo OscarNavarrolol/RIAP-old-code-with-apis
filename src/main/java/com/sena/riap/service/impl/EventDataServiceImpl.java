@@ -33,10 +33,10 @@ public class EventDataServiceImpl implements EventDataService {
         EventData oldEventData = eventDataRepository.findById(id).orElse(null);
         if (oldEventData != null){
             oldEventData.setDate(eventData.getDate());
-            oldEventData.setObjective(oldEventData.getObjective());
-            oldEventData.setStartTime(oldEventData.getStartTime());
-            oldEventData.setEndTime(oldEventData.getEndTime());
-            oldEventData.setLocation(oldEventData.getLocation());
+            oldEventData.setObjective(eventData.getObjective());
+            oldEventData.setStartTime(eventData.getStartTime());
+            oldEventData.setEndTime(eventData.getEndTime());
+            oldEventData.setLocation(eventData.getLocation());
             return eventDataRepository.save(oldEventData);
         }
         return null;

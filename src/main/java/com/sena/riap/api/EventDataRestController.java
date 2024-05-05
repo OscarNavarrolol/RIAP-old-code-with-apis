@@ -56,7 +56,7 @@ public class EventDataRestController {
     }
 
     // METHODS REQUIRED FOR THE PROJECT
-
+/*
     @GetMapping("/list_event")
     public List<EventData> listEvents(@RequestParam(required = false) Integer courseNumber) {
         if (courseNumber != null) {
@@ -107,6 +107,7 @@ public class EventDataRestController {
         }
     }
 
+
     @GetMapping("/update_event/{eventId}")
     public EventData getEventDataForUpdate(@PathVariable Long eventId) {
         return eventDataService.getEventDataById(eventId);
@@ -117,11 +118,13 @@ public class EventDataRestController {
         return eventDataService.updateEventData(eventId, updatedEventData);
     }
 
+
+
     @GetMapping("/course_numbers")
     public List<Integer> allCourseNumbers() {
         UserData user = userDataService.getLoggedInUser();
         Long idUser = user.getIdUser();
         return courseService.getCoursesByUser(idUser);
     }
-
+ */
 }
