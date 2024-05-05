@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var editProgramID = null;
   function loadProgramList() {
     const $output = $("#data");
     const $headerTable = $("#headerTable");
@@ -27,6 +28,7 @@ $(document).ready(function () {
 
   $("#buttonPrograms").click(function () {
     loadProgramList();
+    $("#modalForm").load("/program/get_program");
     $("#bton-close-modal").click();
     $("#modalForm").hide();
     $("#add-btn-attendance").hide();
@@ -39,7 +41,6 @@ $(document).ready(function () {
 
   $(document).on("click", "#view-program", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/program/get_program");
     $("#modalForm").show();
     $.ajax({
       url: `http://localhost:8083/api_program/find/${ID}`,
@@ -76,7 +77,7 @@ $(document).ready(function () {
 
   $(document).on("click", "#edit-program", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/program/get_program");
+    editProgramID = ID;
     $("#modalForm").show();
 
     $.ajax({
@@ -86,9 +87,8 @@ $(document).ready(function () {
       success: function (data) {
         $("#idProgram").val(data.idProgram).prop("readonly", true);
         $("#nameProgram").val(data.name);
-        $("#save-btn").hide();
+        $("#save-btn-program").show();
         $("#clean-btn").hide();
-        $("#edit-btn-program").show();
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -97,34 +97,66 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#edit-btn-program", function (event) {
-    event.preventDefault();
+  $(document).on("click", "#add-btn-program", function () {
+    editProgramID = null;
+    $("#modalForm").show();
 
-    var ID = $("#idProgram").val();
+    $("#idProgram").hide()
+    $("label[for='idProgram']").hide();
 
-    var formData = {
-      name: $("#nameProgram").val(),
-    };
+    $("#name_program").val("");
 
-    $.ajax({
-      url: `http://localhost:8083/api_program/update/${ID}`,
-      type: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(formData),
-      success: function (response) {
-        alert("Los datos del programa han sido actualizados exitosamente.");
-        $("#modalForm").hide();
-        loadEventList();
-      },
-      error: function (xhr, status, error) {
-        console.error(xhr.responseText);
-        alert("Hubo un error al intentar actualizar los datos del programa.");
-      },
-    });
+    $("#btnHidden").show();
   });
 
-  $(document).on("click", "#add-btn-program", function () {
-    alert("table4");
+  $(document).on("click", "#save-btn-program", function (event) {
+    event.preventDefault();
+
+    var ID = editProgramID;
+
+    if (ID != null) {
+      var formData = {
+        name: $("#nameProgram").val(),
+      };
+
+      $.ajax({
+        url: `http://localhost:8083/api_program/update/${ID}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("Los datos del programa han sido actualizados exitosamente.");
+          $("#modalForm").hide();
+          loadProgramList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert(
+            "Hubo un error al intentar actualizar los datos del programa."
+          );
+        },
+      });
+    } else {
+      var formData = {
+        name: $("#nameProgram").val(),
+      };
+
+      $.ajax({
+        url: "http://localhost:8083/api_program/save",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("El programa ha sido guardado exitosamente.");
+          $("#modalForm").hide();
+          loadProgramList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert("Hubo un error al intentar guardar el programa.");
+        },
+      });
+    }
   });
 
   $(document).on("click","#returnTable4", function (){

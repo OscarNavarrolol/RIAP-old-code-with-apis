@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var editEventID = null;
   function loadEventList() {
     const $output = $("#data");
     const $headerTable = $("#headerTable");
@@ -28,6 +29,7 @@ $(document).ready(function () {
 
   $("#buttonEvents").click(function () {
     loadEventList();
+    $("#modalForm").load("/event_data/get_event");
     $("#bton-close-modal").click();
     $("#modalForm").hide()
     $("#add-btn-attendance").hide();
@@ -40,7 +42,6 @@ $(document).ready(function () {
   
   $(document).on("click", "#view-event", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/event_data/get_event");
     $("#modalForm").show();
     $.ajax({
       url: `http://localhost:8083/api_event_data/find/${ID}`,
@@ -81,7 +82,7 @@ $(document).ready(function () {
 
   $(document).on("click", "#edit-event", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/event_data/get_event");
+    editEventID = ID;
     $("#modalForm").show();
 
     $.ajax({
@@ -95,9 +96,8 @@ $(document).ready(function () {
         $("#objective").val(data.objective);
         $("#startTime").val(data.startTime);
         $("#endTime").val(data.endTime);
-        $("#save-btn").hide();
+        $("#save-btn-event").show();
         $("#clean-btn").hide();
-        $("#edit-btn-event").show();
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -106,39 +106,78 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#edit-btn-event", function (event) {
-    event.preventDefault();
+  $(document).on("click", "#add-btn-event", function () {
+    editEventID = null;
+    $("#modalForm").show();
 
-    var ID = $("#idEventData").val();
+    $("#idEventData").hide()
+    $("label[for='idEventData']").hide();
 
-    var formData = {
-      idEvent: $("#idEventData").val(),
-      date: $("#dateEvent").val(),
-      location: $("#location").val(),
-      objective: $("#objective").val(),
-      startTime: $("#startTime").val(),
-      endTime: $("#endTime").val(),
-    };
+    $("#dateEvent").val("");
+    $("#location").val("");
+    $("#objective").val("");
+    $("#startTime").val("");
+    $("#endTime").val("");
 
-    $.ajax({
-      url: `http://localhost:8083/api_event_data/update/${ID}`,
-      type: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(formData),
-      success: function (response) {
-        alert("Los datos del evento han sido actualizados exitosamente.");
-        $("#modalForm").hide();
-        loadEventList();
-      },
-      error: function (xhr, status, error) {
-        console.error(xhr.responseText);
-        alert("Hubo un error al intentar actualizar los datos del evento.");
-      },
-    });
+    $("#btnHidden").show();
   });
 
-  $(document).on("click", "#add-btn-event", function () {
-    alert("table3");
+  $(document).on("click", "#save-btn-event", function (event) {
+    event.preventDefault();
+
+    var ID = editEventID;
+
+    if (ID != null) {
+      var formData = {
+        date: $("#dateEvent").val(),
+        location: $("#location").val(),
+        objective: $("#objective").val(),
+        startTime: $("#startTime").val(),
+        endTime: $("#endTime").val(),
+      };
+
+      $.ajax({
+        url: `http://localhost:8083/api_event_data/update/${ID}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("Los datos del evento han sido actualizados exitosamente.");
+          $("#modalForm").hide();
+          loadEventList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert(
+            "Hubo un error al intentar actualizar los datos del evento."
+          );
+        },
+      });
+    } else {
+      var formData = {
+        date: $("#dateEvent").val(),
+        location: $("#location").val(),
+        objective: $("#objective").val(),
+        startTime: $("#startTime").val(),
+        endTime: $("#endTime").val(),
+      };
+
+      $.ajax({
+        url: "http://localhost:8083/api_event_data/save",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("El evento ha sido guardada exitosamente.");
+          $("#modalForm").hide();
+          loadEventList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert("Hubo un error al intentar guardar el evento.");
+        },
+      });
+    }
   });
 
   $(document).on("click","#returnTable3", function (){

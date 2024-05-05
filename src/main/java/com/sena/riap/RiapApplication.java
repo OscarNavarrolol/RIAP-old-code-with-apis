@@ -11,5 +11,4 @@ public class RiapApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RiapApplication.class, args);
 	}
-
 }

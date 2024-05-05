@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var editAttendanceID = null;
   function loadAttendanceList() {
     const $output = $("#data");
     const $headerTable = $("#headerTable");
@@ -81,7 +82,7 @@ $(document).ready(function () {
 
   $(document).on("click", "#edit-attendance", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/attendance/get_attendance");
+    editAttendanceID = ID;
     $("#modalForm").show();
 
     $.ajax({
@@ -89,7 +90,7 @@ $(document).ready(function () {
       type: "GET",
       dataType: "json",
       success: function (data) {
-        $("#idAttendance").val(data.idAttendance).prop("readonly", true);
+        $("#idAttendance").val(data.idAttendance);
         $("#idEventData").val(data.idEvent);
         $("#idUser").val(data.idUser);
         $("#attendanceTime").val(data.attendanceTime);
@@ -104,6 +105,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#add-btn-attendance", function () {
+    editAttendanceID = null;
     $("#modalForm").show();
 
     $("#idAttendance").hide()
@@ -120,7 +122,7 @@ $(document).ready(function () {
   $(document).on("click", "#save-btn-attendance", function (event) {
     event.preventDefault();
 
-    var ID = $(this).data("id");
+    var ID = editAttendanceID;
 
     if (ID != null) {
       var formData = {

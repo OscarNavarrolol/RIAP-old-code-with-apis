@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  var editUserCourseID = null;
   function loadUserCourseList() {
     const $output = $("#data");
     const $headerTable = $("#headerTable");
@@ -28,6 +29,7 @@ $(document).ready(function () {
 
   $("#buttonUsersCourses").click(function () {
     loadUserCourseList();
+    $("#modalForm").load("/user_course/get_user_course");
     $("#bton-close-modal").click();
     $("#modalForm").hide();
     $("#add-btn-attendance").hide();
@@ -40,7 +42,6 @@ $(document).ready(function () {
   
   $(document).on("click", "#view-userCourse", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/user_course/get_user_course");
     $("#modalForm").show();
     $.ajax({
       url: `http://localhost:8083/api_user_course/find/${ID}`,
@@ -66,7 +67,7 @@ $(document).ready(function () {
         type: "DELETE",
         success: function (response) {
           alert("¡El dato ha sido eliminado exitosamente!");
-          loadAttendanceList();
+          loadUserCourseList();
         },
         error: function (xhr, status, error) {
           console.error(xhr.responseText);
@@ -78,7 +79,7 @@ $(document).ready(function () {
 
   $(document).on("click", "#edit-user-course", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/user_course/get_user_course");
+    editUserCourseID = ID;
     $("#modalForm").show();
 
     $.ajax({
@@ -89,9 +90,8 @@ $(document).ready(function () {
         $("#idUserCourse").val(data.idUserCourse).prop("readonly", true);
         $("#idCourse").val(data.idCourse);
         $("#idUserData").val(data.idUser);
-        $("#save-btn").hide();
+        $("#save-btn-userCourse").show();
         $("#clean-btn").hide();
-        $("#edit-btn-userCourse").show();
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -100,35 +100,69 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#edit-btn-userCourse", function (event) {
+  $(document).on("click", "#add-btn-user-course", function () {
+    editUserCourseID = null;
+    $("#modalForm").show();
+
+    $("#idUserCourse").hide()
+    $("label[for='idUserCourse']").hide();
+
+    $("#idCourse").val("");
+    $("#idUserData").val("");
+
+    $("#btnHidden").show();
+  });
+
+  $(document).on("click", "#save-btn-userCourse", function (event) {
     event.preventDefault();
 
-    var ID = $("#idUserCourse").val();
+    var ID = editUserCourseID;
 
-    var formData = {
-      idCourse: $("#idCourse").val(),
-      idUser: $("#idUserData").val(),
-    };
+    if (ID != null) {
+      var formData = {
+        idCourse: $("#idCourse").val(),
+        idUser: $("#idUserData").val(),
+      };
 
-    $.ajax({
-      url: `http://localhost:8083/api_user_course/update/${ID}`,
-      type: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(formData),
-      success: function (response) {
-        alert("Los datos del user_course han sido actualizados exitosamente.");
-        $("#modalForm").hide();
-        loadUserCourseList();
-      },
-      error: function (xhr, status, error) {
-        console.error(xhr.responseText);
-        alert("Hubo un error al intentar actualizar los datos del programa.");
-      },
-    });
-  });
-  
-  $(document).on("click", "#add-btn-user-course", function () {
-    alert("table5");
+      $.ajax({
+        url: `http://localhost:8083/api_user_course/update/${ID}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("Los datos han sido actualizados exitosamente.");
+          $("#modalForm").hide();
+          loadUserCourseList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert(
+            "Hubo un error al intentar actualizar los datos."
+          );
+        },
+      });
+    } else {
+      var formData = {
+        idCourse: $("#idCourse").val(),
+        idUser: $("#idUserData").val(),
+      };
+
+      $.ajax({
+        url: "http://localhost:8083/api_user_course/save",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("Los datos han sido guardados exitosamente.");
+          $("#modalForm").hide();
+          loadUserCourseList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert("Hubo un error al intentar guardar los datos.");
+        },
+      });
+    }
   });
 
   $(document).on("click","#returnTable5", function (){

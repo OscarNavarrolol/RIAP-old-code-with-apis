@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+  var editUserID = null;
   function loadUserList() {
     const $output = $("#data");
     const $headerTable = $("#headerTable");
@@ -30,6 +30,7 @@ $(document).ready(function () {
 
   $("#buttonUsers").click(function () {
     loadUserList();
+    $("#modalForm").load("/user_data/get_user_data");
     $("#bton-close-modal").click();
     $("#modalForm").hide();
     $("#add-btn-attendance").hide();
@@ -42,7 +43,6 @@ $(document).ready(function () {
   
   $(document).on("click", "#view-user", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/user_data/get_user_data");
     $("#modalForm").show();
     $.ajax({
       url: `http://localhost:8083/api_user/find/${ID}`,
@@ -57,7 +57,7 @@ $(document).ready(function () {
         $("#phone").val(data.phone).prop("readonly", true);
         $("#role").val(data.roleUser);
         $("#password").val(data.password).prop("readonly", true);
-        $("#profilePicture").val(data.profilePicture).prop("readonly", true);
+        // $("#profilePicture").val(data.profilePicture).prop("readonly", true);
         $(".btnHidden").hide();
       },
       error: function (xhr, status, error) {
@@ -81,14 +81,12 @@ $(document).ready(function () {
           alert("Hubo un error al intentar eliminar el usuario.");
         },
       });
-    } else {
-      return;
     }
   });
 
   $(document).on("click", "#edit-user-data", function () {
     var ID = $(this).data("id");
-    $("#modalForm").load("/user_data/get_user_data");
+    editUserID = ID;
     $("#modalForm").show();
 
     $.ajax({
@@ -104,10 +102,9 @@ $(document).ready(function () {
         $("#phone").val(data.phone);
         $("#role").val(data.roleUser);
         $("#password").val(data.password);
-        $("#profilePicture").val(data.profilePicture);
-        $("#save-btn").hide();
+        // $("#profilePicture").val(data.profilePicture);
+        $("#save-btn-userData").show();
         $("#clean-btn").hide();
-        $("#edit-btn-user").show();
       },
       error: function (xhr, status, error) {
         console.error(xhr.responseText);
@@ -116,41 +113,87 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#edit-btn-user", function (event) {
-    event.preventDefault();
+  $(document).on("click", "#add-btn-user", function () {
+    editUserID = null;
+    $("#modalForm").show();
 
-    var ID = $("#idUserData").val();
+    $("#idUserData").hide()
+    $("label[for='idUserData']").hide();
 
-    var formData = {
-      document: $("#document").val(),
-      nameUser: $("#nameUser").val(),
-      age: $("#age").val(),
-      email: $("#email").val(),
-      phone: $("#phone").val(),
-      roleUser: $("#role").val(),
-      password: $("#password").val(),
-      profilePicture: $("#profilePicture").val(),
-    };
+    $("#document").val("");
+    $("#nameUser").val("");
+    $("#age").val("");
+    $("#email").val("");
+    $("#phone").val("");
+    $("#role").val("");
+    $("#password").val("");
+    // $("#profilePicture").val("");
 
-    $.ajax({
-      url: `http://localhost:8083/api_user_data/update/${ID}`,
-      type: "PUT",
-      contentType: "application/json",
-      data: JSON.stringify(formData),
-      success: function (response) {
-        alert("Los datos del usuario han sido actualizados exitosamente.");
-        $("#modalForm").hide();
-        loadUserList();
-      },
-      error: function (xhr, status, error) {
-        console.error(xhr.responseText);
-        alert("Hubo un error al intentar actualizar los datos del usuario.");
-      },
-    });
+    $("#btnHidden").show();
   });
 
-  $(document).on("click", "#add-btn-user", function () {
-    alert("table6");
+  $(document).on("click", "#save-btn-userData", function (event) {
+    event.preventDefault();
+
+    var ID = editUserID;
+
+    if (ID != null) {
+      var formData = {
+        document: $("#document").val(),
+        nameUser: $("#nameUser").val(),
+        age: $("#age").val(),
+        email: $("#email").val(),
+        phone: $("#phone").val(),
+        roleUser: $("#role").val(),
+        password: $("#password").val(),
+        // profilePicture: $("#profilePicture").val(),
+      };
+
+      $.ajax({
+        url: `http://localhost:8083/api_user/update/${ID}`,
+        type: "PUT",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("Los datos del usuario han sido actualizados exitosamente.");
+          $("#modalForm").hide();
+          loadUserList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert(
+            "Hubo un error al intentar actualizar los datos del usuario."
+          );
+        },
+      });
+    } else {
+      var formData = {
+        document: $("#document").val(),
+        nameUser: $("#nameUser").val(),
+        age: $("#age").val(),
+        email: $("#email").val(),
+        phone: $("#phone").val(),
+        roleUser: $("#role").val(),
+        password: $("#password").val(),
+        // profilePicture: $("#profilePicture").val(),
+      };
+
+      $.ajax({
+        url: "http://localhost:8083/api_user/save",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(formData),
+        success: function (response) {
+          alert("El usuario ha sido guardado exitosamente.");
+          $("#modalForm").hide();
+          loadUserList();
+        },
+        error: function (xhr, status, error) {
+          console.error(xhr.responseText);
+          alert("Hubo un error al intentar guardar el usuario.");
+        },
+      });
+    }
   });
 
   $(document).on("click","#returnTable6", function (){
