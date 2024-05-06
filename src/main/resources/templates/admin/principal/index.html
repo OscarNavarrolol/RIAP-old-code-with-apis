@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -16,7 +15,7 @@
     <div class="panel">
       <div class="information">
         <img src="/images/logoriap.png" alt="logo RIAP" />
-        <h1>RIAP</h1>
+        <h1 class="nriap">RIAP</h1>
       </div>
       <hr />
       <div class="menu">
@@ -35,6 +34,7 @@
   </header>
   <hr class="hr2" />
   <div class="container">
+    <h1 id="welcome">¡Welcome!</h1>
     <table class="table">
       <thead id="headerTable"></thead>
       <tbody id="data"></tbody>
@@ -107,8 +107,5 @@
       return { status: "error", message: error.message };
     }
   }
-
-
 </script>
-
 </html>

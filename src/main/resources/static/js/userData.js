@@ -43,6 +43,7 @@ $(document).ready(function () {
     $("#add-btn-program").hide();
     $("#add-btn-user-course").hide();
     $("#add-btn-user").show();
+    $("#welcome").hide();
   });
 
   $(document).on("click", "#view-user", function () {
@@ -73,7 +74,6 @@ $(document).ready(function () {
 
   $(document).on("click", "#delete-user-data",async function () {
     var ID = $(this).data("id");
-    debugger
     const formData = await $.ajax({
       url: `http://localhost:8083/api_user/find/${ID}`,
       type: "GET",
@@ -89,7 +89,6 @@ $(document).ready(function () {
     const imageSrc = "https://vkboueidcnqwbjyejiud.supabase.co/storage/v1/object/public/"+ formData.profilePicture;
     if (confirm("Are you sure you want to delete this user?")) {
       await deleteImage(imageSrc).then((response) => {
-        debugger
         if(response.status === "success"){
           $.ajax({
             url: `http://localhost:8083/api_user/delete/${ID}`,
@@ -140,12 +139,10 @@ $(document).ready(function () {
   });
 
   $('#image-input').on('change', function () {
-    debugger
     const file = $(this)[0].files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = function (e) {
-        debugger
         $('#imgUser').attr('src', e.target.result).show();
       };
       reader.readAsDataURL(file);
@@ -168,7 +165,7 @@ $(document).ready(function () {
     $("#phone").val("");
     $("#role").val("");
     $("#password").val("");
-    // $("#profilePicture").val("");
+    $("#imgUser").val("");
 
     $("#btnHidden").show();
   });
@@ -190,10 +187,8 @@ $(document).ready(function () {
         profilePicture: $("#image-input").val(),
       };
 
-      debugger
       if (formData.profilePicture != undefined) {
         await subirImagen(formData.profilePicture).then((url) => {
-          debugger
           formData.profilePicture = url.data.fullPath;
         });
       } else {

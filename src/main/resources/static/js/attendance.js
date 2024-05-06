@@ -38,6 +38,7 @@ $(document).ready(function () {
     $("#add-btn-program").hide();
     $("#add-btn-user-course").hide();
     $("#add-btn-user").hide();
+    $("#welcome").hide();
   });
 
   $(document).on("click", "#view-attendance", function () {
@@ -117,7 +118,6 @@ $(document).ready(function () {
 
     $("#btnHidden").show();
   });
-
 
   $(document).on("click", "#save-btn-attendance", function (event) {
     event.preventDefault();

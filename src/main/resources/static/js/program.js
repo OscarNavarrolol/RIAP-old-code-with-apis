@@ -37,6 +37,7 @@ $(document).ready(function () {
     $("#add-btn-program").show();
     $("#add-btn-user-course").hide();
     $("#add-btn-user").hide();
+    $("#welcome").hide();
   });
 
   $(document).on("click", "#view-program", function () {

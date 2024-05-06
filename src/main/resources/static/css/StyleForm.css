@@ -64,6 +64,14 @@ button a{
     color: #ffffff;
 }
 
+#imgUser{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
 .btnHidden {
     background-color: #00AF00;
     color: #ffffff;
@@ -73,6 +81,6 @@ button a{
     cursor: pointer;
 }
 
-.btnhiden:hover {
-    background-color: #16700B;
+.btnHidden:hover {
+    background-color: #0b6200;
 }
