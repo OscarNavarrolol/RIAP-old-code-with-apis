@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/styleForm.css"/>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <div class="container1">
     <div class="formGroup-header">
         <a id="returnTable6" class="a-logo"><img src="/images/iconReturn.png" class="logo"></a>
@@ -40,10 +41,11 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
-        <!-- <div class="formGroup">
+        <div class="formGroup">
             <label for="profilePicture">Profile Picture:</label>
-            <input type="image" id="profilePicture" name="profilePicture" required>
-        </div> -->
+            <img src="../../../static/images/logo.png" id="imgUser">
+            <input type="file" id="image-input" accept="image/*">
+        </div>
         <div class="formGroup">
             <input type="submit" id="save-btn-userData" class="btnHidden" value="Guardar" />
             <input type="reset" id="clean-btn" class="btnHidden" value="Limpiar" />

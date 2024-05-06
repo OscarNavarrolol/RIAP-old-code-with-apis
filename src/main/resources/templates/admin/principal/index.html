@@ -1,62 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin</title>
-    <link rel="stylesheet" href="/css/Style.css" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  </head>
-  <body>
-    <header>
-      <div id="modalForm"></div>
-      <div class="panel">
-        <div class="information">
-          <img src="/images/logoriap.png" alt="logo RIAP" />
-          <h1>RIAP</h1>
-        </div>
-        <hr />
-        <div class="menu">
-          <nav>
-            <ul>
-              <li><a id="buttonAttendances">Attendances</a></li>
-              <li><a id="buttonCourses">Courses</a></li>
-              <li><a id="buttonEvents">Events Data</a></li>
-              <li><a id="buttonPrograms">Programs</a></li>
-              <li><a id="buttonUsersCourses">Users Courses</a></li>
-              <li><a id="buttonUsers">Users Datas</a></li>
-            </ul>
-          </nav>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin</title>
+  <link rel="stylesheet" href="/css/Style.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+
+<body>
+  <header>
+    <div id="modalForm"></div>
+    <div class="panel">
+      <div class="information">
+        <img src="/images/logoriap.png" alt="logo RIAP" />
+        <h1>RIAP</h1>
       </div>
-    </header>
-    <hr class="hr2"/>
-    <div class="container">
-      <table class="table">
-        <thead id="headerTable"></thead>
-        <tbody id="data"></tbody>
-      </table>
-        <div class="spaceAdd">
-        <button id="add-btn-attendance" class="add-btn" hidden>
-          <img src="/images/iconNew.png" class="btnAdd" />
-        </button>
-        <button id="add-btn-course" class="add-btn" hidden>
-          <img src="/images/iconNew.png" class="btnAdd" />
-        </button>
-        <button id="add-btn-event" class="add-btn" hidden>
-          <img src="/images/iconNew.png" class="btnAdd" />
-        </button>
-        <button id="add-btn-program" class="add-btn" hidden>
-          <img src="/images/iconNew.png" class="btnAdd" />
-        </button>
-        <button id="add-btn-user-course" class="add-btn" hidden>
-          <img src="/images/iconNew.png" class="btnAdd" />
-        </button>
-        <button id="add-btn-user" class="add-btn" hidden>
-          <img src="/images/iconNew.png" class="btnAdd" />
-        </button>
+      <hr />
+      <div class="menu">
+        <nav>
+          <ul>
+            <li><a id="buttonAttendances">Attendances</a></li>
+            <li><a id="buttonCourses">Courses</a></li>
+            <li><a id="buttonEvents">Events Data</a></li>
+            <li><a id="buttonPrograms">Programs</a></li>
+            <li><a id="buttonUsersCourses">Users Courses</a></li>
+            <li><a id="buttonUsers">Users Datas</a></li>
+          </ul>
+        </nav>
       </div>
     </div>
-  </body>
-  <script src="/js/main.js"></script>
+  </header>
+  <hr class="hr2" />
+  <div class="container">
+    <table class="table">
+      <thead id="headerTable"></thead>
+      <tbody id="data"></tbody>
+    </table>
+    <div class="spaceAdd">
+      <button id="add-btn-attendance" class="add-btn" hidden>
+        <img src="/images/iconNew.png" class="btnAdd" />
+      </button>
+      <button id="add-btn-course" class="add-btn" hidden>
+        <img src="/images/iconNew.png" class="btnAdd" />
+      </button>
+      <button id="add-btn-event" class="add-btn" hidden>
+        <img src="/images/iconNew.png" class="btnAdd" />
+      </button>
+      <button id="add-btn-program" class="add-btn" hidden>
+        <img src="/images/iconNew.png" class="btnAdd" />
+      </button>
+      <button id="add-btn-user-course" class="add-btn" hidden>
+        <img src="/images/iconNew.png" class="btnAdd" />
+      </button>
+      <button id="add-btn-user" class="add-btn" hidden>
+        <img src="/images/iconNew.png" class="btnAdd" />
+      </button>
+    </div>
+  </div>
+</body>
+<script src="/js/main.js"></script>
+<script>
+  async function subirImagen() {
+    supabase = createClient(supabaseUrl, supabaseKey);
+
+    const file = document.getElementById("image-input").files[0];
+
+    const currentDate = new Date().getTime();
+    const dateString = currentDate.toString();
+    const imageName = `${dateString}_${file.name}`;
+
+    try {
+      const { data, error } = await supabase.storage
+        .from("stock-of-images")
+        .upload(imageName, file);
+
+      if (error) {
+        return { status: "error", message: error.message };
+      } else {
+        debugger
+        return { status: "success", data: data };
+      }
+    } catch (error) {
+      return { status: "error", message: error.message };
+    }
+
+  }
+
+  async function deleteImage(imageName) {
+    supabase = createClient(supabaseUrl, supabaseKey);
+
+    try {
+      const { data, error } = await supabase.storage
+        .from("stock-of-images")
+        .remove([imageName]);
+
+      if (error) {
+        return { status: "error", message: error.message };
+      } else {
+        debugger
+        return { status: "success", data: data };
+      }
+    } catch (error) {
+      return { status: "error", message: error.message };
+    }
+  }
+
+
+</script>
+
 </html>

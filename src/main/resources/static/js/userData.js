@@ -1,3 +1,7 @@
+//import js file-service.js
+const { createClient } = supabase;
+const supabaseUrl = "https://vkboueidcnqwbjyejiud.supabase.co";
+const supabaseKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZrYm91ZWlkY25xd2JqeWVqaXVkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTA1NTA0NTYsImV4cCI6MjAyNjEyNjQ1Nn0.Cdj5w2Fq5Qz8FKZKY37X8Fhii_7o6DY4g7X8Fdk33vE";
 $(document).ready(function () {
   var editUserID = null;
   function loadUserList() {
@@ -22,7 +26,7 @@ $(document).ready(function () {
   function mapUserItem(item) {
     return `<tr><td>${item.idUser}</td><td>${item.nameUser}</td><td>${item.age}</td><td>${item.document}</td>
     <td>${item.phone}</td><td>${item.email}</td><td>${item.password}</td><td>${item.roleUser}</td>
-    <td><img src="${item.profilePicture}" alt="profile"></td><td><button id="view-user" class="view-btn" data-id="${item.idUser}">
+    <td><img src="${"https://vkboueidcnqwbjyejiud.supabase.co/storage/v1/object/public/"+item.profilePicture}" alt="profile"></td><td><button id="view-user" class="view-btn" data-id="${item.idUser}">
     <img src="/images/iconView.png" class="action"></button><button id="edit-user-data" class="edit-btn" data-id="${item.idUser}">
     <img src="/images/iconEdit.png" class="action"></button><button id="delete-user-data" class="delete-btn" data-id="${item.idUser}">
     <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
@@ -40,7 +44,7 @@ $(document).ready(function () {
     $("#add-btn-user-course").hide();
     $("#add-btn-user").show();
   });
-  
+
   $(document).on("click", "#view-user", function () {
     var ID = $(this).data("id");
     $("#modalForm").show();
@@ -57,7 +61,8 @@ $(document).ready(function () {
         $("#phone").val(data.phone).prop("readonly", true);
         $("#role").val(data.roleUser);
         $("#password").val(data.password).prop("readonly", true);
-        // $("#profilePicture").val(data.profilePicture).prop("readonly", true);
+        $("#imgUser").val("https://vkboueidcnqwbjyejiud.supabase.co/storage/v1/object/public/"+data.profilePicture).prop("readonly", true);
+        $('#imgUser').attr('src', "https://vkboueidcnqwbjyejiud.supabase.co/storage/v1/object/public/" + data.profilePicture).show();
         $(".btnHidden").hide();
       },
       error: function (xhr, status, error) {
@@ -66,21 +71,41 @@ $(document).ready(function () {
     });
   });
 
-  $(document).on("click", "#delete-user-data", function () {
+  $(document).on("click", "#delete-user-data",async function () {
     var ID = $(this).data("id");
+    debugger
+    const formData = await $.ajax({
+      url: `http://localhost:8083/api_user/find/${ID}`,
+      type: "GET",
+      dataType: "json",
+      success: function (data) {
+        return data;
+      },
+      error: function (xhr, status, error) {
+        console.error(xhr.responseText);
+        alert("There was an error trying to load data for editing.");
+      },
+    });
+    const imageSrc = "https://vkboueidcnqwbjyejiud.supabase.co/storage/v1/object/public/"+ formData.profilePicture;
     if (confirm("Are you sure you want to delete this user?")) {
-      $.ajax({
-        url: `http://localhost:8083/api_user/delete/${ID}`,
-        type: "DELETE",
-        success: function (response) {
-          alert("The user has been successfully deleted!");
-          loadUserList();
-        },
-        error: function (xhr, status, error) {
-          console.error(xhr.responseText);
-          alert("There was an error trying to delete the user.");
-        },
+      await deleteImage(imageSrc).then((response) => {
+        debugger
+        if(response.status === "success"){
+          $.ajax({
+            url: `http://localhost:8083/api_user/delete/${ID}`,
+            type: "DELETE",
+            success: async function (response) {
+              alert("The user has been successfully deleted!");
+              loadUserList();
+            },
+            error: function (xhr, status, error) {
+              console.error(xhr.responseText);
+              alert("There was an error trying to delete the user.");
+            },
+          });
+        }
       });
+      
     }
   });
 
@@ -102,7 +127,8 @@ $(document).ready(function () {
         $("#phone").val(data.phone);
         $("#role").val(data.roleUser);
         $("#password").val(data.password);
-        // $("#profilePicture").val(data.profilePicture);
+        $("#imgUser").val(data.profilePicture);
+        $('#imgUser').attr('src', "https://vkboueidcnqwbjyejiud.supabase.co/storage/v1/object/public/" +data.profilePicture).show();
         $("#save-btn-userData").show();
         $("#clean-btn").hide();
       },
@@ -111,6 +137,21 @@ $(document).ready(function () {
         alert("There was an error trying to load data for editing.");
       },
     });
+  });
+
+  $('#image-input').on('change', function () {
+    debugger
+    const file = $(this)[0].files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        debugger
+        $('#imgUser').attr('src', e.target.result).show();
+      };
+      reader.readAsDataURL(file);
+    } else {
+      $('#imgUser').attr('src', '#').hide();
+    }
   });
 
   $(document).on("click", "#add-btn-user", function () {
@@ -132,7 +173,7 @@ $(document).ready(function () {
     $("#btnHidden").show();
   });
 
-  $(document).on("click", "#save-btn-userData", function (event) {
+  $(document).on("click", "#save-btn-userData", async function (event) {
     event.preventDefault();
 
     var ID = editUserID;
@@ -146,8 +187,18 @@ $(document).ready(function () {
         phone: $("#phone").val(),
         roleUser: $("#role").val(),
         password: $("#password").val(),
-        // profilePicture: $("#profilePicture").val(),
+        profilePicture: $("#image-input").val(),
       };
+
+      debugger
+      if (formData.profilePicture != undefined) {
+        await subirImagen(formData.profilePicture).then((url) => {
+          debugger
+          formData.profilePicture = url.data.fullPath;
+        });
+      } else {
+        formData.profilePicture = $("#imgUser").val();
+      }
 
       $.ajax({
         url: `http://localhost:8083/api_user/update/${ID}`,
@@ -175,9 +226,16 @@ $(document).ready(function () {
         phone: $("#phone").val(),
         roleUser: $("#role").val(),
         password: $("#password").val(),
-        // profilePicture: $("#profilePicture").val(),
-      };
+        profilePicture: $("#image-input").val(),
 
+      };
+      if (formData.profilePicture != undefined) {
+        await subirImagen(formData.profilePicture).then((url) => {
+          formData.profilePicture = url.data.fullPath;
+        });
+      } else {
+        formData.profilePicture = $("#imgUser").val();
+      }
       $.ajax({
         url: "http://localhost:8083/api_user/save",
         type: "POST",
@@ -189,14 +247,15 @@ $(document).ready(function () {
           loadUserList();
         },
         error: function (xhr, status, error) {
-          console.error(xhr.responseText);
+          console.error(error);
           alert("There was an error trying to save the user.");
         },
       });
+
     }
   });
 
-  $(document).on("click","#returnTable6", function (){
+  $(document).on("click", "#returnTable6", function () {
     $("#modalForm").hide();
   });
 });
