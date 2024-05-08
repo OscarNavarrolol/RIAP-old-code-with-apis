@@ -3,13 +3,10 @@ package com.sena.riap.api;
 import com.lowagie.text.DocumentException;
 import com.sena.riap.entities.Attendance;
 import com.sena.riap.service.AttendanceService;
-import com.sena.riap.service.EventDataService;
 import com.sena.riap.service.report.AttendanceExporterExcel;
 import com.sena.riap.service.report.AttendanceExporterPDF;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
