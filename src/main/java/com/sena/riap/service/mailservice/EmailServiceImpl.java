@@ -36,8 +36,7 @@ public class EmailServiceImpl implements IEmailService{
 
     @Override
     public void sendEmailRecover(String toUser, String key) {
-        // valbuena generea la key con js y la mantienen en linea luego
-        String data = "uasduajkdjkajdsjakjwdQ";
+        // valbuena generea la key con js y la guarda
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
 

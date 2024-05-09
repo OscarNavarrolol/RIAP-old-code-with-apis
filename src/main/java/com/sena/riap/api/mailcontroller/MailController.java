@@ -34,6 +34,8 @@ public class MailController {
         return ResponseEntity.ok(response);
     }
 
+    // metodo para saber si recupera clave o envia para aprendices
+
     // working,          KEY LA GENERAN CON JS Y LA PROPORCIONAN A LA REQUEST
     @PostMapping("/recovery")
     public ResponseEntity recoverPassword(@RequestParam("email") String email, @RequestParam("key") String key){
@@ -49,11 +51,10 @@ public class MailController {
         en la nueva tabla guardar el id del usuario, el id generado, debe ser uno a uno la tabla, tiempo limite,
          cada q se genere una clave de recuperacion borra la anterior
          */
-/*
+        /*
         Map<String, String> response = new HashMap<>();
         response.put("status", "SEND");
         return ResponseEntity.ok(response);
-
  */
     }
 

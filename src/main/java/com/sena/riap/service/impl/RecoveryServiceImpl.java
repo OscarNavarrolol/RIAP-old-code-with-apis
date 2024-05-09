@@ -47,4 +47,9 @@ public class RecoveryServiceImpl implements RecoveryService {
     public void deleteRecovery(Long id) {
         recoveryRepository.deleteById(id);
     }
+
+    @Override
+    public Recovery saveNewKey(Long id) {
+        return null;
+    }
 }
