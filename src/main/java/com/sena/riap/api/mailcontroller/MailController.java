@@ -30,9 +30,12 @@ public class MailController {
         return ResponseEntity.ok(response);
     }
 
-    // working
+    // working,          KEY LA GENERAN CON JS Y LA PROPORCIONAN A LA REQUEST
     @PostMapping("/recovery")
     public ResponseEntity<?> recoverPassword(@RequestParam("email") String email, @RequestParam("key") String key){
+        // debo verificar q el correo sea de un instructor y no de un aprendiz para hacer el envio, revisar y moficar metodos
+        // en la nueva tabla guardar el id del usuario, el id generado, debe ser uno a uno la tabla, tiempo limite,
+        // cada q se genere una clave de recuperacion borra la anterior
         emailService.sendEmailRecover(email,key);
 
         Map<String, String> response = new HashMap<>();
@@ -40,4 +43,10 @@ public class MailController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/verify")
+    public Boolean verifyPassword(@RequestParam("key") String key){
+        // metodo para tomar el valor proporcionado y compararlo con el generado en el metodo anterior, al retornar el valor se decide
+        // si se crea una interfaz para q el coloque la nueva contraseña.
+        return null;
+    }
 }
