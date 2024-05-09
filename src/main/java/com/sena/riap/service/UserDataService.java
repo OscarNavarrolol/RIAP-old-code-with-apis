@@ -22,4 +22,6 @@ public interface UserDataService {
 
     List<UserData> getLearnersByCourseNumber(int courseNumber);
 
+    public UserData findByEmail(String email);
+
 }

@@ -18,4 +18,5 @@ public interface UserDataRepository extends JpaRepository<UserData,Long> {
             "WHERE c.number_course = :courseNumber", nativeQuery = true)
     List<UserData> findLearnersByCourseNumber(int courseNumber);
 
+    UserData findByEmail(String email);
 }

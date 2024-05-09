@@ -76,4 +76,9 @@ public class UserDataServiceImpl implements UserDataService {
     public List<UserData> getLearnersByCourseNumber(int courseNumber) {
         return null;
     }
+
+    @Override
+    public UserData findByEmail(String email) {
+        return userDataRepository.findByEmail(email);
+    }
 }
