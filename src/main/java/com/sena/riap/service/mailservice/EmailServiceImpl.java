@@ -34,4 +34,20 @@ public class EmailServiceImpl implements IEmailService{
         mailSender.send(mailMessage);
     }
 
+    @Override
+    public void sendEmailRecover(String toUser, String key) {
+        // valbuena generea la key con js y la mantienen en linea luego
+        String data = "uasduajkdjkajdsjakjwdQ";
+
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+
+        mailMessage.setFrom(emailUser);
+        mailMessage.setTo(toUser);
+        mailMessage.setSubject("RECOVER PASSWORD");
+        mailMessage.setText("YOUR PASSWORD KEY IS" + key);
+
+        mailSender.send(mailMessage);
+
+    }
+
 }
