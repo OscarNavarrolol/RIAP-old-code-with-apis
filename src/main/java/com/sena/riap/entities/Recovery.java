@@ -17,10 +17,10 @@ public class Recovery {
     @Column(name = "id_recovery")
     private Long idRecovery;
 
-    @NotNull(message = "key cannot be null")
-    private String key;
+    @Column(name = "recovery_key")
+    private String recoveryKey;
 
-    @NotBlank(message = "Expiration date cannot be null")
+    @NotNull(message = "Expiration date cannot be null")
     @Column(name = "expiration_date")
     private LocalDateTime expirationDate;
 
@@ -36,12 +36,12 @@ public class Recovery {
         this.idRecovery = idRecovery;
     }
 
-    public String getKey() {
-        return key;
+    public String getRecoveryKey() {
+        return recoveryKey;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setRecoveryKey(String recoveryKey) {
+        this.recoveryKey = recoveryKey;
     }
 
     public LocalDateTime getExpirationDate() {

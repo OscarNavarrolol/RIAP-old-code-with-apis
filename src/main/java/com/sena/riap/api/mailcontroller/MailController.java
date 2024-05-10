@@ -44,17 +44,17 @@ public class MailController {
     @PostMapping("/recovery")
     public ResponseEntity recoverPassword(@RequestParam("email") String email, @RequestParam("key") String key){
         UserData user = userDataService.findByEmail(email);
-        if (user.getRoleUser().equals("admin")){
+        if (user.getRoleUser().equals("admin") && user != null){
             emailService.sendEmailRecover(email,key);
-            recoveryService.saveNewKey(user.getIdUser(),key);          // validar eso, que se envie el correo, y que guarde con normalidad
-            return (ResponseEntity) ResponseEntity.ok();
+            recoveryService.saveNewKey(user.getIdUser(),key);
+            return ResponseEntity.ok().build();
         } else {
-            return (ResponseEntity) ResponseEntity.badRequest();
+            return ResponseEntity.badRequest().build();
         }
         /*
         ebo verificar q el correo sea de un instructor y no de un aprendiz para hacer el envio, revisar y moficar metodos
         en la nueva tabla guardar el id del usuario, el id generado, debe ser uno a uno la tabla, tiempo limite,
-         cada q se genere una clave de recuperacion borra la anterior
+         cada q se genere una clave de recuperacion , validar por vencimiento
          */
 
     }
