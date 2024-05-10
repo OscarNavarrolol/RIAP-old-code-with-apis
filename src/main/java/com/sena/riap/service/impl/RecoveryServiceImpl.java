@@ -59,6 +59,8 @@ public class RecoveryServiceImpl implements RecoveryService {
         newRecovery.setExpirationDate(LocalDateTime.now().plusMinutes(15));
         return recoveryRepository.save(newRecovery);
     }
-
-    public Boolean checkKeyExp
+    // cocinar para revisar fehca
+    public Boolean checkKeyExp(){
+        return false;
+    }
 }
