@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,8 +49,16 @@ public class RecoveryServiceImpl implements RecoveryService {
         recoveryRepository.deleteById(id);
     }
 
+    // para guardar la key que se crea al enviar el correo. falta verificar q esa no exista, en caso contrario eliminarla (piensela).
+    // y usar la validacion de tiempo limite
     @Override
-    public Recovery saveNewKey(Long id) {
-        return null;
+    public Recovery saveNewKey(Long idUser,String key) {
+        Recovery newRecovery = new Recovery();
+        newRecovery.setIdUser(idUser);
+        newRecovery.setKey(key);
+        newRecovery.setExpirationDate(LocalDateTime.now().plusMinutes(15));
+        return recoveryRepository.save(newRecovery);
     }
+
+    public Boolean checkKeyExp
 }

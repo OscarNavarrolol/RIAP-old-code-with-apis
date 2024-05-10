@@ -2,6 +2,7 @@ package com.sena.riap.api.mailcontroller;
 
 import com.sena.riap.domain.EmailDTO;
 import com.sena.riap.entities.UserData;
+import com.sena.riap.service.RecoveryService;
 import com.sena.riap.service.UserDataService;
 import com.sena.riap.service.mailservice.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class MailController {
 
     @Autowired
     private UserDataService userDataService;
+
+    @Autowired
+    private RecoveryService recoveryService;
 
     @PostMapping("/send_message")
     public ResponseEntity<?> receiveRequestEmail(@RequestBody EmailDTO emailDTO){
@@ -42,6 +46,7 @@ public class MailController {
         UserData user = userDataService.findByEmail(email);
         if (user.getRoleUser().equals("admin")){
             emailService.sendEmailRecover(email,key);
+            recoveryService.saveNewKey(user.getIdUser(),key);          // validar eso, que se envie el correo, y que guarde con normalidad
             return (ResponseEntity) ResponseEntity.ok();
         } else {
             return (ResponseEntity) ResponseEntity.badRequest();
@@ -51,11 +56,7 @@ public class MailController {
         en la nueva tabla guardar el id del usuario, el id generado, debe ser uno a uno la tabla, tiempo limite,
          cada q se genere una clave de recuperacion borra la anterior
          */
-        /*
-        Map<String, String> response = new HashMap<>();
-        response.put("status", "SEND");
-        return ResponseEntity.ok(response);
- */
+
     }
 
     @GetMapping("/verify")

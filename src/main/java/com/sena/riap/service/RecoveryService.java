@@ -16,6 +16,6 @@ public interface RecoveryService {
 
     public void deleteRecovery (Long id);
 
-    public Recovery saveNewKey(Long id);
+    public Recovery saveNewKey(Long id,String key);
 
 }
