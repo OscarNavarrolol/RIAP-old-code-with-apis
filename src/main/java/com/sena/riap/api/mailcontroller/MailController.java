@@ -30,14 +30,9 @@ public class MailController {
     // metodo general para enviar un mensaje a una o mas personas
     @PostMapping("/send_message")
     public ResponseEntity<?> receiveRequestEmail(@RequestBody EmailDTO emailDTO){
-
-        System.out.println("Message received " + emailDTO);
-
         emailService.sendEmail(emailDTO.getToUser(), emailDTO.getSubject(), emailDTO.getMessage());
-
         Map<String, String> response = new HashMap<>();
         response.put("status", "SEND");
-
         return ResponseEntity.ok(response);
     }
 
@@ -52,20 +47,19 @@ public class MailController {
             recoveryService.saveNewKey(user.getIdUser(),key);
             return ResponseEntity.ok().build();
         } else {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.notFound().build();
         }
     }
 
     // ingresa la key que le llega al usuario y retorna el ID que se utiliza para actualizar su password, esta en userData
     @GetMapping("/verify")
-    public Long verifyPassword(@RequestParam("key") String key){
+    public ResponseEntity<Long> verifyPassword(@RequestParam("key") String key){
         Recovery recovery = recoveryService.findByKey(key);
-        LocalDateTime recoveryExp = recovery.getExpirationDate();
-        if (LocalDateTime.now().isBefore(recoveryExp)){
+        if (recovery != null && recovery.getExpirationDate().isAfter(LocalDateTime.now())) {
             UserData userChange = userDataService.findByRecoverKey(recovery.getRecoveryKey());
-            return userChange.getIdUser();
+            return ResponseEntity.ok(userChange.getIdUser());
         }
-        return null;
+        return ResponseEntity.notFound().build();
     }
     // Compara el valor proporcionado con el generado anteriormente y retorna el id del usuario
     // crear una interfaz para que el usuario coloque la nueva contraseña.
