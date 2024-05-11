@@ -118,8 +118,7 @@ public class EventDataRestController {
         return eventDataService.updateEventData(eventId, updatedEventData);
     }
 
-
-
+    // toma los cursos por el usuario que se encuentre logeado
     @GetMapping("/course_numbers")
     public List<Integer> allCourseNumbers() {
         UserData user = userDataService.getLoggedInUser();

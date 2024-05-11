@@ -18,4 +18,6 @@ public interface RecoveryService {
 
     public Recovery saveNewKey(Long id,String key);
 
+    public Recovery findByKey(String recoveryKey);
+
 }

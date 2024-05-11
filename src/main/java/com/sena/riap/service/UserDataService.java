@@ -24,4 +24,8 @@ public interface UserDataService {
 
     public UserData findByEmail(String email);
 
+    public UserData findByRecoverKey(String key);
+
+    public UserData updatePassword(Long idUser, String password);
+
 }

@@ -19,4 +19,11 @@ public interface UserDataRepository extends JpaRepository<UserData,Long> {
     List<UserData> findLearnersByCourseNumber(int courseNumber);
 
     UserData findByEmail(String email);
+
+    @Query(value = "SELECT ud.* " +
+            "FROM user_data ud, recovery r " +
+            "WHERE ud.id_user = r.id_user " +
+            "AND r.recovery_key = :key", nativeQuery = true)
+    UserData findByRecoverKey(String key);
+
 }

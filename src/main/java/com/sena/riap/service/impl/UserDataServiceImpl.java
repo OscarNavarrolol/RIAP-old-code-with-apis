@@ -74,11 +74,27 @@ public class UserDataServiceImpl implements UserDataService {
     // complete methods
     @Override
     public List<UserData> getLearnersByCourseNumber(int courseNumber) {
-        return null;
+        return userDataRepository.findLearnersByCourseNumber(courseNumber);
     }
 
     @Override
     public UserData findByEmail(String email) {
         return userDataRepository.findByEmail(email);
     }
+
+    @Override
+    public UserData findByRecoverKey(String key) {
+        return userDataRepository.findByRecoverKey(key);
+    }
+
+    @Override
+    public UserData updatePassword(Long idUser, String password){
+        UserData oldUserData = userDataRepository.findById(idUser).orElse(null);
+        if (oldUserData != null){
+            oldUserData.setPassword(password);
+            userDataRepository.save(oldUserData);
+        }
+        return null;
+    }
+
 }
