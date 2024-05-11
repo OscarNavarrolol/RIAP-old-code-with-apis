@@ -7,11 +7,13 @@ import com.sena.riap.service.AttendanceService;
 import com.sena.riap.service.CourseService;
 import com.sena.riap.service.EventDataService;
 import com.sena.riap.service.UserDataService;
+import com.sena.riap.service.mailservice.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -29,6 +31,9 @@ public class EventDataRestController {
 
     @Autowired
     private CourseService courseService;
+
+    @Autowired
+    private IEmailService emailService;
 
     @GetMapping("/list_event_data")
     public List<EventData> listEventData() {
@@ -88,17 +93,30 @@ public class EventDataRestController {
             // Not setting attendance time
             attendanceService.saveAttendance(attendance);
         }
+        List<String> learnerEmails = learners.stream()
+                .map(UserData::getEmail)
+                .collect(Collectors.toList());
+        String subject = "Nuevo evento: " + eventData.getObjective();
+        String message = "¡A new event has been created! Here are the details:\n" +
+                "Date: " + eventData.getDate() + "\n" +
+                "Location: " + eventData.getLocation() + "\n" +
+                "Start time: " + eventData.getStartTime() + "\n" +
+                "Ending time : " + eventData.getEndTime();
+        emailService.sendEmail(learnerEmails.toArray(new String[0]), subject, message);
 
         return savedEventData;
     }
 
     @DeleteMapping("/delete_event/{eventId}")
-    public void deleteEvent(@PathVariable Long eventId) {
+    public void deleteEvent(@PathVariable Long eventId, @RequestParam Integer courseNumber) {
         // delete all attendances related to the event and then the event
         if (eventId != null) {
             try {
+                EventData eventData = eventDataService.getEventDataById(eventId);
+
                 attendanceService.deleteAllByEventId(eventId);
                 eventDataService.deleteEventData(eventId);
+                notifyEventDeletion(eventData,courseNumber);
             } catch (Exception e) {
                 System.out.println("Error in deleteEvent method: " + e);
             }
@@ -114,8 +132,14 @@ public class EventDataRestController {
     }
 
     @PutMapping("/update_event/{eventId}")
-    public EventData updateEvent(@PathVariable Long eventId, @RequestBody EventData updatedEventData) {
-        return eventDataService.updateEventData(eventId, updatedEventData);
+    public EventData updateEvent(@PathVariable Long eventId, @RequestBody EventData updatedEventData, @RequestParam Integer courseNumber) {
+        EventData oldEventData = eventDataService.getEventDataById(eventId);
+
+        EventData updatedEvent = eventDataService.updateEventData(eventId, updatedEventData);
+
+        notifyEventUpdate(oldEventData, updatedEventData, courseNumber);
+
+        return updatedEvent;
     }
 
     // toma los cursos por el usuario que se encuentre logeado
@@ -124,6 +148,38 @@ public class EventDataRestController {
         UserData user = userDataService.getLoggedInUser();
         Long idUser = user.getIdUser();
         return courseService.getCoursesByUser(idUser);
+    }
+
+    private void notifyEventDeletion(EventData eventData,Integer courseNumber) {
+        List<UserData> learners = userDataService.getLearnersByCourseNumber(courseNumber);
+        List<String> learnerEmails = learners.stream()
+                .map(UserData::getEmail)
+                .collect(Collectors.toList());
+
+        String subject = "Evento eliminado: " + eventData.getObjective();
+        String message = "El evento ha sido eliminado Detalles:\n" +
+                "Fecha: " + eventData.getDate() + "\n" +
+                "Ubicación: " + eventData.getLocation() + "\n" +
+                "Hora de inicio: " + eventData.getStartTime() + "\n" +
+                "Hora de finalización: " + eventData.getEndTime();
+
+        emailService.sendEmail(learnerEmails.toArray(new String[0]), subject, message);
+    }
+
+    private void notifyEventUpdate(EventData oldEventData, EventData updatedEventData,Integer courseNumber) {
+        List<UserData> learners = userDataService.getLearnersByCourseNumber(courseNumber);
+        List<String> learnerEmails = learners.stream()
+                .map(UserData::getEmail)
+                .collect(Collectors.toList());
+
+        String subject = "Evento actualizado: " + updatedEventData.getObjective();
+        String message = "El evento ha sido actualizado Detalles actualizados:\n" +
+                "Fecha anterior: " + oldEventData.getDate() + ", Nueva fecha: " + updatedEventData.getDate() + "\n" +
+                "Ubicación anterior: " + oldEventData.getLocation() + ", Nueva ubicación: " + updatedEventData.getLocation() + "\n" +
+                "Hora de inicio anterior: " + oldEventData.getStartTime() + ", Nueva hora de inicio: " + updatedEventData.getStartTime() + "\n" +
+                "Hora de finalización anterior: " + oldEventData.getEndTime() + ", Nueva hora de finalización: " + updatedEventData.getEndTime();
+
+        emailService.sendEmail(learnerEmails.toArray(new String[0]), subject, message);
     }
 
 }

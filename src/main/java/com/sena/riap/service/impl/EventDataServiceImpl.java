@@ -52,4 +52,7 @@ public class EventDataServiceImpl implements EventDataService {
     public List<EventData> findEventsByCourseNumber(int courseNumber) {
         return eventDataRepository.findEventsByCourseNumber(courseNumber);
     }
+
+
+
 }
