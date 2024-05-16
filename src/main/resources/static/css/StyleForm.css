@@ -48,6 +48,7 @@ input[type="number"],
 input[type="email"],
 input[type="password"],
 input[type="date"],
+input[type="datetime"],
 input[type="datetime-local"],
 input[type="time"],
 select{
