@@ -27,6 +27,16 @@ $(document).ready(function () {
     <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
   }
 
+  function resetFormCourse() {
+    $("#idCourse").val("").prop("readonly", false).show();
+    $("label[for='idCourse']").show();
+    $("#idProgram").val("").prop("readonly", false);
+    $("#numberCourse").val("").prop("readonly", false);
+    $("#save-btn-course").show();
+    $("#clean-btn").show();
+    $(".btnHidden").show();
+  }
+
   $("#buttonCourses").click(function () {
     loadCourseList();
     $("#modalForm").load("/course/get_course");
@@ -38,10 +48,12 @@ $(document).ready(function () {
     $("#add-btn-program").hide();
     $("#add-btn-user-course").hide();
     $("#add-btn-user").hide();
+    $("#add-btn-recovery").hide();
     $("#welcome").hide();
   });
 
   $(document).on("click", "#view-course", function () {
+    resetFormCourse()
     var ID = $(this).data("id");
     $("#modalForm").show();
     $.ajax({
@@ -79,6 +91,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#edit-course", function () {
+    resetFormCourse()
     var ID = $(this).data("id");
     editCourseID = ID;
 
@@ -103,6 +116,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#add-btn-course", function () {
+    resetFormCourse()
     editCourseID = null;
     $("#modalForm").show();
 

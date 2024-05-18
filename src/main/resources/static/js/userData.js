@@ -43,6 +43,7 @@ $(document).ready(function () {
     $("#add-btn-program").hide();
     $("#add-btn-user-course").hide();
     $("#add-btn-user").show();
+    $("#add-btn-recovery").hide();
     $("#welcome").hide();
   });
 

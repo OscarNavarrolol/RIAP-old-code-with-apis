@@ -26,6 +26,15 @@ $(document).ready(function () {
     <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
   }
 
+  function resetFormProgram() {
+    $("#idProgram").val("").prop("readonly", false).show();
+    $("label[for='idProgram']").show();
+    $("#nameProgram").val("").prop("readonly", false);
+    $("#save-btn-program").show();
+    $("#clean-btn").show();
+    $(".btnHidden").show();
+  }
+
   $("#buttonPrograms").click(function () {
     loadProgramList();
     $("#modalForm").load("/program/get_program");
@@ -37,10 +46,12 @@ $(document).ready(function () {
     $("#add-btn-program").show();
     $("#add-btn-user-course").hide();
     $("#add-btn-user").hide();
+    $("#add-btn-recovery").hide();
     $("#welcome").hide();
   });
 
   $(document).on("click", "#view-program", function () {
+    resetFormProgram()
     var ID = $(this).data("id");
     $("#modalForm").show();
     $.ajax({
@@ -77,6 +88,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#edit-program", function () {
+    resetFormProgram()
     var ID = $(this).data("id");
     editProgramID = ID;
     $("#modalForm").show();
@@ -99,6 +111,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#add-btn-program", function () {
+    resetFormProgram()
     editProgramID = null;
     $("#modalForm").show();
 

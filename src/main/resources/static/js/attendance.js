@@ -27,6 +27,17 @@ $(document).ready(function () {
     <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
   }
 
+  function resetFormAttendance() {
+    $("#idAttendance").val("").prop("readonly", false).show();
+    $("label[for='idAttendance']").show();
+    $("#idEventData").val("").prop("readonly", false);
+    $("#idUser").val("").prop("readonly", false);
+    $("#attendanceTime").val("").prop("readonly", false);
+    $("#save-btn-attendance").show();
+    $("#clean-btn").show();
+    $(".btnHidden").show();
+  }
+
   $("#buttonAttendances").click(function () {
     loadAttendanceList();
     $("#modalForm").load("/attendance/get_attendance");
@@ -38,10 +49,12 @@ $(document).ready(function () {
     $("#add-btn-program").hide();
     $("#add-btn-user-course").hide();
     $("#add-btn-user").hide();
+    $("#add-btn-recovery").hide();
     $("#welcome").hide();
   });
 
   $(document).on("click", "#view-attendance", function () {
+    resetFormAttendance()
     var ID = $(this).data("id");
     $("#modalForm").show();
     $.ajax({
@@ -82,6 +95,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#edit-attendance", function () {
+    resetFormAttendance()
     var ID = $(this).data("id");
     editAttendanceID = ID;
     $("#modalForm").show();
@@ -106,6 +120,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#add-btn-attendance", function () {
+    resetFormAttendance()
     editAttendanceID = null;
     $("#modalForm").show();
 

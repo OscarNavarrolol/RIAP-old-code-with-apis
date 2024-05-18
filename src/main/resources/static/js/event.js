@@ -27,6 +27,19 @@ $(document).ready(function () {
     <img src="/images/iconDelete.png" class="action"></button></td></tr>`;
   }
 
+  function resetFormEvent() {
+    $("#idEventData").val("").prop("readonly", false).show();
+    $("label[for='idEventData']").show();
+    $("#dateEvent").val("").prop("readonly", false);
+    $("#location").val("").prop("readonly", false);
+    $("#objective").val("").prop("readonly", false);
+    $("#startTime").val("").prop("readonly", false);
+    $("#endTime").val("").prop("readonly", false);
+    $("#save-btn-event").show();
+    $("#clean-btn").show();
+    $(".btnHidden").show();
+  }
+
   $("#buttonEvents").click(function () {
     loadEventList();
     $("#modalForm").load("/event_data/get_event");
@@ -38,10 +51,12 @@ $(document).ready(function () {
     $("#add-btn-program").hide();
     $("#add-btn-user-course").hide();
     $("#add-btn-user").hide();
+    $("#add-btn-recovery").hide();
     $("#welcome").hide();
   });
   
   $(document).on("click", "#view-event", function () {
+    resetFormEvent()
     var ID = $(this).data("id");
     $("#modalForm").show();
     $.ajax({
@@ -82,6 +97,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#edit-event", function () {
+    resetFormEvent()
     var ID = $(this).data("id");
     editEventID = ID;
     $("#modalForm").show();
@@ -108,6 +124,7 @@ $(document).ready(function () {
   });
 
   $(document).on("click", "#add-btn-event", function () {
+    resetFormEvent()
     editEventID = null;
     $("#modalForm").show();
 
