@@ -27,19 +27,9 @@ public class ControllerUserData {
         return "admin/principal/index";
     }
 
-    @GetMapping("/about_us")
-    public String getAboutUsPage(){
-        return "general/AboutUs";
-    }
-
     @GetMapping("/login")
     public String getLoginPage(){
         return "general/Login";
-    }
-
-    @GetMapping("/home")
-    public String getHomePage(){
-        return "general/HomePage";
     }
 
     @GetMapping("/logout")
