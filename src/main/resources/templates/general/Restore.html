@@ -1,0 +1,23 @@
+<link rel="stylesheet" href="/css/Login.css" />
+<div class="restore">
+    <form id="forma" name="forma" method="post">
+
+        <h1>Restore Password</h1>
+        <div class="element">
+            <div class="imagen">
+                <img src="imagens/envelope-solid.svg">
+            </div>
+            <div class="dates">
+                <input type="email" id="email" name="email" required="true" placeholder="Enter your e-mail">
+            </div>
+        </div>
+        <div class="recaptchat">
+            <h2>Recaptchat</h2>
+        </div>
+        <div class="button-send">
+            <input type="submit" id="button" name="button" value="Enviar">
+        </div>
+        <hr>
+        <a class="long-in" th:href="@{/login}">log in</a>
+    </form>
+</div>

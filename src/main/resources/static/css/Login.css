@@ -1,18 +1,27 @@
+:root{
+    --bottun_web:#00AF00;
+    --color_black:#202124;
+    --color_white:#F1F0EF;
+    --effect:rgba(54, 54, 54, 0.3);
+    --border:solid 1px :rgba:(255,255,255,0.5);
+    --border_rount:25px;
+}
+
 .login{
     border: 1px solid black;
     width:  400px;
-    height: 500px;
+    height: 450px;
     color: black;
     border-radius: 20px;
     box-shadow: 0px 0px 20px rgba(0,0,0,0.75);
-    overflow: hidden;
+    overflow: hidden;  
     background-color: #202124;
 }
 
 form{
     display: block;
     box-sizing: border-box;
-    padding: 40px;
+    padding: 30px;
     width: 100%;
     height: 100%;
     flex-direction: column;
@@ -23,15 +32,102 @@ form{
 h1{
     color: rgba(255,255,255,0.8);
     font-weight: normal;
-    font-size: 24px;
+    font-size: 27px;
     text-shadow: 0px 0px 2px rgba(255,255,255,0.8);
-    margin-bottom: 60px;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-label{
-    color: rgba(255,255,255,0.8);
-    text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 2px;
-    padding-left: 10px;
+.element{
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+    padding: 0px 20px;
+    margin-bottom: 20px;
+}
+
+.imagen{
+    width: 15%;
+    text-align: right;
+}
+
+.data{
+    width: 85%;
+    text-align: left;
+}
+
+img{
+    background-color: #202020;
+    border-radius: 5px 0px 0px 5px ;
+    padding: 8.5px 12px;
+    width: 20px;
+    height: 22px;
+}
+
+#password,#email,#document,#code{ 
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(20px);
+    border: var(--border);
+    border-radius: 0px 5px 5px 0px; 
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+    width: 100%;
+}
+
+input:focus{
+    outline: 0 none;
+}
+
+.button-send{
+    padding: 15px 0px 15px 0px;
+    text-align: center;
+}
+
+#button{
+    background-color: var(--color_white);
+    backdrop-filter: blur(20px);
+    border-radius: var(--border_rount);
+    border: var(--border);
+    color: black;
+    width: 75%;
+    padding: 12px;
+    cursor: pointer;
+    
+}
+
+#button:hover{
+    color: white;
+    transition: 0.3s;
+    background-color: var(--bottun_web);
+    box-shadow: 0px 0px 5px 1px rgb(0, 209, 35);
+}
+
+.forget-password{
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.forget-password:hover{
+    color: #00AF00;
+}
+
+button{
+    background-color: #00AF00;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 40px;
+    border: none;
+    margin: 10px 0px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
+    color: black;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: rgb(0, 139, 12);
+    color: white;
+    box-shadow: 1px 1px 3px rgba(0, 139, 12);
 }

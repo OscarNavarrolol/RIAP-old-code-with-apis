@@ -32,6 +32,11 @@ public class ControllerUserData {
         return "general/Login";
     }
 
+    @GetMapping("/restore")
+    public String getRestorePage(){
+        return "general/Restore";
+    }
+
     @GetMapping("/logout")
     public String logout() {
         return "redirect:/login";
@@ -41,5 +46,4 @@ public class ControllerUserData {
     public String showPrincipalPage(){
         return "admin/principal/PrincipalAdmin";
     }
-
 }
