@@ -1,10 +1,12 @@
 <link rel="stylesheet" href="/css/Login.css" />
+<script src="/js/Login.js"></script>
+<body>
 <div class="login">
     <form class="login-form" method="post">
-        <h1>Account Login</h1>
+            <h1>Account Login</h1>
         <div class="element">
             <div class="imagen">
-                <img src="/images/icon_user.png" alt="">
+                <label for="document"><img src="/images/icon_user.png" alt=""></label>
             </div>
             <div class="data">
                 <input type="text" id="document" name="document" required="true" placeholder="User">
@@ -12,10 +14,13 @@
         </div>
         <div class="element">
             <div class="imagen">
-                <img src="/images/icon_key.png" alt="">
+                <label for="password"><img src="/images/icon_key.png" alt=""></label>
             </div>
             <div class="data">
                 <input type="password" id="password" name="password" required="true" placeholder="Password">
+                <span class="toggle-password">
+                    <img id="togglePassword" class="togglePasswordImg" src="/images/icon_ojo_cerrado.png" alt="Show/Hide Password">
+                </span>
             </div>
         </div>
         <div class="button-send">
@@ -24,3 +29,4 @@
         <a class="forget-password">forgot password?</a>
     </form>
 </div>
+</body>
