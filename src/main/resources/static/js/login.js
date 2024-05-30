@@ -1,21 +1,36 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const form = document.querySelector('.login-form');
-    const predefinedUser = "admin";
-    const predefinedPassword = "user123";
-    const togglePassword = document.getElementById('togglePassword');
-    const password = document.getElementById('password');
+document.addEventListener('DOMContentLoaded', (event) => {
+    const loginForm = document.getElementById('loginForm');
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
-        
-        const userInput = document.getElementById('document').value;
-        const passwordInput = document.getElementById('password').value;
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-        if (userInput === predefinedUser && passwordInput === predefinedPassword) {
-            alert("Login successful!");
-            window.location.href = "http://localhost:8083/user_data/tables";
-        } else {
-            alert("Invalid username or password. Please try again.");
+        const documentValue = document.getElementById('document').value;
+        const passwordValue = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('http://localhost:8083/api_user/auth', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    document: documentValue,
+                    password: passwordValue
+                })
+            });
+
+            if (response.ok) {
+                const userData = await response.json();
+                alert(`Login successful! Welcome, ${userData.nameUser}`);
+                // Redirigir a la página principal o dashboard
+                window.location.href = "http://localhost:8083/user_data/tables";
+            } else {
+                const errorData = await response.json();
+                alert(`Login failed: ${errorData.message}`);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
         }
     });
 
@@ -27,3 +42,4 @@ document.addEventListener("DOMContentLoaded", function() {
         this.src = type === 'password' ? '/images/icon_ojo_cerrado.png' : '/images/icon_ojo.png';
     });
 });
+

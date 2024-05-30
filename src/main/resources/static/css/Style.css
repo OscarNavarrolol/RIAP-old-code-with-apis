@@ -1,189 +1,172 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap");
+
 :root{
     --bottun_web:#00AF00;
-    --color_black:#202124;
-    --color_white:#F1F0EF;
-    --effect:rgba(255, 255, 255, 0.3);
-    --border:solid 1px;
-    --border_rount:5px;
   }
 
-  ::-webkit-scrollbar {
-    display: none;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Montserrat", sans-serif;
 }
-  
-  body{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: var(--color_black);
-    margin: 15px;
-  }
-  
-  .panel{
-    padding: 25px;
-    background-color: rgba(0, 0, 0,0.5);
-    text-align: center;
-    border-radius: 5px 5px 0 0;
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  z-index: 100;
+  background: transparent;
+  padding: 0rem calc((100vw - 1400px) / 2);
+}
+
+.logo {
+  margin-left: 1rem;
+}
+
+.nav-links {
+  margin-right: 2rem;
+}
+
+.nav-links ul{
     display: flex;
-  }
-  
-  .information{
-    width: 15%;
-    display: flex;
-  }
-  
-  img{
-    width: 50px;
-    border-radius: 10px;
-  }
-  
-  .nriap{
-    margin: auto 20px;
-    color: white;
-  }
-  
-  .menu{
-    width: 85%;
-  }
-  
-  .panel ul{
-    padding: 0;
-    display: flex;
-    margin: auto;
     list-style: none;
   }
-  
-  .panel ul li a{
-    padding: 15px 14px;
-    text-decoration:none;
-    color: white;
-  }
-  
-  .panel ul li{
+
+  .nav-links ul li{
     border-radius: 10px;
     cursor: pointer;
-    margin: auto;
-    padding:15px 14px;
+    margin: 0 4px 0 4px;
+    padding:12px 10px;
     color: var(--color_white);
     text-align: center;
     border-color: var(--bottun_web);
     box-shadow: 0 0 40px 40px var(--bottun_web) inset;
     transition: box-shadow 0.2s ease-in-out;
   }
-  
-  .panel ul li:hover {
+
+.nav-links li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255,1);
+  padding:12px 10px;
+  border: 1px white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.nav-links ul li:hover{
     box-shadow: 0 0 10px 0 var(--bottun_web) inset, 0 0 10px 4px var(--bottun_web);
   }
-  
-  .hr2{
-    border-color: #ffffff;
-    box-shadow: 0 0 1px 1px;
-    margin: 2px;
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  align-items: center;
+  color: #fff;
+  background: #0f0f10;
+  padding: 0rem calc((100vw - 1400px) / 2);
+  overflow-x: hidden;
+  position: relative;
+}
+
+.hero h1 {
+  padding-bottom: 1rem;
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-transform: uppercase;
+  color: #84f159;
+}
+
+.hero p {
+  padding-bottom: 3rem;
+  font-size: clamp(1rem, 1vw, 2rem);
+  line-height: 1.5;
+}
+
+.left-column {
+  margin-left: 2rem;
+  margin-right: 2rem;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 500px;
+  position: relative;
+}
+
+button {
+  padding: 1.2rem 3.5rem;
+  border-radius: 4px;
+  border: none;
+  font-size: 1.2rem;
+  margin-bottom: 3rem;
+  color: rgba(0, 0, 0, 0.8);
+  background: #31ec41;
+  cursor: pointer;
+  outline: none;
+  z-index: 1;
+  cursor: pointer;
+}
+
+button:hover{
+    color: black;
+    background: #0af81e;
+    border-radius: 0 20px 0 20px;
+}
+
+.right-column {
+  z-index: 1;
+  position: relative;
+  display: inline;
+  top: 100px;
+}
+
+.aboutUser{
+  margin: 4rem 5rem 4rem 5rem;
+  padding: 2rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255,0.4);
+  backdrop-filter: blur(5px);
+  border: solid 1px rgba(0, 255, 42, 0.6);
+}
+
+.aboutUser h3{
+  text-align: center;
+  padding: 10px 0 20px 0;
+}
+
+.aboutUser a{
+  text-align: center;
+  color: rgba(255, 255, 255,0.8);
+}
+
+#circle-1 {
+  position: absolute;
+  top: 400px;
+  left: -400px;
+  max-width: 100%;
+  height: auto;
+}
+
+#circle-2 {
+  z-index: -1;
+  position: absolute;
+  top: 100px;
+  right: -400px;
+  max-width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
   }
 
-  #modalForm {
-    display: none;
-    position: fixed;
-    z-index: 99;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow: auto;
+  .aboutUser{
+    margin: 4rem 2rem 4rem 2rem;
   }
-  
-  .container{
-    background-color: rgba(0, 0, 0,0.5);
-    color: white; 
-    border-radius: 0 0 5px 5px;
-    margin: auto;
-  }
-
-  #welcome{
-    margin: 0 auto;
-    text-align: center;
-    color: rgba(87, 198, 104, 0.5);
-    font-size: 150px;
-    font-family: serif;
-  }
-  
-  table{
-    width: 100%;
-    padding: 0 0 50px 0;
-    margin: auto;
-  }
-
-  thead tr{
-    text-align: center;
-    background-color: rgba(30, 255, 0, 0.4);
-  }
-
-  thead th{
-    padding: 8px 0;
-    font-family: 'Courier New', Courier, monospace;
-  }
-
-  tbody tr{
-    text-align: center;
-  }
-
-  tbody td{
-    padding: 4px 0;
-    font-family: 'Courier New', Courier, monospace;
-  }
-
-  tbody td img{
-    width: 50px;
-    height: 50px;
-  }
-  
-  .picture{
-    width:20px;
-  }
-
-  .action{
-    width: 25px;
-    height: 25px;
-  }
-
-  .edit-btn,.delete-btn,.view-btn{
-    background-color: rgba(0,0,0,0);
-    opacity: 0.7;
-    cursor: pointer;
-    border: none;
-    padding: 4px;
-  }
-
-  .edit-btn:hover{
-    opacity: 1;
-    border-radius: 3px;
-  }
-
-  .delete-btn:hover{
-    opacity: 1;
-    border-radius: 3px;
-  }
-
-  .view-btn:hover{
-    opacity: 1;
-    border-radius: 3px;
-  }
-
-  .spaceAdd{
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
-    z-index: 98;
-  }
-  
-  .add-btn{
-    background-color: rgba(0, 0, 0, 0);
-    opacity: 0.5;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    outline: none;
-  }
-
-  .add-btn:hover{
-    opacity: 1;
-  }
+}

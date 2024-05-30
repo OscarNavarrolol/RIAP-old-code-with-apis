@@ -44,6 +44,6 @@ public class ControllerUserData {
 
     @GetMapping("/principal")
     public String showPrincipalPage(){
-        return "admin/principal/PrincipalAdmin";
+        return "general/index";
     }
 }
