@@ -6,7 +6,6 @@ import com.sena.riap.entities.Attendance;
 import com.sena.riap.entities.EventData;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public interface AttendanceService {

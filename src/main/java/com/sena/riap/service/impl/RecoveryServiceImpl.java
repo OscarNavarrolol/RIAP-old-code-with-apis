@@ -1,11 +1,9 @@
 package com.sena.riap.service.impl;
 
-import com.sena.riap.entities.Program;
 import com.sena.riap.entities.Recovery;
 import com.sena.riap.repository.RecoveryRepository;
 import com.sena.riap.service.RecoveryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;

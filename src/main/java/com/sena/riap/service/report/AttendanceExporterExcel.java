@@ -11,8 +11,6 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.List;
-import java.time.ZoneId;
-import java.util.Date;
 
 // Handles exporting attendance data to an Excel file.
 public class AttendanceExporterExcel {

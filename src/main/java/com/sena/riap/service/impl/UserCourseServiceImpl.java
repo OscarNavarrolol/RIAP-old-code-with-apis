@@ -1,6 +1,5 @@
 package com.sena.riap.service.impl;
 
-import com.sena.riap.entities.Course;
 import com.sena.riap.entities.UserCourse;
 import com.sena.riap.repository.UserCourseRepository;
 import com.sena.riap.service.UserCourseService;

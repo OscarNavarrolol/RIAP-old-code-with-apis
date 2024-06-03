@@ -1,19 +1,12 @@
 package com.sena.riap.api;
 
-import com.sena.riap.entities.Attendance;
 import com.sena.riap.entities.EventData;
-import com.sena.riap.entities.UserData;
-import com.sena.riap.service.AttendanceService;
-import com.sena.riap.service.CourseService;
 import com.sena.riap.service.EventDataService;
-import com.sena.riap.service.UserDataService;
-import com.sena.riap.service.mailservice.IEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE})
@@ -22,18 +15,6 @@ public class EventDataRestController {
 
     @Autowired
     private EventDataService eventDataService;
-
-    @Autowired
-    private UserDataService userDataService;
-
-    @Autowired
-    private AttendanceService attendanceService;
-
-    @Autowired
-    private CourseService courseService;
-
-    @Autowired
-    private IEmailService emailService;
 
     @GetMapping("/list_event_data")
     public List<EventData> listEventData() {
