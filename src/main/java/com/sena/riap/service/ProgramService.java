@@ -1,6 +1,5 @@
 package com.sena.riap.service;
 
-import com.sena.riap.entities.Attendance;
 import com.sena.riap.entities.Program;
 
 import java.util.List;

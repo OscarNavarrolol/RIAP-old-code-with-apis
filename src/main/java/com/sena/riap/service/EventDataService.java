@@ -1,7 +1,6 @@
 package com.sena.riap.service;
 
 import com.sena.riap.entities.EventData;
-import com.sena.riap.entities.UserData;
 
 import java.util.List;
 

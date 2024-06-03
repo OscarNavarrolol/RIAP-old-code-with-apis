@@ -1,6 +1,5 @@
 package com.sena.riap.service;
 
-import com.sena.riap.entities.Course;
 import com.sena.riap.entities.UserCourse;
 
 import java.util.List;
