@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>RIAP</title>
+		<title>Abouts</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/css/main.css" />
@@ -11,13 +11,14 @@
 		<div id="modalForm"></div>
 		<!-- Wrapper -->
 			<div id="wrapper">
+
 				<!-- Header -->
 					<header id="header">
 						<div class="inner">
 
 							<!-- Logo -->
 								<a href="/user_data/principal" class="logo">
-									<span class="symbol"><img src="/images/logo.png" alt="" /></span><span class="title" >RIAP</span>
+									<span class="symbol"><img src="/images/logo.png" alt="" /></span><span class="title">RIAP</span>
 								</a>
 
 							<!-- Nav -->
@@ -37,7 +38,7 @@
 							<li><a href="/user_data/principal">Home</a></li>
 							<li><a href="/user_data/about">Abouts</a></li>
 							<li><a href="/user_data/login">Login</a></li>
-							<li><a href="/user_data/attendance">Attendance</a></li>
+							<li><a href="/user_data/attendance">Attendances</a></li>
 							<li><a href="/user_data/event">Events</a></li>
 						</ul>
 					</nav>
@@ -45,11 +46,11 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<header>
-								<h1>RIAP is an artificial intelligence project.</h1>
-								<p>Our project, focused on the intelligent recognition of face-to-face attendance, is designed to optimize the management of attendance at events within the SENA institution. Using advanced facial recognition technology, our system allows to register the presence of trainees in various events scheduled by their instructors in a fast and efficient way. This approach not only minimizes the use of paper, but also significantly improves attendance registration times, contributing to a greener and more modern management of institutional resources..</p>
-							</header>
-							
+							<h1>Event</h1>
+                            <table class="table">
+                                <thead id="headerTable"></thead>
+                                <tbody id="data"></tbody>
+                              </table>
 						</div>
 					</div>
 
@@ -59,7 +60,6 @@
 							<section>
 								<h2>Get in touch</h2>
 							</section>
-						</div>
 					</footer>
 
 			</div>
@@ -69,6 +69,7 @@
 			<script src="/js/general/browser.min.js"></script>
 			<script src="/js/general/breakpoints.min.js"></script>
 			<script src="/js/general/main.js"></script>
+            <script src="/js/general/events.js"></script>
 
 	</body>
 </html>

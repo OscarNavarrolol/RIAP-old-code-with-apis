@@ -47,4 +47,16 @@ public class ControllerUserData {
     public String getMethodAbouts() {
         return "general/about";
     }
+
+    @GetMapping("/attendance")
+    public String getMethodAttendance(){
+        return "general/attendance";
+    }
+
+    @GetMapping("/event")
+    public String getMethodEvent() {
+        return "general/event";
+    }
+    
+    
 }
