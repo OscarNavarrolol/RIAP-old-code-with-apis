@@ -1,32 +1,27 @@
-<link rel="stylesheet" href="/css/Login.css" />
-<script src="/js/general/Login.js"></script>
-<body>
-<div class="login">
-    <form class="login-form" id="loginForm">
-        <h1>Account Login</h1>
-        <div class="element">
-            <div class="imagen">
-                <label for="document"><img src="/images/icon_user.png" alt=""></label>
-            </div>
-            <div class="data">
-                <input type="text" id="document" name="document" required="true" placeholder="User">
-            </div>
-        </div>
-        <div class="element">
-            <div class="imagen">
-                <label for="password"><img src="/images/icon_key.png" alt=""></label>
-            </div>
-            <div class="data">
-                <input type="password" id="password" name="password" required="true" placeholder="Password">
-                <span class="toggle-password">
-                    <img id="togglePassword" class="togglePasswordImg" src="/images/icon_ojo_cerrado.png" alt="Show/Hide Password">
-                </span>
-            </div>
-        </div>
-        <div class="button-send">
-            <input type="submit" id="button" name="button" value="Login">
-        </div>
-        <a class="forget-password">forgot password?</a>
-    </form>
+<link rel="stylesheet" href="/css/login.css">
+<script src="/js/general/login.js"></script>
+<script src="/js/general/modal.js"></script>
+<div class="login-container">
+	<span class="close-button">&times;</span>
+	<form id="loginForm" action="" class="form-login">
+		<ul class="login-nav">
+			<li class="login-nav__item active">
+				<a href="#">Sign In</a>
+			</li>
+		</ul>
+		<label for="login-input-user" class="login__label">
+			Username
+		</label>
+		<input id="login-input-user" class="login__input" type="text" />
+		<label for="login-input-password" class="login__label">
+			Password
+		</label>
+		<input id="login-input-password" class="login__input" type="password" />
+		<label for="login-sign-up" class="login__label--checkbox">
+			<input id="login-sign-up" type="checkbox" class="login__input--checkbox" />
+			Keep me Signed in
+		</label>
+		<button class="login__submit" disabled>Sign in</button>
+	</form>
+	<a href="#" class="login__forgot">Forgot Password?</a>
 </div>
-</body>

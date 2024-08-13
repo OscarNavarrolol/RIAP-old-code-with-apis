@@ -25,7 +25,7 @@ public class ControllerUserData {
 
     @GetMapping("/login")
     public String getLoginPage(){
-        return "general/Login1";
+        return "general/Login";
     }
 
     @GetMapping("/restore")
