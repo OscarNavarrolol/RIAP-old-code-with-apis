@@ -171,15 +171,39 @@
 	background-color: #00df00;
 }
 
+.finalForm {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.finalRight {
+    text-align: left;
+}
+
+.finalLeft {
+    text-align: right;
+}
+
 .login__forgot {
-	display: block;
-	margin-top: 3rem;
-	text-align: center;
 	color: rgba(255, 255, 255, 0.75);
-	font-size: .75rem;
+	font-size: .90rem;
 	text-decoration: none;
 	position: relative;
 	z-index: 1;
+}
+
+.returnHome {
+	color: rgba(255, 255, 255, 0.75);
+	font-size: .90rem;
+	text-decoration: none;
+	position: relative;
+	z-index: 1;
+}
+
+.returnHome:hover{
+	color: #00df00;
 }
 
 .login__forgot:hover {

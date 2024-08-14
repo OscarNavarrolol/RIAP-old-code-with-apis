@@ -62,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json())
       .then((data) => {
         if (data && data.idUser && data.nameUser) { // Comprobar si la autenticación fue exitosa
-            debugger
           keepUserLoggedIn(data.idUser, data.nameUser); // Guardar el ID y el nombre del usuario
           localStorage.setItem( 'user', JSON.stringify(data))
           window.location.href = `/user_data/principal`; // Redirigir al endpoint con el ID del usuario

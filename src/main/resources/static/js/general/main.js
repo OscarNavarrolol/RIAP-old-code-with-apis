@@ -1,11 +1,16 @@
-document.addEventListener("DOMContentLoaded", function () {
-	const user = localStorage.getItem('user')
-	if (user) {
-		const userObject = JSON.parse(user)
-		const buttonElement = document.getElementById('buttonAdmin');
-		$('buttonAdmin').removeClass('hidden');
-	}
-	});
+$(document).ready(function() {
+    const user = localStorage.getItem('user');
+    if (user) {
+        const userObject = JSON.parse(user);
+        $('#buttonAttendance, #buttonEvent, #buttonLogout').removeClass('hidden');
+        $('#loginButton').addClass('hidden'); // Oculta el botón de Login
+
+        $('#buttonLogout').on('click', function() {
+            localStorage.removeItem('user');
+            window.location.href = '/user_data/principal'; // Cambia '/user_data/principal' por la URL correcta
+        });
+    }
+});
 
 
 (function($) {
