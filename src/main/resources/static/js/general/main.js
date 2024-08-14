@@ -1,3 +1,13 @@
+document.addEventListener("DOMContentLoaded", function () {
+	const user = localStorage.getItem('user')
+	if (user) {
+		const userObject = JSON.parse(user)
+		const buttonElement = document.getElementById('buttonAdmin');
+		$('buttonAdmin').removeClass('hidden');
+	}
+	});
+
+
 (function($) {
 
 	var	$window = $(window),

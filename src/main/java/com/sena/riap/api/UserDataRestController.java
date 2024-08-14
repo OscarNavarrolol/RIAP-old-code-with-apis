@@ -44,13 +44,13 @@ public class UserDataRestController {
 
     // Returns the user object corresponding to the correct credentials
     @PostMapping("/auth")
-    public UserData verifyCredentials(@RequestParam("document") String document, @RequestParam("password") String password){
+    public UserData verifyCredentials(@RequestParam String document, @RequestParam String password){
         return userDataService.loginUser(document,password);
     }
 
     // metodo para actualizar la contraseña del usuario en base a su ID, el ID lo proporciona MailController
     @PutMapping("/update_password/{id_user}")
-    public UserData updatePassword(@PathVariable("id_user") Long idUser, @RequestParam("password") String password) {
+    public UserData updatePassword(@PathVariable("id_user") Long idUser, @RequestParam String password) {
         return userDataService.updatePassword(idUser,password);
     }
 

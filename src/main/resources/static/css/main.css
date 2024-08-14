@@ -472,8 +472,8 @@ input, select, textarea {
 						color: inherit;
 					}
 
-					#menu > .inner > ul > li #buttonAdmin{
-						visibility: hidden;
+					#menu > .inner > ul > li .hidden{
+						display: none;
 					}
 
 					#menu > .inner > ul > li:first-child {
