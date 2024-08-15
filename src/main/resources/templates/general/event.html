@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/css/main.css" />
 		<noscript><link rel="stylesheet" href="/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	</head>
 	<body class="is-preload">
 		<div id="modalForm"></div>
@@ -43,24 +44,35 @@
 							<li><a id="buttonLogout" class="hidden">cerrar sesion</a></li>
 						</ul>
 					</nav>
-
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
 							<h1>Event</h1>
 
-							<label for="courseDropdown">Select a Course:</label>
 							<select id="courseDropdown">
-								<option value="">--Select a Course--</option>
+								<option value="">Select a Course</option>
 							</select>
 
-                            <table class="table">
-                                <thead id="headerTable"></thead>
-                                <tbody id="data"></tbody>
-                              </table>
+							<table id="eventsTable" border="1">
+								<thead>
+									<tr>
+										<th>Location</th>
+										<th>Objetivo</th>
+										<th>Date</th>
+										<th>Start Time</th>
+										<th>End Time</th>
+										<th>Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td colspan="3">Please select a course to see the events.</td>
+									</tr>
+								</tbody>
+							</table>
+							
 						</div>
 					</div>
-
 				<!-- Footer -->
 					<footer id="footer">
 						<div class="inner">

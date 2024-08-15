@@ -66,6 +66,26 @@ input, select, textarea {
 	appearance: none;
 }
 
+#eventsTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+#eventsTable th, #eventsTable td {
+    padding: 8px;
+    text-align: left;
+}
+
+#eventsTable th {
+    background-color: #f2f2f2;
+}
+
+#eventsTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+
 /* Basic */
 
 	@-ms-viewport {
