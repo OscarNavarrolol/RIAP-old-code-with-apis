@@ -6,13 +6,48 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="/css/main.css" />
 		<noscript><link rel="stylesheet" href="/css/noscript.css" /></noscript>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 	</head>
 	<body class="is-preload">
-		<div id="modalForm"></div>
+
+		<!-- View Modal -->
+		<div id="eventModal" class="modal">
+		    <div class="modal-content">
+		        <span class="close">&times;</span>
+		        <h2>Event Details</h2>
+		        <p id="eventDetails"></p>
+		    </div>
+		</div>
+
+		<!-- Edit Modal -->
+		<div id="editEventModal" class="modal">
+		    <div class="modal-content">
+		        <span class="close">&times;</span>
+		        <h2>Edit Event</h2>
+		        <form id="editEventForm">
+		            <label for="editLocation">Location:</label>
+		            <input type="text" id="editLocation" name="location"><br>
+				
+		            <label for="editObjective">Objective:</label>
+		            <input type="text" id="editObjective" name="objective"><br>
+				
+		            <label for="editDate">Date:</label>
+		            <input type="date" id="editDate" name="date"><br>
+				
+		            <label for="editStartTime">Start Time:</label>
+		            <input type="time" id="editStartTime" name="startTime"><br>
+				
+		            <label for="editEndTime">End Time:</label>
+		            <input type="time" id="editEndTime" name="endTime"><br>
+				
+		            <button type="button" id="saveEditBtn">Save Changes</button>
+		        </form>
+		    </div>
+		</div>
+
+		
 		<!-- Wrapper -->
 			<div id="wrapper">
-
+				<div id="modal-login"></div>
 				<!-- Header -->
 					<header id="header">
 						<div class="inner">
@@ -36,8 +71,9 @@
 					<nav id="menu">
 						<h2>Menu</h2>
 						<ul>
-							<li><a href="/user_data/principal">Home</a></li>
-							<li><a href="/user_data/about">Abouts</a></li>
+							<li><a id="buttonHome" href="/user_data/principal">Home</a></li>
+							<li><a id="buttonHomeUser" class="hidden" href="/user_data/user">Home User</a></li>
+							<li><a id="buttonAbouts" href="/user_data/about">Abouts</a></li>
 							<li><a id="loginButton" href="/user_data/login">Login</a></li>
 							<li><a id="buttonAttendance" class="hidden" href="/user_data/attendance">Attendance</a></li>
 							<li><a id="buttonEvent" class="hidden" href="/user_data/event">Events</a></li>
@@ -72,6 +108,11 @@
 							</table>
 							
 						</div>
+					</div>
+					<div class="spaceAdd">
+					<button id="add-btn-event" class="add-btn" hidden>
+						<img src="/images/iconNew.png" class="btnAdd" />
+					  </button>
 					</div>
 				<!-- Footer -->
 					<footer id="footer">

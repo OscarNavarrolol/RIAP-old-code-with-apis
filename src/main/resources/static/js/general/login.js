@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         userDisplayDiv.textContent = `Bienvenido, ${userName}!`; // Mostrar nombre del usuario
       }
 
-      window.location.href = `/user_data/principal/${userId}`; // Redirigir al endpoint con el ID del usuario
+      window.location.href = `/user_data/user/${userId}`; // Redirigir al endpoint con el ID del usuario
     }
   }
 
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (data && data.idUser && data.nameUser) { // Comprobar si la autenticación fue exitosa
           keepUserLoggedIn(data.idUser, data.nameUser); // Guardar el ID y el nombre del usuario
           localStorage.setItem( 'user', JSON.stringify(data))
-          window.location.href = `/user_data/principal`; // Redirigir al endpoint con el ID del usuario
+          window.location.href = `/user_data/user`; // Redirigir al endpoint con el ID del usuario
         } else {
           alert("Credenciales inválidas, por favor intenta de nuevo.");
         }

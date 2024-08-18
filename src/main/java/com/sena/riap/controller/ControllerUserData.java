@@ -57,6 +57,11 @@ public class ControllerUserData {
     public String getMethodEvent() {
         return "general/event";
     }
+
+    @GetMapping("/user")
+    public String getMethodUser() {
+        return "general/homeUser";
+    }
     
     
 }

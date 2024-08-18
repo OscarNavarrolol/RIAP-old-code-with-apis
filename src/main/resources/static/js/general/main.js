@@ -2,8 +2,16 @@ $(document).ready(function() {
     const user = localStorage.getItem('user');
     if (user) {
         const userObject = JSON.parse(user);
-        $('#buttonAttendance, #buttonEvent, #buttonLogout').removeClass('hidden');
+
+		console.log(userObject);
+
+        // Mostrar el nombre del usuario en el h1
+        $('#welcomeMessage').text(`¡Bienvenido, ${userObject.nameUser}!`);
+
+        $('#buttonAttendance, #buttonEvent, #buttonLogout, #buttonHomeUser ').removeClass('hidden');
         $('#loginButton').addClass('hidden'); // Oculta el botón de Login
+        $('#buttonHome').addClass('hidden');
+        $('#buttonAbouts').addClass('hidden');
 
         $('#buttonLogout').on('click', function() {
             localStorage.removeItem('user');
@@ -11,6 +19,7 @@ $(document).ready(function() {
         });
     }
 });
+
 
 
 (function($) {

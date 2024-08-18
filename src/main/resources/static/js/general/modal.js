@@ -1,7 +1,7 @@
-/* document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('loginModal');
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modalForm');
     const loginButton = document.getElementById('loginButton');
-    const closeButton = document.querySelector('.close-button');
+    const closeButton = document.querySelector('close-button');
 
     loginButton.addEventListener('click', () => {
         modal.style.display = 'block';
@@ -16,4 +16,4 @@
             modal.style.display = 'none';
         }
     });
-}); */
+});

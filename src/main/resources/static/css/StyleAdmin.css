@@ -78,18 +78,6 @@
     box-shadow: 0 0 1px 1px;
     margin: 2px;
   }
-
-  #modalForm {
-    display: none;
-    position: fixed;
-    z-index: 998;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    overflow: auto;
-  }
   
   .container{
     background-color: rgba(0, 0, 0,0.5);

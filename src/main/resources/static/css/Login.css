@@ -5,6 +5,10 @@
 	transition: .25s all ease;
 }
 
+body {
+    background-image: radial-gradient(ellipse at left bottom, rgb(29, 31, 28) 0%,rgba(44, 77, 42, 0.9) 59%, rgba(13, 131, 39, 0.9) 100%);
+}
+
 .login-container {
     border-radius: 5%;
 	display: block;
@@ -32,7 +36,7 @@
 	right: 0;
 	bottom: 0;
 	left: 0;
-	background-image: radial-gradient(ellipse at left bottom, rgb(12, 14, 12) 0%,rgba(20, 36, 17, 0.9) 59%, rgba(15, 56, 24, 0.9) 100%);
+	background-image: radial-gradient(ellipse at left bottom, rgb(12, 14, 12) 0%,rgba(38, 70, 32, 0.9) 59%, rgba(14, 133, 39, 0.9) 100%);
 	box-shadow: 0 -20px 150px -20px rgba(0, 0, 0, 0.5);
 }
 
