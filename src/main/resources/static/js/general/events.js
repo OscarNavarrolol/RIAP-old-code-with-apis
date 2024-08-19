@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    let selectedCourseNumber = null; // Variable global para almacenar el courseNumber seleccionado
+    let selectedCourseNumber = null; 
 
     async function fetchCourseNumbers() {
         try {

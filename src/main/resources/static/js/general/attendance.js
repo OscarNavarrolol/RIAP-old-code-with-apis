@@ -17,7 +17,7 @@ $(document).ready(function () {
     async function populateDropdown() {
         const courseNumbers = await fetchCourseNumbers();
         const $courseDropdown = $('#courseDropdown');
-        $courseDropdown.empty();  // Vaciar el dropdown antes de llenarlo
+        $courseDropdown.empty();
 
         courseNumbers.forEach(number => {
             $courseDropdown.append(new Option(`Select Course`));
@@ -42,7 +42,6 @@ $(document).ready(function () {
         const $dateDropdown = $('#dateDropdown');
         $dateDropdown.empty().prop('disabled', false);
 
-        // Añadir opción inicial
         $dateDropdown.append(new Option('Select Date'));
 
         eventDates.forEach(date => {
@@ -74,19 +73,18 @@ $(document).ready(function () {
             second: '2-digit',
             hour12: false
         };
-        return new Intl.DateTimeFormat('en-GB', options).format(date);  // Formato de 24 horas
+        return new Intl.DateTimeFormat('en-GB', options).format(date);
     }
 
     async function populateAttendanceTable(courseNumber, eventDate) {
         const attendanceData = await fetchAttendance(courseNumber, eventDate);
         const $attendanceTableBody = $('#attendanceTable tbody');
-        $attendanceTableBody.empty(); // Limpiar la tabla antes de llenarla
+        $attendanceTableBody.empty();
     
         attendanceData.forEach(attendance => {
-            // Verificar si la fecha de asistencia es null o vacía
             const formattedTime = attendance.attendanceTime
                 ? formatDateTime(attendance.attendanceTime)
-                : 'No asistió';
+                : 'Did not attend';
     
             const row = `<tr>
                             <td>${attendance.userName}</td>
@@ -115,6 +113,5 @@ $(document).ready(function () {
         }
     });
 
-    // Inicializar el dropdown de cursos
     populateDropdown();
 });

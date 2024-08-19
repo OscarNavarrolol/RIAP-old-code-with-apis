@@ -4,15 +4,13 @@ document.addEventListener("DOMContentLoaded", function () {
   const passwordInput = document.getElementById("login-input-password");
   const keepSignedInCheckbox = document.getElementById("login-sign-up");
   const submitButton = document.querySelector(".login__submit");
-  const userDisplayDiv = document.getElementById("userDisplay"); // Div para mostrar el nombre del usuario
+  const userDisplayDiv = document.getElementById("userDisplay"); 
 
-  // Habilitar el botón de enviar cuando los campos no están vacíos
   function validateForm() {
     submitButton.disabled =
       usernameInput.value.trim() === "" || passwordInput.value.trim() === "";
   }
 
-  // Verificar si el usuario está logueado
   function checkLoginStatus() {
     const isLoggedIn = localStorage.getItem("loggedIn") || sessionStorage.getItem("loggedIn");
     if (isLoggedIn === "true") {
@@ -23,14 +21,13 @@ document.addEventListener("DOMContentLoaded", function () {
         localStorage.getItem("nameUser") || sessionStorage.getItem("nameUser");
 
       if (userName) {
-        userDisplayDiv.textContent = `Bienvenido, ${userName}!`; // Mostrar nombre del usuario
+        userDisplayDiv.textContent = `Welcome, ${userName}!`;
       }
 
-      window.location.href = `/user_data/user/${userId}`; // Redirigir al endpoint con el ID del usuario
+      window.location.href = `/user_data/user/${userId}`;
     }
   }
 
-  // Mantener al usuario logueado
   function keepUserLoggedIn(token, nameUser) {
     const storage = keepSignedInCheckbox.checked
       ? localStorage
@@ -40,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     storage.setItem("nameUser", nameUser);
   }
 
-  // Manejar el envío del formulario
   loginForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
@@ -66,21 +62,19 @@ document.addEventListener("DOMContentLoaded", function () {
           localStorage.setItem( 'user', JSON.stringify(data))
           window.location.href = `/user_data/user`; // Redirigir al endpoint con el ID del usuario
         } else {
-          alert("Credenciales inválidas, por favor intenta de nuevo.");
+          alert("Invalid credentials, please try again.");
         }
       })
       .catch((error) => {
         console.error("Error durante el inicio de sesión:", error);
         alert(
-          "Ocurrió un error durante el inicio de sesión. Por favor intenta de nuevo más tarde."
+          "Invalid credentials, please try again."
         );
       });
   });
 
-  // Habilitar/deshabilitar botón de enviar
   usernameInput.addEventListener("input", validateForm);
   passwordInput.addEventListener("input", validateForm);
 
-  // Comprobar si el usuario está logueado al cargar la página
   checkLoginStatus();
 });

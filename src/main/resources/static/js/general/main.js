@@ -2,13 +2,10 @@ $(document).ready(function() {
     const user = localStorage.getItem('user');
     if (user) {
         const userObject = JSON.parse(user);
-
-		console.log(userObject);
-
-        $('#welcomeMessage').text(`¡Bienvenido, ${userObject.nameUser}!`);
+        $('#welcomeMessage').text(`Welcome, ${userObject.nameUser}!`);
 
         $('#buttonAttendance, #buttonEvent, #buttonLogout, #buttonHomeUser ').removeClass('hidden');
-        $('#loginButton').addClass('hidden'); // Oculta el botón de Login
+        $('#loginButton').addClass('hidden');
         $('#buttonHome').addClass('hidden');
         $('#buttonAbouts').addClass('hidden');
 
