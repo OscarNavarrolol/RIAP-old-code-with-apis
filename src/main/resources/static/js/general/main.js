@@ -5,7 +5,6 @@ $(document).ready(function() {
 
 		console.log(userObject);
 
-        // Mostrar el nombre del usuario en el h1
         $('#welcomeMessage').text(`¡Bienvenido, ${userObject.nameUser}!`);
 
         $('#buttonAttendance, #buttonEvent, #buttonLogout, #buttonHomeUser ').removeClass('hidden');
@@ -15,7 +14,7 @@ $(document).ready(function() {
 
         $('#buttonLogout').on('click', function() {
             localStorage.removeItem('user');
-            window.location.href = '/user_data/principal'; // Cambia '/user_data/principal' por la URL correcta
+            window.location.href = '/user_data/principal';
         });
     }
 });

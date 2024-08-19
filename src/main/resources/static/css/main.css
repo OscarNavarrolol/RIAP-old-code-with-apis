@@ -66,22 +66,146 @@ input, select, textarea {
 	appearance: none;
 }
 
-#eventsTable {
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 4%;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    width: 80%;
+    max-width: 500px;
+    max-height: 60%;
+    overflow-y: auto;
+
+}
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    color: #333;
+}
+
+form label {
+    display: block;
+    margin: 10px 0 5px;
+    font-family: 'Arial', sans-serif;
+    color: #666;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="time"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+.modal-content button {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+}
+
+.modal-content button:hover {
+    background-color: #45a049;
+}
+
+#courseDropdown, #dateDropdown{
+    width: 100%;
+    max-width: 200px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iNiIgdmlld0JveD0iMCAwIDEwIDYiIHZlcnNpb249IjEuMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTkgMEwwIDZIMTBaIiBmaWxsPSIjNDA0MDQwIi8+Cjwvc3ZnPgo='); /* Flecha personalizada */
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px 6px;
+}
+
+#courseDropdown:focus {
+    border-color: #4CAF50;
+    box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
+    outline: none;
+}
+
+#dateDropdown:focus {
+    border-color: #4CAF50;
+    box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
+    outline: none;
+}
+
+#courseDropdown, #dateDropdown option {
+    padding: 10px;
+    font-size: 16px;
+}
+
+#eventsTable, #attendanceTable{
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-#eventsTable th, #eventsTable td {
+#eventsTable th, #eventsTable td, #attendanceTable th, #attendanceTable td{
     padding: 8px;
     text-align: left;
 }
 
-#eventsTable th {
+#eventsTable th, #attendanceTable th {
     background-color: #f2f2f2;
 }
 
 #eventsTable tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#attendanceTable tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
@@ -133,7 +257,6 @@ input, select, textarea {
     opacity: 1;
   }
 
-  /* Modal styling */
 .modal {
     display: none; 
     position: fixed;

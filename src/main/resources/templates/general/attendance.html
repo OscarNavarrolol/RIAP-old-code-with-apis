@@ -17,7 +17,7 @@
 						<div class="inner">
 
 							<!-- Logo -->
-								<a href="/user_data/principal" class="logo">
+								<a href="/user_data/user" class="logo">
 									<span class="symbol"><img src="/images/logo.png" alt="" /></span><span class="title">RIAP</span>
 								</a>
 
@@ -48,7 +48,22 @@
 				<!-- Main -->
 					<div id="main">
 						<div class="inner">
-							<h1>Attendance</h1>
+							<h1>Attendances</h1>
+							<select id="courseDropdown"></select>
+							<select id="dateDropdown" disabled></select>
+
+							<table id="attendanceTable" border="1">
+								<thead>
+									<tr>
+										<th>Student Name</th>
+										<th>Objetive</th>
+										<th>Attendance</th>
+									</tr>
+								</thead>
+								<tbody>
+									<!-- Asistencias se cargarán aquí -->
+								</tbody>
+							</table>
 						</div>
 					</div>
 
@@ -57,6 +72,8 @@
 						<div class="inner">
 							<section>
 								<h2>Get in touch</h2>
+								<p>Johan Solution</p>
+								<p>info@johansolution.com</p>
 							</section>
 					</footer>
 
@@ -67,7 +84,6 @@
 			<script src="/js/general/browser.min.js"></script>
 			<script src="/js/general/breakpoints.min.js"></script>
 			<script src="/js/general/main.js"></script>
-			<script src="/js/general/modal.js"></script>
 			<script src="/js/general/login.js"></script>
 			<script src="/js/general/attendance.js"></script>
 			<script src="/js/general/events.js"></script>

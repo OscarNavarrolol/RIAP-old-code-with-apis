@@ -177,7 +177,43 @@ $(document).ready(function () {
                 console.error('Error:', error);
             }
         }
-    }    
+    }  
+    
+    async function addNewEvent(courseNumber) {
+        const newEventData = {
+            location: $('#newLocation').val(),
+            objective: $('#newObjective').val(),
+            date: $('#newDate').val(),
+            startTime: $('#newStartTime').val(),
+            endTime: $('#newEndTime').val(),
+        };
+    
+        try {
+            const url = `/api_event_data/create_event?courseNumber=${courseNumber}`;
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newEventData),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Error saving new event');
+            }
+    
+            const savedEvent = await response.json();
+            console.log('Event Saved:', savedEvent);
+    
+            $('#addEventModal').css('display', 'none');
+    
+            const events = await fetchEventsByCourse(courseNumber);
+            displayEvents(events);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+    
     
     $(document).ready(function () {
         $('.close').on('click', function () {
@@ -190,6 +226,20 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#add-btn-event').on('click', function () {
+        if (!selectedCourseNumber) {
+            alert('Please select a course first.');
+            return;
+        }
+    
+        $('#addEventModal').css('display', 'block');
+    
+        $('#saveNewEventBtn').off('click').on('click', function () {
+            addNewEvent(selectedCourseNumber);
+        });
+    });
+    
 
     populateDropdown();
 });
