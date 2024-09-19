@@ -18,7 +18,7 @@ public interface EventDataRepository extends JpaRepository<EventData,Long> {
             "JOIN course c ON uc.id_course = c.id_course " +
             "WHERE c.number_course =:courseNumber", nativeQuery = true)
     List<EventData> findEventsByCourseNumber(int courseNumber);
-// para obtener las fechas
+// for get dates
 @Query(value = "SELECT DISTINCT ed.date_event " +
         "FROM event_data ed " +
         "JOIN attendance a ON ed.id_event = a.id_event " +

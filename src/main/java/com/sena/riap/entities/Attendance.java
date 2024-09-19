@@ -24,7 +24,7 @@ public class Attendance {
     @Column(name = "attendance_time")
     private LocalDateTime attendanceTime;
 
-    // metodos pa probar pe
+    // keep temporary data
     @Transient
     private String eventName;
     @Transient

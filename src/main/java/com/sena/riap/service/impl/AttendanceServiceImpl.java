@@ -108,16 +108,23 @@ public class AttendanceServiceImpl implements AttendanceService {
 
     //receive the user id and try the method
     @Override
-    public Attendance saveEventArrivalTime(Long idUser) {
-        EventData todayEvent = findTodayEvent(getAllEvents());
+    public Attendance saveEventArrivalTime(String document) {
+        UserData user = userDataRepository.findByDocument(document);
 
-        if (todayEvent != null) {
-            Attendance attendanceRecord = attendanceRepository.findByIdUserAndIdEvent(idUser, todayEvent.getIdEvent());
+        if (user != null) {
+            EventData todayEvent = findTodayEvent(getAllEvents());
+            Long idUser = user.getIdUser();
 
-            if (attendanceRecord != null && attendanceRecord.getIdEvent() == todayEvent.getIdEvent()) {
-                LocalDateTime arrivalTime = LocalDateTime.now();
-                attendanceRecord.setAttendanceTime(arrivalTime);
-                return attendanceRepository.save(attendanceRecord);
+            if (todayEvent != null) {
+                Attendance attendanceRecord = attendanceRepository.findByIdUserAndIdEvent(idUser, todayEvent.getIdEvent());
+
+                if (attendanceRecord != null && attendanceRecord.getIdEvent() == todayEvent.getIdEvent()) {
+                    LocalDateTime arrivalTime = LocalDateTime.now();
+                    attendanceRecord.setAttendanceTime(arrivalTime);
+                    return attendanceRepository.save(attendanceRecord);
+                } else {
+                    return null;
+                }
             } else {
                 return null;
             }
@@ -125,6 +132,7 @@ public class AttendanceServiceImpl implements AttendanceService {
             return null;
         }
     }
+
     // listar de fecha de eventos por numero de curso
     @Override
     public List<LocalDate> listEventsByCourse(Integer courseNumber) {

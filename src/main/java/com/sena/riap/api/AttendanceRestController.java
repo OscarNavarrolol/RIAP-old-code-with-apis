@@ -51,12 +51,12 @@ public class AttendanceRestController {
 
     // METHODS REQUIRED FOR THE PROJECT
 
-    @PutMapping("/take_attendance/{id_user}")
-    public void takeAttendance(@PathVariable("id_user") Long idUser) {
-        attendanceService.saveEventArrivalTime(idUser);
+    @PutMapping("/take_attendance/{document}")
+    public void takeAttendance(@PathVariable("document") String document) {
+        attendanceService.saveEventArrivalTime(document);
     }
 
-    // fechas de eventos por numero de curso, ya existe metodo para traer los cursos por admin
+    // event dates by course number, there is already a method to bring the courses by admin
     @GetMapping("/event_dates")
     public List<LocalDate> getEventDatesByCourse(@RequestParam(required = false) Integer courseNumber) {
         return attendanceService.listEventsByCourse(courseNumber);

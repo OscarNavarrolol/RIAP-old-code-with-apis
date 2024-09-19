@@ -28,7 +28,7 @@ public interface AttendanceService {
 
     public EventData findTodayEvent(List<EventData> eventList);
 
-    public Attendance saveEventArrivalTime(Long idUser);
+    public Attendance saveEventArrivalTime(String document);
 
     public List<LocalDate> listEventsByCourse(Integer courseNumber);
 

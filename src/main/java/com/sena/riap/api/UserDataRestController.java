@@ -48,7 +48,7 @@ public class UserDataRestController {
         return userDataService.loginUser(document,password);
     }
 
-    // metodo para actualizar la contraseña del usuario en base a su ID, el ID lo proporciona MailController
+    // method to update the user's password based on their ID, the ID is provided by MailController
     @PutMapping("/update_password/{id_user}")
     public UserData updatePassword(@PathVariable("id_user") Long idUser, @RequestParam String password) {
         return userDataService.updatePassword(idUser,password);

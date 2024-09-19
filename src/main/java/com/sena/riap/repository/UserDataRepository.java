@@ -20,6 +20,8 @@ public interface UserDataRepository extends JpaRepository<UserData,Long> {
 
     UserData findByEmail(String email);
 
+    UserData findByDocument(String document);
+
     @Query(value = "SELECT ud.* " +
             "FROM user_data ud, recovery r " +
             "WHERE ud.id_user = r.id_user " +
